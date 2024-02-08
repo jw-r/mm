@@ -6,6 +6,7 @@ function Layout({ children }: { children: ReactNode }) {
     <div>
       <Header />
       {children}
+      <div className="h-[3000px]">asdasd</div>
     </div>
   );
 }

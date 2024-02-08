@@ -1,5 +1,9 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
-export function TypographyMuted({ children }: { children: ReactNode }) {
-  return <p className="text-sm text-muted-foreground">{children}</p>;
+interface TextProps extends PropsWithChildren {
+  hover: boolean;
+}
+
+export function TypographyMuted({ children, hover }: TextProps) {
+  return <p className={`text-sm text-muted-foreground ${hover && 'hover:text-foreground/80'}`}>{children}</p>;
 }
