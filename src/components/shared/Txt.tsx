@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { HTMLProps, PropsWithChildren } from 'react';
+import { HTMLProps } from 'react';
 
 const typographyMap = {
   h1: {
@@ -40,9 +40,10 @@ const typographyMap = {
   },
 } as const;
 
-interface TxtProps extends PropsWithChildren {
+interface TxtProps {
   typography?: keyof typeof typographyMap;
   className?: HTMLProps<HTMLElement>['className'];
+  children: string;
 }
 
 export function Txt({ typography = 'p', className, children, ...props }: TxtProps) {
