@@ -47,6 +47,7 @@ function Sidebar() {
         {categories.map((category) => (
           <Button
             id={String(category.id)}
+            key={category.id}
             variant={selectedCategoryId === String(category.id) ? 'secondary' : 'ghost'}
             className="w-full justify-start"
             onClick={selectCategory}

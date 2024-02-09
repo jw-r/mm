@@ -5,9 +5,9 @@ export function MainPage() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex flex-col p-12">
+      <main className="flex flex-col p-12">
         <Txt typography="h1">네트워크</Txt>
-      </div>
+      </main>
     </div>
   );
 }
