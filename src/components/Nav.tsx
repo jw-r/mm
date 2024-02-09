@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { TypographySmall } from './typography/TypographySmall';
-import { TypographyMuted } from './typography/TypographyMuted';
+import { Txt } from './shared/Txt';
 
 export function Nav() {
   const { pathname } = useLocation();
@@ -11,22 +10,20 @@ export function Nav() {
 
   return (
     <nav className="flex items-center gap-4">
-      <Link to="/">
-        {isMainPage ? <TypographySmall hover>문서</TypographySmall> : <TypographyMuted hover>문서</TypographyMuted>}
+      <Link to="/" className="hover:scale-105">
+        <Txt typography="small" className={isMainPage ? '' : 'text-foreground/30'}>
+          문서
+        </Txt>
       </Link>
-      <Link to="/repository">
-        {isRepositoryPage ? (
-          <TypographySmall hover>복습 창고</TypographySmall>
-        ) : (
-          <TypographyMuted hover>복습 창고</TypographyMuted>
-        )}
+      <Link to="/repository" className="hover:scale-105">
+        <Txt typography="small" className={isRepositoryPage ? '' : 'text-foreground/30'}>
+          복습 창고
+        </Txt>
       </Link>
-      <Link to="quiz">
-        {isQuizPage ? (
-          <TypographySmall hover>오늘의 퀴즈</TypographySmall>
-        ) : (
-          <TypographyMuted hover>오늘의 퀴즈</TypographyMuted>
-        )}
+      <Link to="quiz" className="hover:scale-105">
+        <Txt typography="small" className={isQuizPage ? '' : 'text-foreground/30'}>
+          오늘의 퀴즈
+        </Txt>
       </Link>
     </nav>
   );
