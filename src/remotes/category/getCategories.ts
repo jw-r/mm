@@ -12,7 +12,7 @@ const getCategories = () => {
 };
 
 export function useGetCategories() {
-  const { setCategories } = useCategoryStore();
+  const { selectCategory, selectedCategory } = useCategoryStore();
 
   return useSuspenseQuery({
     queryKey: ['getCategories'],
@@ -20,7 +20,9 @@ export function useGetCategories() {
 
     meta: {
       onSuccess: (data: { categories: Category[] }) => {
-        setCategories(data.categories);
+        if (selectedCategory === null) {
+          selectCategory(data.categories[0]);
+        }
       },
     },
   });

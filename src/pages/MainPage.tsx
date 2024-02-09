@@ -2,12 +2,11 @@ import { Txt } from '@/components/shared/Txt';
 import { useCategoryStore } from '@/stores/categoryStore';
 
 export function MainPage() {
-  const { categories, selectedCategoryId } = useCategoryStore();
-  const categoryName = categories.find((category) => category.id === selectedCategoryId)?.name || '';
+  const { selectedCategory } = useCategoryStore();
 
   return (
     <main className="flex flex-col p-12">
-      <Txt typography="h1">{categoryName}</Txt>
+      <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
     </main>
   );
 }
