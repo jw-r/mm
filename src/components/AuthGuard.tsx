@@ -13,7 +13,7 @@ export function AuthGuard({ children }: { children: ReactNode }) {
   return (
     <>
       {children}
-      {accessToken === null && (
+      {accessToken == null && (
         <Dialog open={isOpen}>
           <DialogContent className="max-w-md">
             <DialogClose
@@ -30,7 +30,7 @@ export function AuthGuard({ children }: { children: ReactNode }) {
             </Txt>
             <TooltipProvider>
               <Tooltip open>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <Button variant="outline" className="flex w-full items-center">
                     <img src={signupIcon} alt="구글" className="mr-4" />
                     <Txt typography="small">Google 계정으로 로그인</Txt>

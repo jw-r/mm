@@ -1,3 +1,4 @@
+import { queryClient } from '@/providers/TanstackProvider';
 import { http } from '@/utils/http';
 import { useMutation } from '@tanstack/react-query';
 
@@ -9,5 +10,9 @@ export function useDeleteCategory() {
   return useMutation({
     mutationKey: ['deleteCategory'],
     mutationFn: ({ categoryId }: { categoryId: number }) => deleteCategory(categoryId),
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['getCategories'] });
+    },
   });
 }

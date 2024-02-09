@@ -8,7 +8,8 @@ declare module '@tanstack/react-query' {
   }
 }
 
-const queryClient = new QueryClient({
+// eslint-disable-next-line react-refresh/only-export-components
+export const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onSuccess: (data, query) => {
       if (query.meta && query.meta.onSuccess) {
