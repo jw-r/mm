@@ -38,7 +38,7 @@ function Sidebar() {
   };
 
   return (
-    <div className="space-y-6 py-12 pl-10">
+    <div className="space-y-6 px-10 py-12">
       <div>
         <Txt typography="h3">카테고리</Txt>
         <div className="h-[2px] w-40 bg-foreground" />
