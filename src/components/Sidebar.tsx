@@ -1,9 +1,11 @@
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import { Txt } from './shared/Txt';
 import { Button } from './ui/button';
 import { Plus } from 'lucide-react';
+import { useCategoryStore } from '@/stores/categoryStore';
+import { Category } from '@/models/type';
 
-const categories = [
+const dummy: Category[] = [
   {
     id: 1,
     name: '네트워크',
@@ -27,15 +29,22 @@ const categories = [
 ];
 
 function Sidebar() {
-  const [selectedCategoryId, setSelectedCategoryId] = useState('1');
+  const { selectCategory, selectedCategoryId, categories, setCategories } = useCategoryStore();
 
-  const selectCategory: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const onClickCategory: MouseEventHandler<HTMLButtonElement> = (e) => {
     const target = e.target as HTMLElement;
 
     if (target.id) {
-      setSelectedCategoryId(target.id);
+      selectCategory(Number(target.id));
     }
   };
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      setCategories(dummy);
+      selectCategory(dummy[0].id);
+    }
+  }, []);
 
   return (
     <div className="space-y-6 px-10 py-12">
@@ -48,9 +57,9 @@ function Sidebar() {
           <Button
             id={String(category.id)}
             key={category.id}
-            variant={selectedCategoryId === String(category.id) ? 'secondary' : 'ghost'}
+            variant={selectedCategoryId === category.id ? 'secondary' : 'ghost'}
             className="w-full justify-start"
-            onClick={selectCategory}
+            onClick={onClickCategory}
           >
             {category.name}
           </Button>

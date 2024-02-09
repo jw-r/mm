@@ -2,6 +2,7 @@ import Sidebar from '@/components/Sidebar';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 interface Questions {
   documents: {
@@ -115,11 +116,14 @@ const data: Questions = {
 };
 
 export function RepositoryPage() {
+  const { categories, selectedCategoryId } = useCategoryStore();
+  const categoryName = categories.find((category) => category.id === selectedCategoryId)?.name || '';
+
   return (
     <div className="flex">
       <Sidebar />
       <main className="flex w-full max-w-3xl flex-col p-12">
-        <Txt typography="h1">네트워크</Txt>
+        <Txt typography="h1">{categoryName}</Txt>
         {data.documents.map((document) => (
           <div key={document.id} className="mt-8 space-y-2 rounded-lg border-2 p-4">
             <div className="flex items-center justify-between">

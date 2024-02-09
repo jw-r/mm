@@ -1,9 +1,5 @@
+import { Category } from '@/models/type';
 import { create } from 'zustand';
-
-interface Category {
-  id: string;
-  name: string;
-}
 
 type State = {
   categories: Category[];
@@ -17,7 +13,7 @@ type Actions = {
 
 export const useCategoryStore = create<State & Actions>((set) => ({
   categories: [] as Category[],
-  selectedCategoryId: '',
+  selectedCategoryId: 0,
   selectCategory: (categoryId) => set({ selectedCategoryId: categoryId }),
   setCategories: (categories) => set({ categories }),
 }));
