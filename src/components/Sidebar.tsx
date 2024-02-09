@@ -1,9 +1,12 @@
+/* eslint-disable react-refresh/only-export-components */
 import { MouseEventHandler, useEffect } from 'react';
 import { Txt } from './shared/Txt';
 import { Button } from './ui/button';
 import { Plus } from 'lucide-react';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { Category } from '@/models/type';
+import { useGetCategories } from '@/remotes/category/getCategories';
+import withSuspense from './shared/hocs/withSuspense';
 
 const dummy: Category[] = [
   {
@@ -29,6 +32,7 @@ const dummy: Category[] = [
 ];
 
 function Sidebar() {
+  const { data } = useGetCategories();
   const { selectCategory, selectedCategoryId, categories, setCategories } = useCategoryStore();
 
   const onClickCategory: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -72,4 +76,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default withSuspense(Sidebar, { fallback: <div>Loading...</div> });
