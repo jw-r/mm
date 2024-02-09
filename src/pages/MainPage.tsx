@@ -1,5 +1,10 @@
-function MainPage() {
-  return <div>MainPage</div>;
-}
+import Sidebar from '@/components/Sidebar';
 
-export default MainPage;
+export function MainPage() {
+  return (
+    <div className="flex">
+      <Sidebar />
+      <div>MainPage</div>
+    </div>
+  );
+}

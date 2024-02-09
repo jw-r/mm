@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import RepositoryPage from './pages/RepositoryPage';
-import QuizPage from './pages/QuizPage';
-import Layout from './components/Layout';
+import { MainPage, RepositoryPage, QuizPage } from './pages';
+import { Layout } from './components/Layout';
 
 function App() {
   return (

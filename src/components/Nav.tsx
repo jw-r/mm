@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { TypographySmall } from './typography/TypographySmall';
 import { TypographyMuted } from './typography/TypographyMuted';
 
-function Nav() {
+export function Nav() {
   const { pathname } = useLocation();
 
   const isMainPage = pathname === '/';
@@ -31,5 +31,3 @@ function Nav() {
     </nav>
   );
 }
-
-export default Nav;

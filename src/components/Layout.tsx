@@ -1,14 +1,11 @@
 import { ReactNode } from 'react';
-import Header from './Header';
+import { Header } from './Header';
 
-function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col">
       <Header />
       {children}
-      <div className="h-[3000px]">asdasd</div>
     </div>
   );
 }
-
-export default Layout;

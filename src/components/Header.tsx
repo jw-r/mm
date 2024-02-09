@@ -1,14 +1,10 @@
-import Nav from './Nav';
-import Spacing from './shared/Spacing';
+import { Nav } from './Nav';
 
-function Header() {
+export function Header() {
   return (
     <header className="sticky top-0 flex border-b-[1px] bg-white px-5 py-6">
-      <div>Reminder</div>
-      <Spacing direction="horizontal" size={30} />
+      <div className="mr-8">Reminder</div>
       <Nav />
     </header>
   );
 }
-
-export default Header;

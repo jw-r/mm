@@ -1,9 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { TypographyProps } from './type';
 
-interface TextProps extends PropsWithChildren {
-  hover: boolean;
-}
-
-export function TypographySmall({ children, hover }: TextProps) {
-  return <p className={`text-sm font-medium leading-none ${hover && 'hover:text-foreground/80'}`}>{children}</p>;
+export function TypographySmall({ children, hover, className }: TypographyProps) {
+  return (
+    <p className={`text-sm font-medium leading-none ${hover && 'hover:text-foreground/80'} ${className}`}>{children}</p>
+  );
 }
