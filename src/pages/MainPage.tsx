@@ -1,12 +1,22 @@
 import { FileUploadDialog } from '@/components/createDocument/FileUploadDialog';
 import { Txt } from '@/components/shared/Txt';
+import useRouter from '@/hooks/useRouter';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
+import { MouseEventHandler } from 'react';
 
 export function MainPage() {
+  const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
   const { data } = useGetDocuments({ categoryId: selectedCategory?.id });
+
+  const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
+    const button = e.target as HTMLButtonElement;
+    const documentsId = Number(button.id);
+
+    push(`/documents/${documentsId}`);
+  };
 
   return (
     <main className="flex w-full max-w-3xl flex-col p-12">
@@ -19,6 +29,7 @@ export function MainPage() {
           <article
             key={document.id}
             className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
+            onClick={moveToDetail}
           >
             <div className="flex items-center justify-between">
               <Txt typography="large">{document.documentName}</Txt>
