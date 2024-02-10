@@ -16,7 +16,7 @@ const getDocuments = ({ categoryId }: { categoryId: number }) => {
 
 export function useGetDocuments({ categoryId }: { categoryId: number | undefined }) {
   return useQuery({
-    queryKey: ['getDocuments'],
+    queryKey: ['getDocuments', categoryId],
     queryFn: () => getDocuments({ categoryId: categoryId as number }),
 
     enabled: !!categoryId,
