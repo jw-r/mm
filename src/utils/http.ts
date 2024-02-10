@@ -3,11 +3,24 @@ import Axios, { AxiosRequestConfig } from 'axios';
 
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_API_URL_DEV,
-  headers: {
-    // Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJzY29wZSI6ImFjY2Vzc190b2tlbiIsImV4cCI6NjE3MDc1NDM4OTYsImlhdCI6MTcwNzU0Mzk1Nn0.C9floBknFU048E0lP2qTGDe72nIZDojf66hut2Xd2YE`,
-  },
 });
+
+axios.interceptors.request.use(
+  (config) => {
+    if (!config.headers) return config;
+
+    const token = localStorage.getItem('pick-toss-token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  },
+);
 
 export const http = {
   get: <Response = unknown>(url: GetApiPath, config?: AxiosRequestConfig) => {

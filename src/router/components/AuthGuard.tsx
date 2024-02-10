@@ -1,9 +1,10 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { Txt } from './shared/Txt';
-import signupIcon from '../assets/google.svg';
-import { Button } from './ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../components/ui/dialog';
+import { Txt } from '../../components/shared/Txt';
+import signupIcon from '../../assets/google.svg';
+import { Button } from '../../components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../components/ui/tooltip';
 import { useUserStore } from '@/stores/userStore';
+import { Outlet } from 'react-router-dom';
 
 export function AuthGuard() {
   const { token } = useUserStore();
@@ -16,6 +17,7 @@ export function AuthGuard() {
 
   return (
     <>
+      <Outlet />
       {token == null && (
         <Dialog open={true}>
           <DialogContent className="max-w-md">
