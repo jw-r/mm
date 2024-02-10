@@ -1,6 +1,6 @@
 import { Category, Question } from '@/models/type';
 import { http } from '@/utils/http';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 interface GetDocumentsResponse {
   id: number;
@@ -14,12 +14,14 @@ interface GetDocumentsResponse {
 }
 
 const getDocument = ({ documentId }: { documentId: number }) => {
-  return http.get<GetDocumentsResponse>(`/categories/${documentId}/documents`);
+  return http.get<GetDocumentsResponse>(`/documents/${documentId}`);
 };
 
-export function useGetDocument({ documentId }: { documentId: number }) {
-  return useSuspenseQuery({
+export function useGetDocument({ documentId }: { documentId: number | undefined }) {
+  return useQuery({
     queryKey: ['getDocuments'],
-    queryFn: () => getDocument({ documentId }),
+    queryFn: () => getDocument({ documentId: documentId as number }),
+
+    enabled: !!documentId,
   });
 }

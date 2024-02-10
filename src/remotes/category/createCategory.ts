@@ -7,7 +7,7 @@ interface CreateCategoryRequest {
 }
 
 const createCategory = (requestBody: CreateCategoryRequest) => {
-  return http.post<CreateCategoryRequest>('/categories', requestBody);
+  return http.post<CreateCategoryRequest, { id: number }>('/categories', requestBody);
 };
 
 export function useCreateCategory() {

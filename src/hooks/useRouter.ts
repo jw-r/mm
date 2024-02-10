@@ -16,4 +16,4 @@ export default function useRouter() {
   }, [navigate]);
 }
 
-export type RouterPath = '/' | '/repository' | '/quiz';
+export type RouterPath = '/' | '/repository' | '/quiz' | `/documents/${number}`;

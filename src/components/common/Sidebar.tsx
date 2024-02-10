@@ -35,7 +35,27 @@ function Sidebar() {
       return;
     }
 
-    createCategory({ name: categoryName.trim() });
+    createCategory(
+      { name: categoryName.trim() },
+      {
+        onSuccess: ({ id }) => {
+          selectCategory({ id, name: categoryName });
+        },
+      },
+    );
+  };
+
+  const handleDeleteCategory = (categoryId: number) => {
+    deleteCategory(
+      { categoryId },
+      {
+        onSuccess: () => {
+          if (categoryId === selectedCategory?.id) {
+            selectCategory(data.categories[0]);
+          }
+        },
+      },
+    );
   };
 
   return (
@@ -64,7 +84,7 @@ function Sidebar() {
             </Button>
             {hoverCategoryId === category.id && (
               <X
-                onClick={() => deleteCategory({ categoryId: category.id })}
+                onClick={() => handleDeleteCategory(category.id)}
                 size={20}
                 className="absolute right-2 top-[50%] translate-y-[-50%] cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 hover:outline-none hover:ring-2 hover:ring-ring hover:ring-offset-1"
               />

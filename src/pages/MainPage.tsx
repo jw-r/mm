@@ -2,6 +2,7 @@ import { FileUploadDialog } from '@/components/createDocument/FileUploadDialog';
 import { Txt } from '@/components/shared/Txt';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
 import { useCategoryStore } from '@/stores/categoryStore';
+import { formatDate } from '@/utils/formatDate';
 
 export function MainPage() {
   const { selectedCategory } = useCategoryStore();
@@ -22,7 +23,7 @@ export function MainPage() {
             <div className="flex items-center justify-between">
               <Txt typography="large">{document.documentName}</Txt>
               <Txt typography="small" className="text-foreground/40">
-                {document.createdAt}
+                {formatDate(document.createdAt)}
               </Txt>
             </div>
             {document.summary && (

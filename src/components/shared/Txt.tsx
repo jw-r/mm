@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { HTMLProps } from 'react';
+import { HTMLProps, ReactNode } from 'react';
 
 const typographyMap = {
   h1: {
@@ -43,7 +43,7 @@ const typographyMap = {
 interface TxtProps {
   typography?: keyof typeof typographyMap;
   className?: HTMLProps<HTMLElement>['className'];
-  children: string;
+  children: ReactNode;
 }
 
 export function Txt({ typography = 'p', className, children, ...props }: TxtProps) {

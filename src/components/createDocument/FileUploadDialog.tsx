@@ -1,19 +1,12 @@
 import { X } from 'lucide-react';
 import { Button } from '../ui/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Input } from '../ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { FormEventHandler } from 'react';
 import { useCreateDocument } from '@/remotes/document/createDocument';
 import { useCategoryStore } from '@/stores/categoryStore';
+import { DialogTrigger } from '@radix-ui/react-dialog';
 
 export function FileUploadDialog() {
   const { selectedCategory } = useCategoryStore();
@@ -34,13 +27,23 @@ export function FileUploadDialog() {
     });
   };
 
+  const alertNoCategory = () => {
+    alert('카테고리를 먼저 생성해주세요');
+  };
+
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="h-full">
+      {selectedCategory?.id ? (
+        <DialogTrigger asChild>
+          <Button variant="outline" className="h-full">
+            문서 업로드하기
+          </Button>
+        </DialogTrigger>
+      ) : (
+        <Button variant="outline" className="h-full" onClick={alertNoCategory}>
           문서 업로드하기
         </Button>
-      </DialogTrigger>
+      )}
       <DialogContent>
         <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
           <X className="h-4 w-4" />
