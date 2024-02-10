@@ -118,31 +118,29 @@ export function RepositoryPage() {
   const { selectedCategory } = useCategoryStore();
 
   return (
-    <div className="flex">
-      <main className="flex w-full max-w-3xl flex-col p-12">
-        <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
-        {data.documents.map((document) => (
-          <div key={document.id} className="mt-8 space-y-2 rounded-lg border-2 p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col">
-                <Txt typography="large">{`Note: ${document.documentName}`}</Txt>
-                <Txt typography="small" className="text-foreground/35">
-                  {document.createdAt}
-                </Txt>
-              </div>
-              <Button variant="outline">문서보기</Button>
+    <main className="flex w-full max-w-3xl flex-col p-12">
+      <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
+      {data.documents.map((document) => (
+        <div key={document.id} className="mt-8 space-y-2 rounded-lg border-2 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <Txt typography="large">{`Note: ${document.documentName}`}</Txt>
+              <Txt typography="small" className="text-foreground/35">
+                {document.createdAt}
+              </Txt>
             </div>
-            <Accordion type="multiple" className="w-full pl-4">
-              {document.questions.map((question, index) => (
-                <AccordionItem key={question.id} value={String(question.id)} className="last:border-none">
-                  <AccordionTrigger>{`${index + 1}. ${question.question}`}</AccordionTrigger>
-                  <AccordionContent>{question.answer}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <Button variant="outline">문서보기</Button>
           </div>
-        ))}
-      </main>
-    </div>
+          <Accordion type="multiple" className="w-full pl-4">
+            {document.questions.map((question, index) => (
+              <AccordionItem key={question.id} value={String(question.id)} className="last:border-none">
+                <AccordionTrigger>{`${index + 1}. ${question.question}`}</AccordionTrigger>
+                <AccordionContent>{question.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      ))}
+    </main>
   );
 }
