@@ -5,6 +5,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
 import { SidebarLayout } from './components/SidebarLayout';
 import { Root } from './components/Root';
+import { Suspense } from 'react';
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,14 @@ export const router = createBrowserRouter([
               {
                 element: <SidebarLayout />,
                 children: [
-                  { index: true, element: <MainPage /> },
+                  {
+                    index: true,
+                    element: (
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <MainPage />
+                      </Suspense>
+                    ),
+                  },
                   { path: 'repository', element: <RepositoryPage /> },
                 ],
               },

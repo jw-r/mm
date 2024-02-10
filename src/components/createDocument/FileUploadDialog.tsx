@@ -37,7 +37,9 @@ export function FileUploadDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">문서 업로드하기</Button>
+        <Button variant="outline" className="h-full">
+          문서 업로드하기
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
