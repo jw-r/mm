@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Txt } from './shared/Txt';
+import { Txt } from '../shared/Txt';
 
 export function Nav() {
   const { pathname } = useLocation();

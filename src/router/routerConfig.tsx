@@ -1,5 +1,5 @@
 import { AuthGuard } from '@/router/components/AuthGuard';
-import { Oauth } from '@/components/Oauth';
+import { Oauth } from '@/components/common/Oauth';
 import { MainPage, QuizPage, RepositoryPage } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';

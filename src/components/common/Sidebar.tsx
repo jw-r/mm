@@ -1,12 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ChangeEvent, MouseEventHandler, useState } from 'react';
-import { Txt } from './shared/Txt';
-import { Button } from './ui/button';
+import { Txt } from '../shared/Txt';
+import { Button } from '../ui/button';
 import { Plus, X } from 'lucide-react';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { useGetCategories } from '@/remotes/category/getCategories';
 import { useCreateCategory } from '@/remotes/category/createCategory';
-import { Input } from './ui/input';
+import { Input } from '../ui/input';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 
 function Sidebar() {
