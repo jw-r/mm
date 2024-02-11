@@ -28,6 +28,7 @@ export function MainPage() {
         {data?.documents.map((document) => (
           <article
             key={document.id}
+            id={String(document.id)}
             className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
             onClick={moveToDetail}
           >
