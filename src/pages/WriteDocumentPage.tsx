@@ -10,9 +10,5 @@ import { MarkdownEditor } from '@/components/createDocument/MarkdownEditor';
 export function WriteDocumentPage() {
   const [value, setValue] = useState('');
 
-  return (
-    <div className="h-full p-4">
-      <MarkdownEditor value={value} setValue={setValue} />
-    </div>
-  );
+  return <MarkdownEditor value={value} setValue={setValue} />;
 }

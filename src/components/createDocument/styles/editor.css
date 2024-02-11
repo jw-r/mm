@@ -1,0 +1,11 @@
+.w-md-editor-preview {
+  box-shadow: none;
+}
+
+.w-md-editor-toolbar {
+  width: 50%;
+}
+
+.w-md-editor-text-input {
+  height: calc(100vh - 74px);
+}

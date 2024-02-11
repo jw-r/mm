@@ -66,6 +66,11 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      min: {
+        h: {
+          main: 'calc(100vh - 74px)',
+        },
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
