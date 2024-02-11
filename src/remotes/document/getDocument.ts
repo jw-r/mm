@@ -19,7 +19,7 @@ const getDocument = ({ documentId }: { documentId: number }) => {
 
 export function useGetDocument({ documentId }: { documentId: number | undefined }) {
   return useQuery({
-    queryKey: ['getDocuments'],
+    queryKey: ['getDocuments', documentId],
     queryFn: () => getDocument({ documentId: documentId as number }),
 
     enabled: !!documentId,

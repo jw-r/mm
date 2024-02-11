@@ -1,4 +1,4 @@
-import { FileUploadDialog } from '@/components/createDocument/FileUploadDialog';
+import { CreateDocumentMenu } from '@/components/createDocument/CreateDocumentMenu';
 import { Txt } from '@/components/shared/Txt';
 import useRouter from '@/hooks/useRouter';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
@@ -12,20 +12,21 @@ export function MainPage() {
   const { data } = useGetDocuments({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
-    const button = e.target as HTMLButtonElement;
+    const button = e.currentTarget as HTMLButtonElement;
     const documentsId = Number(button.id);
 
     push(`/documents/${documentsId}`);
   };
 
+  if (!data) return null;
   return (
     <main className="flex w-full max-w-3xl flex-col p-12">
       <div className="flex justify-between">
         <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
-        <FileUploadDialog />
+        <CreateDocumentMenu />
       </div>
       <div className="mt-8 space-y-2">
-        {data?.documents.map((document) => (
+        {data.documents.map((document) => (
           <article
             key={document.id}
             id={String(document.id)}

@@ -17,6 +17,7 @@ export function FileUploadDialog() {
 
     const formData = new FormData(e.currentTarget);
     const file = formData.get('file') as File;
+    console.log(file);
     const userDocumentName = formData.get('userDocumentName') as string;
 
     createDocument({
@@ -35,7 +36,7 @@ export function FileUploadDialog() {
     <Dialog>
       {selectedCategory?.id ? (
         <DialogTrigger asChild>
-          <Button variant="outline" className="h-full">
+          <Button variant="ghost" className="h-full">
             문서 업로드하기
           </Button>
         </DialogTrigger>

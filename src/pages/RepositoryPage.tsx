@@ -1,4 +1,4 @@
-import { FileUploadDialog } from '@/components/createDocument/FileUploadDialog';
+import { CreateDocumentMenu } from '@/components/createDocument/CreateDocumentMenu';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
@@ -24,7 +24,7 @@ export function RepositoryPage() {
     <main className="flex w-full max-w-3xl flex-col p-12">
       <div className="flex justify-between">
         <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
-        <FileUploadDialog />
+        <CreateDocumentMenu />
       </div>
       {data?.documents.map((document) => (
         <div key={document.id} className="mt-8 space-y-2 rounded-lg border-2 p-4">
