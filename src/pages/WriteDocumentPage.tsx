@@ -1,27 +1,18 @@
-import { Txt } from '@/components/shared/Txt';
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
+import { useState } from 'react';
+// import MarkdownIt from 'markdown-it';
+// import MdEditor from 'react-markdown-editor-lite';
+// import 'react-markdown-editor-lite/lib/index.css';
 
-const mdParser = new MarkdownIt();
+// const mdParser = new MarkdownIt();
+
+import { MarkdownEditor } from '@/components/createDocument/MarkdownEditor';
 
 export function WriteDocumentPage() {
-  const handleEditorChange = () => {};
+  const [value, setValue] = useState('');
 
   return (
     <div className="h-full p-4">
-      <MdEditor
-        className="rounded-md border-r-0"
-        // canView={{ menu: false, md: false, html: false, both: false, fullScreen: false, hideMenu: false }}
-        view={{
-          menu: false,
-          md: false,
-          html: true,
-        }}
-        defaultValue="# sadasda"
-        renderHTML={(text) => mdParser.render(text)}
-        onChange={handleEditorChange}
-      />
+      <MarkdownEditor value={value} setValue={setValue} />
     </div>
   );
 }

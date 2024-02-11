@@ -3,11 +3,13 @@ import { useGetDocument } from '@/remotes/document/getDocument';
 import { formatDate } from '@/utils/formatDate';
 import { useParams } from 'react-router-dom';
 
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
+// import MarkdownIt from 'markdown-it';
+// import MdEditor from 'react-markdown-editor-lite';
+// import 'react-markdown-editor-lite/lib/index.css';
 
-const mdParser = new MarkdownIt();
+import { MarkdownViewer } from '@/components/common/MarkdownViewer';
+
+// const mdParser = new MarkdownIt();
 
 export function DocumentDetailPage() {
   const { id } = useParams();
@@ -26,18 +28,7 @@ export function DocumentDetailPage() {
             {formatDate(data.createdAt)}
           </Txt>
         </div>
-        <MdEditor
-          id={String(data.id)}
-          className="mt-4 rounded-md border-none"
-          view={{
-            menu: false,
-            md: false,
-            html: true,
-          }}
-          defaultValue={data.content}
-          renderHTML={(text) => mdParser.render(text)}
-          readOnly
-        />
+        <MarkdownViewer content={data.content} />
       </div>
     </main>
   );
