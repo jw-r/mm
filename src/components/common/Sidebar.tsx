@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ChangeEvent, MouseEventHandler, useState } from 'react';
+import { ChangeEvent, FormEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import { Txt } from '../shared/Txt';
 import { Button } from '../ui/button';
 import { Plus, X } from 'lucide-react';
@@ -25,6 +25,12 @@ function Sidebar() {
     if (target.id && target.name) {
       selectCategory({ id: Number(target.id), name: target.name });
     }
+  };
+
+  const onSubmitCategoryInput: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    handleCreateCategory(inputValue);
   };
 
   const handleCreateCategory = (categoryName: string) => {
@@ -57,6 +63,11 @@ function Sidebar() {
       },
     );
   };
+
+  useEffect(() => {
+    selectCategory(data?.categories[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="space-y-6 px-10 py-12">
@@ -92,7 +103,7 @@ function Sidebar() {
           </div>
         ))}
         {isInputOpen ? (
-          <form onSubmit={() => handleCreateCategory(inputValue)}>
+          <form onSubmit={onSubmitCategoryInput}>
             <Input
               autoFocus
               onBlur={() => handleCreateCategory(inputValue)}
