@@ -4,6 +4,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-markdown-preview/markdown.css';
 import './styles/editor.css';
 import { useState } from 'react';
+import { STYLE } from '@/constants';
 
 document.documentElement.setAttribute('data-color-mode', 'light');
 
@@ -16,12 +17,13 @@ export function MD({ children }: { children: ReactNode }) {
 function MarkdownEditor({ value, setValue }: any) {
   const [isMobile, setIsMobile] = useState(false);
 
-  const textareaStyle = `pt-4 h-full bg-[#8f8f8f10] ${!isMobile && 'w-[50%]'}`;
+  const textareaStyle = `pt-4 h-full bg-[#FAFDFC] ${!isMobile && 'w-[50%]'}`;
+  const editorHeight = `calc(100vh - ${STYLE.HEADER_HEIGHT}px - ${STYLE.FIXED_BUTTON_HEIGHT}px)`;
 
   return (
     <MDEditor
-      className="p-3 shadow-none *:border-none"
-      height="calc(100vh - 74px)"
+      className="px-3 shadow-none *:border-none"
+      height={editorHeight}
       autoFocus
       value={value}
       onChange={setValue as any}
@@ -29,7 +31,7 @@ function MarkdownEditor({ value, setValue }: any) {
         rehypePlugins: [[rehypeSanitize]],
       }}
       textareaProps={{
-        placeholder: '여기에 글을 작성해주세요...',
+        placeholder: '# 제목을 입력해주세요',
         className: textareaStyle,
       }}
       visibleDragbar={false}

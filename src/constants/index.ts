@@ -1,0 +1,4 @@
+export const STYLE = {
+  HEADER_HEIGHT: 74,
+  FIXED_BUTTON_HEIGHT: 64,
+};

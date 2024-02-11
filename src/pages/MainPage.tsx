@@ -33,7 +33,7 @@ export function MainPage() {
             className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
             onClick={moveToDetail}
           >
-            <div className="mb-[-10px] flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <Txt typography="large">{document.documentName}</Txt>
               <Txt typography="small" className="text-foreground/40">
                 {formatDate(document.createdAt)}
