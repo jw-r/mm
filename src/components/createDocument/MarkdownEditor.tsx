@@ -24,6 +24,10 @@ export function MarkdownEditor({ value, setValue }: any) {
         previewOptions={{
           rehypePlugins: [[rehypeSanitize]],
         }}
+        textareaProps={{
+          placeholder: '여기에 글을 작성해주세요...',
+          className: 'pt-4 h-full bg-red-300',
+        }}
         visibleDragbar={false}
         extraCommands={[]}
         preview={isMobile ? 'edit' : 'live'}

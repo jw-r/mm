@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
               },
               { path: 'quiz', element: <QuizPage /> },
               { path: 'documents/:id', element: <DocumentDetailPage /> },
-              { path: 'write', element: <WriteDocumentPage /> },
+              // { path: 'write', element: <WriteDocumentPage /> },
             ],
           },
         ],
@@ -43,6 +43,7 @@ export const router = createBrowserRouter([
         path: 'oauth',
         element: <Oauth />,
       },
+      { path: 'write', element: <WriteDocumentPage /> },
     ],
   },
 ]);
