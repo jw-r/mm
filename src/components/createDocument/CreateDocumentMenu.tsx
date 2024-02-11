@@ -1,8 +1,11 @@
+import useRouter from '@/hooks/useRouter';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { FileUploadDialog } from './FileUploadDialog';
 
 export function CreateDocumentMenu() {
+  const { push } = useRouter();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -10,7 +13,9 @@ export function CreateDocumentMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col space-y-2">
         <FileUploadDialog />
-        <Button variant="ghost">직접 작성하기</Button>
+        <Button onClick={() => push('/write')} variant="ghost">
+          직접 작성하기
+        </Button>
       </DropdownMenuContent>
     </DropdownMenu>
   );

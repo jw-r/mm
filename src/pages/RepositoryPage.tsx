@@ -21,7 +21,7 @@ export function RepositoryPage() {
   };
 
   return (
-    <main className="flex w-full max-w-3xl flex-col p-12">
+    <main className="flex w-full max-w-[880px] flex-col p-12">
       <div className="flex justify-between">
         <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
         <CreateDocumentMenu />

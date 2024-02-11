@@ -20,12 +20,12 @@ export function MainPage() {
 
   if (!data) return null;
   return (
-    <main className="flex w-full max-w-3xl flex-col p-12">
+    <main className="flex w-full max-w-[880px] flex-col p-12">
       <div className="flex justify-between">
         <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
         <CreateDocumentMenu />
       </div>
-      <div className="mt-8 space-y-2">
+      <div className="mt-8 space-y-4">
         {data.documents.map((document) => (
           <article
             key={document.id}
@@ -33,7 +33,7 @@ export function MainPage() {
             className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
             onClick={moveToDetail}
           >
-            <div className="flex items-center justify-between">
+            <div className="mb-[-10px] flex items-center justify-between">
               <Txt typography="large">{document.documentName}</Txt>
               <Txt typography="small" className="text-foreground/40">
                 {formatDate(document.createdAt)}

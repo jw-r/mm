@@ -1,15 +1,8 @@
+import { MD } from '@/components/common/Markdown/MD';
 import { Txt } from '@/components/shared/Txt';
 import { useGetDocument } from '@/remotes/document/getDocument';
 import { formatDate } from '@/utils/formatDate';
 import { useParams } from 'react-router-dom';
-
-// import MarkdownIt from 'markdown-it';
-// import MdEditor from 'react-markdown-editor-lite';
-// import 'react-markdown-editor-lite/lib/index.css';
-
-import { MarkdownViewer } from '@/components/common/MarkdownViewer';
-
-// const mdParser = new MarkdownIt();
 
 export function DocumentDetailPage() {
   const { id } = useParams();
@@ -28,7 +21,7 @@ export function DocumentDetailPage() {
             {formatDate(data.createdAt)}
           </Txt>
         </div>
-        <MarkdownViewer content={data.content} />
+        <MD.Viewer content={data.content} />
       </div>
     </main>
   );
