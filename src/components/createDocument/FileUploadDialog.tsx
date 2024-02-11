@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Input } from '../ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
-import { FormEventHandler, ReactNode, useEffect } from 'react';
+import { FormEventHandler, ReactNode } from 'react';
 import { useCreateDocument } from '@/remotes/document/createDocument';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { DialogTrigger } from '@radix-ui/react-dialog';

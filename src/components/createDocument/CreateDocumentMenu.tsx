@@ -19,7 +19,7 @@ export function CreateDocumentMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button className="h-full">문서 업로드</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col space-y-2">

@@ -41,7 +41,9 @@ type GetApiPath =
   | '/categories'
   | `/categories/${number}/documents`
   | `/documents/${number}`
-  | `/categories/${number}/documents/questions`;
+  | `/categories/${number}/documents/questions`
+  | '/question-sets/today'
+  | `/question-sets/${string}`;
 
 type PostApiPath = '/categories' | '/documents';
 

@@ -40,7 +40,7 @@ export function MainPage() {
               </Txt>
             </div>
             {document.summary && (
-              <Txt className="line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>
+              <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>
             )}
           </article>
         ))}
