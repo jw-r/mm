@@ -8,6 +8,9 @@ import { useCreateDocument } from '@/remotes/document/createDocument';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 
+// 제목 밑에 날짜 조금 띄워주자
+// 페이지 타이틀을 카테고리 말고
+
 export function FileUploadDialog() {
   const { selectedCategory } = useCategoryStore();
   const { mutate: createDocument } = useCreateDocument();
@@ -17,8 +20,12 @@ export function FileUploadDialog() {
 
     const formData = new FormData(e.currentTarget);
     const file = formData.get('file') as File;
-    console.log(file);
     const userDocumentName = formData.get('userDocumentName') as string;
+
+    // if (file.type !== 'type/markdown') {
+    //   alert('마크다운 문서만 업로드할 수 있습니다');
+    //   return;
+    // }
 
     createDocument({
       file,
@@ -37,7 +44,7 @@ export function FileUploadDialog() {
       {selectedCategory?.id ? (
         <DialogTrigger asChild>
           <Button variant="ghost" className="h-full">
-            문서 업로드하기
+            md 파일 업로드
           </Button>
         </DialogTrigger>
       ) : (

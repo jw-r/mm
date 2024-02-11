@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import { Txt } from '../shared/Txt';
+import 'react-markdown-editor-lite/lib/index.css';
 
 export function MarkdownRenderer({ content }: { content: string }) {
   return (

@@ -1,6 +1,6 @@
 import { AuthGuard } from '@/router/components/AuthGuard';
 import { Oauth } from '@/components/common/Oauth';
-import { DocumentDetailPage, MainPage, QuizPage, RepositoryPage } from '@/pages';
+import { DocumentDetailPage, MainPage, QuizPage, RepositoryPage, WriteDocumentPage } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
 import { SidebarLayout } from './components/SidebarLayout';
@@ -34,6 +34,7 @@ export const router = createBrowserRouter([
               },
               { path: 'quiz', element: <QuizPage /> },
               { path: 'documents/:id', element: <DocumentDetailPage /> },
+              { path: 'write', element: <WriteDocumentPage /> },
             ],
           },
         ],

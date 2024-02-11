@@ -10,7 +10,7 @@ export function CreateDocumentMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col space-y-2">
         <FileUploadDialog />
-        <FileUploadDialog />
+        <Button variant="ghost">직접 작성하기</Button>
       </DropdownMenuContent>
     </DropdownMenu>
   );
