@@ -69,6 +69,12 @@ function Sidebar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (data.categories.length === 0) {
+      selectCategory(null);
+    }
+  }, [data.categories.length, selectCategory]);
+
   return (
     <div className="space-y-6 px-10 py-12">
       <div className="w-52">

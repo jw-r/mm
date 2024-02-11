@@ -33,7 +33,14 @@ export const router = createBrowserRouter([
                   { path: 'repository', element: <RepositoryPage /> },
                 ],
               },
-              { path: 'quiz', element: <QuizPage.Private /> },
+              {
+                path: 'quiz',
+                element: (
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <QuizPage.Private />
+                  </Suspense>
+                ),
+              },
               { path: 'documents/:id', element: <DocumentDetailPage /> },
               { path: 'write', element: <WriteDocumentPage /> },
             ],

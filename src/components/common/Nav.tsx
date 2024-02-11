@@ -6,7 +6,7 @@ export function Nav() {
 
   const isMainPage = pathname === '/';
   const isRepositoryPage = pathname === '/repository';
-  const isQuizPage = pathname === '/quiz';
+  const isQuizPage = pathname.startsWith('/quiz');
 
   return (
     <nav className="flex items-center gap-4">

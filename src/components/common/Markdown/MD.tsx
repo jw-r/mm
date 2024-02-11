@@ -8,14 +8,13 @@ import { STYLE } from '@/constants';
 
 document.documentElement.setAttribute('data-color-mode', 'light');
 
-type Preview = 'edit' | 'live';
-
 export function MD({ children }: { children: ReactNode }) {
   return children;
 }
 
-function MarkdownEditor({ value, setValue }: any) {
+function Editor({ value, setValue }: { value: string; setValue: (newValue: string) => void }) {
   const [isMobile, setIsMobile] = useState(false);
+  console.log(setIsMobile);
 
   const textareaStyle = `pt-4 h-full bg-[#FAFDFC] ${!isMobile && 'w-[50%]'}`;
   const editorHeight = `calc(100vh - ${STYLE.HEADER_HEIGHT}px - ${STYLE.FIXED_BUTTON_HEIGHT}px)`;
@@ -26,7 +25,7 @@ function MarkdownEditor({ value, setValue }: any) {
       height={editorHeight}
       autoFocus
       value={value}
-      onChange={setValue as any}
+      onChange={(value?: string) => setValue(value || '')}
       previewOptions={{
         rehypePlugins: [[rehypeSanitize]],
       }}
@@ -41,9 +40,9 @@ function MarkdownEditor({ value, setValue }: any) {
   );
 }
 
-function MarkdownViewer({ content }: { content: string }) {
+function Viewer({ content }: { content: string }) {
   return <MDEditor.Markdown className="mt-6 max-w-4xl" source={content} rehypePlugins={[[rehypeSanitize]]} />;
 }
 
-MD.Editor = MarkdownEditor;
-MD.Viewer = MarkdownViewer;
+MD.Editor = Editor;
+MD.Viewer = Viewer;

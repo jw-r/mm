@@ -6,7 +6,7 @@ type State = {
 };
 
 type Actions = {
-  selectCategory: (category: Category) => void;
+  selectCategory: (category: Category | null) => void;
 };
 
 export const useCategoryStore = create<State & Actions>((set) => ({
