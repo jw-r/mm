@@ -1,14 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Txt } from '../shared/Txt';
 import { Button } from '../ui/button';
+import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 
 export function Nav() {
   const { pathname } = useLocation();
+  const { data: user } = useGetUserInfo();
 
   const isMainPage = pathname === '/';
   const isRepositoryPage = pathname === '/repository';
   const isQuizPage = pathname.startsWith('/quiz');
 
+  if (!user) return null;
   return (
     <>
       <nav className="hidden w-full sm:block">
@@ -31,7 +34,7 @@ export function Nav() {
             </Link>
           </div>
           <div>
-            <Txt typography="line-code">Free.</Txt>
+            <Txt typography="line-code">{user?.subscription.plan}</Txt>
             <Link to="/profile" className="hover:scale-105">
               <Button variant="outline" className="shadow-sm">
                 Profile

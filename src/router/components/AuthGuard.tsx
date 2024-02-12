@@ -3,11 +3,13 @@ import { Txt } from '../../components/shared/Txt';
 import signupIcon from '../../assets/google.svg';
 import { Button } from '../../components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../components/ui/tooltip';
-import { useUserStore } from '@/stores/userStore';
 import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { LOCAL_TOKEN_NAME } from '@/constants';
 
 export function AuthGuard() {
-  const { token } = useUserStore();
+  const [init, setInit] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   const onClickGoogleLogin = () => {
     fetch(import.meta.env.VITE_API_URL_DEV + 'oauth/url')
@@ -15,10 +17,30 @@ export function AuthGuard() {
       .then(({ oauth_url }) => (window.location.href = oauth_url));
   };
 
+  useEffect(() => {
+    setInit(true);
+    if (localStorage.getItem(LOCAL_TOKEN_NAME)) {
+      setIsAuthorized(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      setIsAuthorized(false);
+    };
+
+    window.addEventListener('unauthorized', handleUnauthorized);
+
+    return () => {
+      window.removeEventListener('unauthorized', handleUnauthorized);
+    };
+  }, []);
+
+  if (!init) return null;
   return (
     <>
       <Outlet />
-      {token == null && (
+      {!isAuthorized && (
         <Dialog open={true}>
           <DialogContent className="max-w-md">
             <DialogHeader className="flex flex-col items-center">

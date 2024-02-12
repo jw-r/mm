@@ -23,6 +23,16 @@ axios.interceptors.request.use(
   },
 );
 
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      window.dispatchEvent(new CustomEvent('unauthorized'));
+    }
+    return Promise.reject(error);
+  },
+);
+
 export const http = {
   get: <Response = unknown>(url: GetApiPath, config?: AxiosRequestConfig) => {
     return axios.get<Response>(url, config).then((res) => res.data);
