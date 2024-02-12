@@ -76,12 +76,12 @@ function Sidebar() {
   }, [data.categories.length, selectCategory]);
 
   return (
-    <div className="space-y-6 px-10 py-12">
-      <div className="w-52">
+    <div className="hidden space-y-6 px-6 py-8 sm:block lg:px-10 lg:py-12">
+      <div className="w-36 lg:w-52">
         <Txt typography="h3">카테고리</Txt>
         <div className="h-[2px] w-full bg-foreground" />
       </div>
-      <div className="flex w-52 flex-col space-y-2">
+      <div className="flex w-36 flex-col space-y-2 lg:w-52">
         {data.categories.map((category) => (
           <div
             key={category.id}

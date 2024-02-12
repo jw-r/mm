@@ -21,9 +21,9 @@ export function RepositoryPage() {
   };
 
   return (
-    <main className="flex w-full max-w-[880px] flex-col p-12">
+    <main className="flex w-full max-w-[880px] flex-col px-6 py-8 lg:p-12">
       <div className="flex justify-between">
-        <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
+        <Txt typography="h1">복습 창고</Txt>
         <CreateDocumentMenu />
       </div>
       {data?.documents.map((document) => (
@@ -42,7 +42,7 @@ export function RepositoryPage() {
           <Accordion type="multiple" className="w-full pl-4">
             {document.questions.map((question, index) => (
               <AccordionItem key={question.id} value={String(question.id)} className="last:border-none">
-                <AccordionTrigger>{`${index + 1}. ${question.question}`}</AccordionTrigger>
+                <AccordionTrigger className="text-start">{`${index + 1}. ${question.question}`}</AccordionTrigger>
                 <AccordionContent>{question.answer}</AccordionContent>
               </AccordionItem>
             ))}

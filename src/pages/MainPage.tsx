@@ -18,15 +18,14 @@ export function MainPage() {
     push(`/documents/${documentsId}`);
   };
 
-  if (!data) return null;
   return (
-    <main className="flex w-full max-w-[880px] flex-col p-12">
+    <main className="flex w-full max-w-[880px] flex-col px-6 py-8 lg:p-12">
       <div className="flex justify-between">
-        <Txt typography="h1">{selectedCategory?.name || '카테고리'}</Txt>
+        <Txt typography="h1">문서</Txt>
         <CreateDocumentMenu />
       </div>
       <div className="mt-8 space-y-4">
-        {data.documents.map((document) => (
+        {data?.documents.map((document) => (
           <article
             key={document.id}
             id={String(document.id)}
