@@ -15,7 +15,7 @@ const createDocument = (requestBody: CreateDocumentRequest) => {
   formData.append('categoryId', String(requestBody.categoryId));
   formData.append('documentFormat', requestBody.documentFormat);
 
-  return http.post<FormData>('/documents', formData, {
+  return http.post<FormData, { id: number }>('/documents', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -26,9 +26,5 @@ export function useCreateDocument() {
   return useMutation({
     mutationKey: ['createDocument'],
     mutationFn: (data: CreateDocumentRequest) => createDocument(data),
-
-    onSuccess: (query) => {
-      console.log(query);
-    },
   });
 }
