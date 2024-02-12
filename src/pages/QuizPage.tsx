@@ -106,7 +106,6 @@ function NoDocument() {
 function NotGenerated() {
   const { push } = useRouter();
   const { data: user } = useGetUserInfo();
-  // TODO: user email 표시
 
   if (!user) return null;
   return (
@@ -119,7 +118,7 @@ function NotGenerated() {
       </Txt>
       <Center className="flex w-full flex-col items-center p-4">
         <Txt typography="small" className="text-center leading-5 text-foreground/60">
-          문서가 생성되면 evencoding@gmail.com으로 알림을 보내드릴게요!
+          문서가 생성되면 {user.email}으로 알림을 보내드릴게요!
         </Txt>
         <div className="mt-4 flex w-full max-w-sm flex-col space-y-3">
           <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/')}>

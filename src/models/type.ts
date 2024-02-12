@@ -21,13 +21,16 @@ export interface TodayQuestion {
 }
 
 export interface User {
+  email: string;
   subscription: {
     plan: 'PRO' | 'FREE';
     purchasedDate: string;
     expireDate: string;
   };
   document: {
-    currentSubscriptionCycleTotalDocuments: number;
-    currentSubscriptionCycleUsedDocuments: number;
+    anytimeMaxDocumentNum: number;
+    currentSubscriptionCycleMaxDocumentNum: number;
+    currentSubscriptionCycleUploadedDocumentNum: number;
+    currentUploadedDocumentNum: number;
   };
 }
