@@ -8,3 +8,14 @@ export interface Question {
   question: string;
   answer: string;
 }
+
+export interface TodayQuestion {
+  id: number;
+  question: string;
+  answer: string;
+  category: Category;
+  document: {
+    id: number;
+    name: string;
+  };
+}

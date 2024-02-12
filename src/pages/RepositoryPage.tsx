@@ -21,9 +21,9 @@ export function RepositoryPage() {
   };
 
   return (
-    <main className="flex w-full max-w-[880px] flex-col px-6 py-8 lg:p-12">
+    <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
       <div className="flex justify-between">
-        <Txt typography="h1">복습 창고</Txt>
+        <Txt typography="h1">📚 복습 창고</Txt>
         <CreateDocumentMenu />
       </div>
       {data?.documents.map((document) => (
@@ -31,7 +31,7 @@ export function RepositoryPage() {
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
               <Txt typography="large">{`Note: ${document.documentName}`}</Txt>
-              <Txt typography="small" className="text-foreground/35">
+              <Txt typography="small" className="mt-1 text-foreground/35">
                 {formatDate(document.createdAt)}
               </Txt>
             </div>

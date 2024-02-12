@@ -6,6 +6,8 @@ import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
 import { MouseEventHandler } from 'react';
 
+// access_token
+
 export function MainPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
@@ -19,7 +21,7 @@ export function MainPage() {
   };
 
   return (
-    <main className="flex w-full max-w-[880px] flex-col px-6 py-8 lg:p-12">
+    <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
       <div className="flex justify-between">
         <Txt typography="h1">문서</Txt>
         <CreateDocumentMenu />

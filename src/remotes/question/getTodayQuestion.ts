@@ -1,18 +1,9 @@
-import { Category } from '@/models/type';
+import { TodayQuestion } from '@/models/type';
 import { http } from '@/utils/http';
 import { useQuery } from '@tanstack/react-query';
 
-interface GetTodayQuestionResponse {
-  questions: {
-    id: number;
-    question: string;
-    answer: string;
-    category: Category;
-    document: {
-      id: number;
-      name: string;
-    };
-  }[];
+export interface GetTodayQuestionResponse {
+  questions: TodayQuestion[];
 }
 
 const getTodayQuestion = ({ questionSetId }: { questionSetId: string }) => {

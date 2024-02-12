@@ -11,14 +11,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { useGetCategories } from '@/remotes/category/getCategories';
 import { Txt } from '../shared/Txt';
 
-// 제목 밑에 날짜 조금 띄워주자
-// 페이지 타이틀을 카테고리 말고
-
 export function CreateDocumentDialog({ children }: { children: ReactNode }) {
   return children;
 }
 
-function FileUpload() {
+function FileUpload({ trigger }: { trigger?: ReactNode }) {
   const { selectedCategory } = useCategoryStore();
   const { mutate: createDocument } = useCreateDocument();
 
@@ -45,9 +42,13 @@ function FileUpload() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="h-full">
-          md 파일 업로드
-        </Button>
+        {trigger ? (
+          trigger
+        ) : (
+          <Button variant="ghost" className="h-full">
+            md 파일 업로드
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">

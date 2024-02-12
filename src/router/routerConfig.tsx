@@ -1,12 +1,12 @@
 import { AuthGuard } from '@/router/components/AuthGuard';
 import { Oauth } from '@/components/common/Oauth';
-import { DocumentDetailPage, MainPage, QuizPage, RepositoryPage, WriteDocumentPage } from '@/pages';
+import { DocumentDetailPage, MainPage, QuizPage, RepositoryPage, UserProfilePage, WriteDocumentPage } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
 import { SidebarLayout } from './components/SidebarLayout';
 import { Root } from './components/Root';
 import { CatchEmail } from '@/components/common/CatchEmail';
-import { ClipSuspense } from '@/components/common/ClipSuspense';
+import { ClipSuspense } from '@/components/shared/ClipSuspense';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +38,7 @@ export const router = createBrowserRouter([
                   },
                   { path: 'documents/:id', element: <DocumentDetailPage /> },
                   { path: 'write', element: <WriteDocumentPage /> },
+                  { path: 'profile', element: <UserProfilePage /> },
                 ],
               },
             ],

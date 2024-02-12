@@ -76,7 +76,7 @@ function Sidebar() {
   }, [data.categories.length, selectCategory]);
 
   return (
-    <div className="hidden space-y-6 px-6 py-8 sm:block lg:px-10 lg:py-12">
+    <div className="hidden space-y-6 p-4 sm:block md:p-8 lg:py-12">
       <div className="w-36 lg:w-52">
         <Txt typography="h3">카테고리</Txt>
         <div className="h-[2px] w-full bg-foreground" />
