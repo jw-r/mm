@@ -7,6 +7,7 @@ import useRouter from '@/hooks/useRouter';
 import { TodayQuestion } from '@/models/type';
 import { useGetQuestionSetId } from '@/remotes/question/getQuesionSetId';
 import { useTodayQuestion } from '@/remotes/question/getTodayQuestion';
+import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -104,7 +105,10 @@ function NoDocument() {
 
 function NotGenerated() {
   const { push } = useRouter();
+  const { data: user } = useGetUserInfo();
+  // TODO: user email 표시
 
+  if (!user) return null;
   return (
     <div className="flex flex-col items-center">
       <Txt

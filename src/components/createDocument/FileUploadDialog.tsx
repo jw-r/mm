@@ -13,6 +13,7 @@ import { Txt } from '../shared/Txt';
 import { useGetDocument } from '@/remotes/document/getDocument';
 import useRouter from '@/hooks/useRouter';
 import FadeLoader from 'react-spinners/FadeLoader';
+import { queryClient } from '@/providers/TanstackProvider';
 
 // 토큰 만료 401
 
@@ -33,7 +34,7 @@ export function CreateDocumentDialog({
 
     const formData = new FormData(e.currentTarget);
     let file;
-    let categoryId;
+    let categoryId: number;
     const userDocumentName = formData.get('userDocumentName') as string;
 
     if (type === 'file') {
@@ -74,7 +75,23 @@ export function CreateDocumentDialog({
           return <Write onSubmit={onSubmit} />;
         }
       case 'PROGRESSING':
-        return <Progressing next={() => setUploadProcess('DONE')} />;
+        return (
+          <Progressing
+            next={async () => {
+              setUploadProcess('DONE');
+              await queryClient.refetchQueries({
+                queryKey: ['getDocuments', selectedCategory?.id],
+                exact: true,
+                type: 'all',
+              });
+              await queryClient.refetchQueries({
+                queryKey: ['getQuestions', selectedCategory?.id],
+                exact: true,
+                type: 'all',
+              });
+            }}
+          />
+        );
       case 'DONE':
         return <Done documentId={documentId} />;
     }
