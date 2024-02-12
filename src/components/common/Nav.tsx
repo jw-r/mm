@@ -30,11 +30,14 @@ export function Nav() {
               </Txt>
             </Link>
           </div>
-          <Link to="/profile" className="hover:scale-105">
-            <Button variant="outline" className="shadow-sm">
-              Profile
-            </Button>
-          </Link>
+          <div>
+            <Txt typography="line-code">Free.</Txt>
+            <Link to="/profile" className="hover:scale-105">
+              <Button variant="outline" className="shadow-sm">
+                Profile
+              </Button>
+            </Link>
+          </div>
         </div>
       </nav>
       <nav className="flex w-full justify-end sm:hidden">Menu</nav>

@@ -89,7 +89,8 @@ function NoDocument() {
           문서를 생성하고 매일 새로운 퀴즈를 받아보세요!
         </Txt>
         <div className="mt-4 flex w-full max-w-sm flex-col space-y-3">
-          <CreateDocumentDialog.FileUpload
+          <CreateDocumentDialog
+            type="file"
             trigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
           />
           <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/write')}>
@@ -118,7 +119,7 @@ function NotGenerated() {
         </Txt>
         <div className="mt-4 flex w-full max-w-sm flex-col space-y-3">
           <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/')}>
-            홈으로 이동하기
+            문서 창고로 이동하기
           </Button>
         </div>
       </Center>

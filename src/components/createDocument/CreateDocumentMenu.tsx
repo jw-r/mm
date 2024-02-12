@@ -32,7 +32,7 @@ export function CreateDocumentMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col space-y-2">
         {selectedCategory?.id ? (
-          <CreateDocumentDialog.FileUpload />
+          <CreateDocumentDialog type="file" />
         ) : (
           <Button onClick={noCategoryAlert} variant="ghost">
             md 파일 업로드

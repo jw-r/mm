@@ -17,12 +17,10 @@ const getDocument = ({ documentId }: { documentId: number }) => {
   return http.get<GetDocumentsResponse>(`/documents/${documentId}`);
 };
 
-export function useGetDocument({ documentId, polling }: { documentId: number | undefined; polling?: boolean }) {
+export function useGetDocument({ documentId }: { documentId: number | undefined }) {
   return useQuery({
     queryKey: ['getDocuments', documentId],
     queryFn: () => getDocument({ documentId: documentId as number }),
-
-    refetchInterval: polling ? 1000 : false,
 
     enabled: !!documentId,
   });
