@@ -5,8 +5,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
 import { SidebarLayout } from './components/SidebarLayout';
 import { Root } from './components/Root';
-import { Suspense } from 'react';
 import { CatchEmail } from '@/components/common/CatchEmail';
+import { ClipSuspense } from '@/components/common/ClipSuspense';
 
 export const router = createBrowserRouter([
   {
@@ -20,29 +20,26 @@ export const router = createBrowserRouter([
             element: <HeaderLayout />,
             children: [
               {
-                element: <SidebarLayout />,
+                element: <ClipSuspense />,
                 children: [
                   {
-                    index: true,
-                    element: (
-                      <Suspense fallback={<div>Loading...</div>}>
-                        <MainPage />
-                      </Suspense>
-                    ),
+                    element: <SidebarLayout />,
+                    children: [
+                      {
+                        index: true,
+                        element: <MainPage />,
+                      },
+                      { path: 'repository', element: <RepositoryPage /> },
+                    ],
                   },
-                  { path: 'repository', element: <RepositoryPage /> },
+                  {
+                    path: 'quiz',
+                    element: <QuizPage.Private />,
+                  },
+                  { path: 'documents/:id', element: <DocumentDetailPage /> },
+                  { path: 'write', element: <WriteDocumentPage /> },
                 ],
               },
-              {
-                path: 'quiz',
-                element: (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <QuizPage.Private />
-                  </Suspense>
-                ),
-              },
-              { path: 'documents/:id', element: <DocumentDetailPage /> },
-              { path: 'write', element: <WriteDocumentPage /> },
             ],
           },
         ],
