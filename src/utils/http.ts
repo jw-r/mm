@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { LOCAL_TOKEN_NAME } from '@/constants';
 import Axios, { AxiosRequestConfig } from 'axios';
 
 const axios = Axios.create({
@@ -9,7 +10,7 @@ axios.interceptors.request.use(
   (config) => {
     if (!config.headers) return config;
 
-    const token = localStorage.getItem('pick-toss-token');
+    const token = localStorage.getItem(LOCAL_TOKEN_NAME);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -43,7 +44,8 @@ type GetApiPath =
   | `/documents/${number}`
   | `/categories/${number}/documents/questions`
   | '/question-sets/today'
-  | `/question-sets/${string}`;
+  | `/question-sets/${string}`
+  | '/members/info';
 
 type PostApiPath = '/categories' | '/documents';
 

@@ -19,3 +19,15 @@ export interface TodayQuestion {
     name: string;
   };
 }
+
+export interface User {
+  subscription: {
+    plan: 'PRO' | 'FREE';
+    purchasedDate: string;
+    expireDate: string;
+  };
+  document: {
+    currentSubscriptionCycleTotalDocuments: number;
+    currentSubscriptionCycleUsedDocuments: number;
+  };
+}
