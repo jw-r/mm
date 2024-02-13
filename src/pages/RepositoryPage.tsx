@@ -1,4 +1,5 @@
 import { CreateDocumentMenu } from '@/components/createDocument/CreateDocumentMenu';
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ export function RepositoryPage() {
 
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
+      <SEO title="Repository" description="복습 창고" image="" />
       <div className="flex justify-between">
         <Txt typography="h1">📚 복습 창고</Txt>
         <CreateDocumentMenu />

@@ -1,6 +1,7 @@
 import { CreateDocumentDialog } from '@/components/createDocument/FileUploadDialog';
 import { ProtectLimitProvider } from '@/components/createDocument/ProtectLimitProvider';
 import { Center } from '@/components/shared/Center';
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,12 @@ function Private() {
   }
 
   if (!data) return null;
-  return <QuizComponent questions={data.questions} />;
+  return (
+    <>
+      <QuizComponent questions={data.questions} />
+      <SEO title="Today Quiz" description="복습 창고" image="" />
+    </>
+  );
 }
 
 function Public() {
@@ -40,7 +46,12 @@ function Public() {
   const { data } = useTodayQuestion({ questionSetId });
 
   if (!data) return null;
-  return <QuizComponent questions={data.questions} />;
+  return (
+    <>
+      <SEO title="Today Quiz" description="복습 창고" image="" />
+      <QuizComponent questions={data.questions} />
+    </>
+  );
 }
 
 function QuizComponent({ questions }: { questions: TodayQuestion[] }) {
@@ -78,6 +89,7 @@ function NoDocument() {
 
   return (
     <div className="flex flex-col items-center">
+      <SEO title="Today Quiz" description="복습 창고" image="" />
       <Txt
         typography="h4"
         className="mt-8 w-full max-w-4xl p-3 text-center ring-1 ring-offset-2 ring-offset-foreground"
@@ -119,6 +131,7 @@ function NotGenerated() {
   if (!user) return null;
   return (
     <div className="flex flex-col items-center">
+      <SEO title="Today Quiz" description="복습 창고" image="" />
       <Txt
         typography="h4"
         className="mt-8 w-full max-w-4xl p-3 text-center ring-1 ring-offset-2 ring-offset-foreground"

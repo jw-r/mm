@@ -4,7 +4,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, Dia
 import { X } from 'lucide-react';
 import { Button } from '../ui/button';
 import useRouter from '@/hooks/useRouter';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
+import { PlansTable } from '../payments/PlansTable';
 
 export function ProtectLimitProvider({ children, fakeTrigger }: { children: ReactNode; fakeTrigger: ReactNode }) {
   const { push } = useRouter();
@@ -43,41 +43,7 @@ export function ProtectLimitProvider({ children, fakeTrigger }: { children: Reac
             혹은 단돈 3,900원으로 PRO 모드를 즐겨보세요!
           </div>
 
-          <Table>
-            <TableCaption>결제 후, 최대 12시간 이내에 PRO 계정으로 전환됩니다</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead></TableHead>
-                <TableHead className="text-center">free</TableHead>
-                <TableHead className="text-center">현재</TableHead>
-                <TableHead className="text-center">PRO</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell className="text-center font-medium">
-                  최대 보유
-                  <br />
-                  문서 개수
-                </TableCell>
-                <TableCell className="text-center">{user?.documentUsage.anytimeMaxDocumentNum}</TableCell>
-                <TableCell className="text-center">3 / 3</TableCell>
-                <TableCell className="text-center font-bold">15</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="text-center font-medium">
-                  최대 문서
-                  <br />
-                  생성 개수
-                </TableCell>
-                <TableCell className="text-center">15</TableCell>
-                <TableCell className="text-center">
-                  {user?.documentUsage.currentSubscriptionCycleUploadedDocumentNum} / 15
-                </TableCell>
-                <TableCell className="text-center font-bold">45</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <PlansTable caption="결제 후, 최대 12시간 이내에 PRO 계정으로 전환됩니다" />
 
           <DialogClose asChild>
             <Button onClick={() => push('/upgrade')} className="font-semibold">

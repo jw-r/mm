@@ -1,4 +1,5 @@
 import { CreateDocumentMenu } from '@/components/createDocument/CreateDocumentMenu';
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import useRouter from '@/hooks/useRouter';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
@@ -22,6 +23,7 @@ export function MainPage() {
 
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
+      <SEO title="Documents" description="모든 문서" image="" />
       <div className="flex justify-between">
         <Txt typography="h1">문서</Txt>
         <CreateDocumentMenu />
