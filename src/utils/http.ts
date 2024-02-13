@@ -57,7 +57,7 @@ type GetApiPath =
   | `/question-sets/${string}`
   | '/members/info';
 
-type PostApiPath = '/categories' | '/documents';
+type PostApiPath = '/categories' | '/documents' | '/payment';
 
 type PatchApiPath = `/categories/${number}`;
 

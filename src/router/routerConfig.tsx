@@ -1,6 +1,14 @@
 import { AuthGuard } from '@/router/components/AuthGuard';
 import { Oauth } from '@/components/common/Oauth';
-import { DocumentDetailPage, MainPage, QuizPage, RepositoryPage, UserProfilePage, WriteDocumentPage } from '@/pages';
+import {
+  DocumentDetailPage,
+  MainPage,
+  Payment,
+  QuizPage,
+  RepositoryPage,
+  UserProfilePage,
+  WriteDocumentPage,
+} from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
 import { SidebarLayout } from './components/SidebarLayout';
@@ -58,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: 'oauth',
         element: <Oauth />,
+      },
+      {
+        path: '/upgrade',
+        element: <Payment />,
       },
     ],
   },
