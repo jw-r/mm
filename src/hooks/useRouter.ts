@@ -23,4 +23,6 @@ export type RouterPath =
   | `/quiz/${string}`
   | `/documents/${number}`
   | '/write'
-  | '/login';
+  | '/login'
+  | '/upgrade'
+  | '/feedback';

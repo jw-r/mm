@@ -2,6 +2,7 @@ import { AuthGuard } from '@/router/components/AuthGuard';
 import { Oauth } from '@/components/common/Oauth';
 import {
   DocumentDetailPage,
+  FeedbackPage,
   MainPage,
   Payment,
   QuizPage,
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
                   { path: 'documents/:id', element: <DocumentDetailPage /> },
                   { path: 'write', element: <WriteDocumentPage /> },
                   { path: 'profile', element: <UserProfilePage /> },
+                  { path: 'feedback', element: <FeedbackPage /> },
                 ],
               },
             ],

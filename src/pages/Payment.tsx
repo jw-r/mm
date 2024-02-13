@@ -1,6 +1,7 @@
 import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from '@/components/ui/use-toast';
 import useRouter from '@/hooks/useRouter';
 import { usePostPayment } from '@/remotes/user/postPayment';
 import { ArrowLeft } from 'lucide-react';
@@ -24,7 +25,13 @@ export function Payment() {
     payment(
       { name: username },
       {
-        onSuccess: () => back(),
+        onSuccess: () => {
+          toast({
+            title: '제출이 완료됐어요 🚀',
+            description: '최대 12시간 이내로 PRO 계정으로 전환됩니다',
+          });
+          back();
+        },
       },
     );
   };
@@ -45,7 +52,7 @@ export function Payment() {
             일반 결제 및 입금자 성함 입력 <span className="text-red-500">*</span>
           </Txt>
           <div className="flex flex-col space-y-2">
-            <Txt typography="small">계좌 번호 : 406602-04-1591528 (우리은행 이창진)</Txt>
+            <Txt typography="small">계좌 번호 : 100-244-9406366 (우리은행 이창진)</Txt>
             <Txt typography="small" className="font-semibold">
               3,900원 입금 후, 아래 입력 칸에 입금자 성함을 꼭 입력해주세요.
             </Txt>
