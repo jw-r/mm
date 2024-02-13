@@ -5,7 +5,7 @@ export const STYLE = {
 
 export const LOCAL_TOKEN_NAME = 'pick-toss-token';
 
-export const MAX_CONTENT_LENGTH = 15000;
+export const MAX_CONTENT_LENGTH = 300;
 
 export const MIN_CONTENT_LENGTH = 300;
 

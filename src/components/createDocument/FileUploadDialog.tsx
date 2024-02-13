@@ -79,16 +79,7 @@ export function CreateDocumentDialog({
           <Progressing
             next={async () => {
               setUploadProcess('DONE');
-              await queryClient.refetchQueries({
-                queryKey: ['getDocuments', selectedCategory?.id],
-                exact: true,
-                type: 'all',
-              });
-              await queryClient.refetchQueries({
-                queryKey: ['getQuestions', selectedCategory?.id],
-                exact: true,
-                type: 'all',
-              });
+              await queryClient.refetchQueries();
             }}
           />
         );
