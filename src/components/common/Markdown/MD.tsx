@@ -4,7 +4,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-markdown-preview/markdown.css';
 import './styles/editor.css';
 import { useState } from 'react';
-import { STYLE } from '@/constants';
+import { MAX_CONTENT_LENGTH, STYLE } from '@/constants';
 
 document.documentElement.setAttribute('data-color-mode', 'light');
 
@@ -25,7 +25,11 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
       height={editorHeight}
       autoFocus
       value={value}
-      onChange={(value?: string) => setValue(value || '')}
+      onChange={(value?: string) => {
+        if (value && value.length <= MAX_CONTENT_LENGTH) {
+          setValue(value);
+        }
+      }}
       previewOptions={{
         rehypePlugins: [[rehypeSanitize]],
       }}
