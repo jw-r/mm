@@ -3,45 +3,35 @@ import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { CreateDocumentDialog } from './FileUploadDialog';
 import { useCategoryStore } from '@/stores/categoryStore';
+import { useGetUserInfo } from '@/remotes/user/getUserInfo';
+import { toast } from '../ui/use-toast';
+import { ProtectLimitProvider } from './ProtectLimitProvider';
 
 export function CreateDocumentMenu() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
+  const { data: user } = useGetUserInfo();
 
-  const noCategoryAlert = () => {
-    if (!selectedCategory?.id) {
-      alert('카테고리를 먼저 생성해주세요');
-      return true;
-    }
-
-    return false;
-  };
-
-  const moveToWrite = () => {
-    if (noCategoryAlert()) {
-      return;
-    }
-
-    push('/write');
-  };
-
+  if (!user) return null;
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button className="h-full">문서 업로드</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex flex-col space-y-2">
-        {selectedCategory?.id ? (
-          <CreateDocumentDialog type="file" />
-        ) : (
-          <Button onClick={noCategoryAlert} variant="ghost">
-            md 파일 업로드
-          </Button>
-        )}
-        <Button onClick={moveToWrite} variant="ghost">
-          직접 작성하기
+    <ProtectLimitProvider fakeTrigger={<Button className="h-full">문서 업로드</Button>}>
+      {selectedCategory?.id ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="h-full">문서 업로드</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="flex flex-col space-y-2">
+            <CreateDocumentDialog type="file" />
+            <Button onClick={() => push('/write')} variant="ghost">
+              직접 작성하기
+            </Button>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <Button className="h-full" onClick={() => toast({ title: '카테고리를 먼저 생성해주세요' })}>
+          문서 업로드
         </Button>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      )}
+    </ProtectLimitProvider>
   );
 }

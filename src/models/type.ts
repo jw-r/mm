@@ -27,7 +27,7 @@ export interface User {
     purchasedDate: string;
     expireDate: string;
   };
-  document: {
+  documentUsage: {
     anytimeMaxDocumentNum: number;
     currentSubscriptionCycleMaxDocumentNum: number;
     currentSubscriptionCycleUploadedDocumentNum: number;

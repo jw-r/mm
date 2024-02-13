@@ -1,4 +1,5 @@
 import { CreateDocumentDialog } from '@/components/createDocument/FileUploadDialog';
+import { ProtectLimitProvider } from '@/components/createDocument/ProtectLimitProvider';
 import { Center } from '@/components/shared/Center';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -90,13 +91,21 @@ function NoDocument() {
           문서를 생성하고 매일 새로운 퀴즈를 받아보세요!
         </Txt>
         <div className="mt-4 flex w-full max-w-sm flex-col space-y-3">
-          <CreateDocumentDialog
-            type="file"
-            trigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
-          />
-          <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/write')}>
-            직접 문서 작성하기
-          </Button>
+          <ProtectLimitProvider
+            fakeTrigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
+          >
+            <CreateDocumentDialog
+              type="file"
+              trigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
+            />
+          </ProtectLimitProvider>
+          <ProtectLimitProvider
+            fakeTrigger={<Button className="bg-blue-400 shadow-md hover:bg-blue-500">직접 문서 작성하기</Button>}
+          >
+            <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/write')}>
+              직접 문서 작성하기
+            </Button>
+          </ProtectLimitProvider>
         </div>
       </Center>
     </div>

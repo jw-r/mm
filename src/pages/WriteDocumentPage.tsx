@@ -1,12 +1,11 @@
 import { MD } from '@/components/common/Markdown/MD';
 import { CreateDocumentDialog } from '@/components/createDocument/FileUploadDialog';
+import { ProtectLimitProvider } from '@/components/createDocument/ProtectLimitProvider';
 import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
 import { useState } from 'react';
-
-// 문서, 복습창고
 
 export function WriteDocumentPage() {
   const [value, setValue] = useState('');
@@ -32,15 +31,23 @@ export function WriteDocumentPage() {
             업로드
           </Button>
         ) : (
-          <CreateDocumentDialog
-            type="content"
-            content={value}
-            trigger={
+          <ProtectLimitProvider
+            fakeTrigger={
               <Button variant="secondary" className="px-6 py-3 font-semibold">
                 업로드
               </Button>
             }
-          />
+          >
+            <CreateDocumentDialog
+              type="content"
+              content={value}
+              trigger={
+                <Button variant="secondary" className="px-6 py-3 font-semibold">
+                  업로드
+                </Button>
+              }
+            />
+          </ProtectLimitProvider>
         )}
       </div>
     </div>
