@@ -1,3 +1,4 @@
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -38,6 +39,7 @@ export function PaymentPage() {
 
   return (
     <div className="flex justify-center">
+      <SEO title="Upgrade" description="결제 페이지" image="" />
       <div className="mt-16 flex w-full max-w-3xl flex-col items-start justify-center px-4">
         <Button
           variant="ghost"

@@ -1,3 +1,4 @@
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -38,6 +39,7 @@ export function FeedbackPage() {
 
   return (
     <div className="flex justify-center">
+      <SEO title="Feedback" description="각종 문의 및 피드백" image="" />
       <div className="mt-6 flex w-full max-w-3xl flex-col items-start justify-center px-4">
         <Button
           variant="ghost"

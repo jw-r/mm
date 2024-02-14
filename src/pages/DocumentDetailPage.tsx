@@ -1,4 +1,5 @@
 import { MD } from '@/components/common/Markdown/MD';
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useGetDocument } from '@/remotes/document/getDocument';
@@ -10,11 +11,11 @@ export function DocumentDetailPage() {
   const documentId = id ? Number(id) : undefined;
 
   const { data } = useGetDocument({ documentId });
-  console.log(data);
 
   if (!data) return null;
   return (
     <main className="flex w-full justify-center">
+      <SEO title={`Document/${documentId}`} description="모든 문서" image="" />
       <div className="flex w-full max-w-4xl flex-col items-center justify-center p-8">
         <Txt typography="h2" className="text-center">
           {data.documentName}

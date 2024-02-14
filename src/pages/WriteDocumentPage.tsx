@@ -1,6 +1,7 @@
 import { MD } from '@/components/common/Markdown/MD';
 import { CreateDocumentDialog } from '@/components/createDocument/FileUploadDialog';
 import { ProtectLimitProvider } from '@/components/createDocument/ProtectLimitProvider';
+import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
@@ -12,6 +13,7 @@ export function WriteDocumentPage() {
 
   return (
     <div>
+      <SEO title="Write doc" description="문서 직접 작성하기" image="" />
       <MD.Editor value={value} setValue={setValue} />
       <div className="absolute bottom-0 flex h-16 w-full items-center justify-between bg-foreground p-4">
         <Txt typography="small" className="font-semibold text-background">

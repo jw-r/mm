@@ -3,6 +3,7 @@ import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';
 import signupIcon from '../assets/google.svg';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { SEO } from '@/components/shared/SEO';
 
 export function LoginPage() {
   const onClickGoogleLogin = () => {
@@ -13,6 +14,7 @@ export function LoginPage() {
 
   return (
     <Center className="w-full max-w-md p-4 sm:p-0">
+      <SEO title="Login" description="로그인" image="" />
       <Txt typography="h2" className="mb-12 text-center">
         Pick toss
       </Txt>

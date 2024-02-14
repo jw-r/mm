@@ -15,7 +15,7 @@ export function UserProfilePage() {
   if (!user) return null;
   return (
     <div className="mt-4 flex justify-center pb-20">
-      <SEO title="Profile" description="복습 창고" image="" />
+      <SEO title="Profile" description="사용자 프로필" image="" />
       <div className="flex w-full max-w-3xl px-5">
         <div className="flex w-full flex-col justify-start">
           <div className="border-b py-4 last:border-none">
