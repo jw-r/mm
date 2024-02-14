@@ -62,7 +62,11 @@ export function Nav() {
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel className="text-center text-[#82F0D2]">Pro</DropdownMenuLabel>
+            {user.subscription.plan === 'PRO' ? (
+              <DropdownMenuLabel className="bg-[#82F0D2] text-center font-bold">PRO</DropdownMenuLabel>
+            ) : (
+              <DropdownMenuLabel className="bg-foreground/5 text-center">free</DropdownMenuLabel>
+            )}
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => push('/')}>문서</DropdownMenuItem>
             <DropdownMenuItem onClick={() => push('/repository')}>복습 창고</DropdownMenuItem>
