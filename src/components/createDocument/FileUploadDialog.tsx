@@ -47,7 +47,7 @@ export function CreateDocumentDialog({
       categoryId = Number(formData.get('category'));
     }
 
-    if (file.type !== 'text/markdown') {
+    if (file.type !== 'text/markdown' && !file.name.endsWith('.md')) {
       alert('마크다운 문서를 업로드해주세요');
       return;
     }
