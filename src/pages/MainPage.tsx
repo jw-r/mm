@@ -21,7 +21,7 @@ export function MainPage() {
     push(`/documents/${documentsId}`);
   };
 
-  const hasNoContent = data?.documents.length === 0;
+  const hasNoContent = !data?.documents.length;
 
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
