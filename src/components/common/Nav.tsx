@@ -2,8 +2,19 @@ import { Link, useLocation } from 'react-router-dom';
 import { Txt } from '../shared/Txt';
 import { Button } from '../ui/button';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
+import { Menu } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import useRouter from '@/hooks/useRouter';
 
 export function Nav() {
+  const { push } = useRouter();
   const { pathname } = useLocation();
   const { data: user } = useGetUserInfo();
 
@@ -43,7 +54,24 @@ export function Nav() {
           </div>
         </div>
       </nav>
-      <nav className="flex w-full justify-end sm:hidden">Menu</nav>
+      <nav className="flex w-full justify-end sm:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="py-3">
+              <Menu />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel className="text-center text-[#82F0D2]">Pro</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => push('/')}>문서</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => push('/repository')}>복습 창고</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => push('/quiz')}>오늘의 퀴즈</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => push('/profile')}>Profile</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </nav>
     </>
   );
 }

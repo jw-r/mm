@@ -25,4 +25,5 @@ export type RouterPath =
   | '/write'
   | '/login'
   | '/upgrade'
-  | '/feedback';
+  | '/feedback'
+  | '/profile';
