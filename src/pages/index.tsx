@@ -4,8 +4,9 @@ import { QuizPage } from './QuizPage';
 import { RepositoryPage } from './RepositoryPage';
 import { UserProfilePage } from './UserProfilePage';
 import { WriteDocumentPage } from './WriteDocumentPage';
-import { Payment } from './Payment';
+import { PaymentPage } from './PaymentPage';
 import { FeedbackPage } from './FeedbackPage';
+import { LoginPage } from './LoginPage';
 
 export {
   MainPage,
@@ -14,6 +15,7 @@ export {
   DocumentDetailPage,
   WriteDocumentPage,
   UserProfilePage,
-  Payment,
+  PaymentPage,
   FeedbackPage,
+  LoginPage,
 };

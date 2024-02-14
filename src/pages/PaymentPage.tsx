@@ -8,7 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 import { ChangeEvent, useState } from 'react';
 
-export function Payment() {
+export function PaymentPage() {
   const { back } = useRouter();
   const [username, setUsername] = useState('');
   const { mutate: payment } = usePostPayment();

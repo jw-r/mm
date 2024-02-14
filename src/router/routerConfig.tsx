@@ -3,8 +3,9 @@ import { Oauth } from '@/components/common/Oauth';
 import {
   DocumentDetailPage,
   FeedbackPage,
+  LoginPage,
   MainPage,
-  Payment,
+  PaymentPage,
   QuizPage,
   RepositoryPage,
   UserProfilePage,
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
               },
             ],
           },
+          {
+            path: '/upgrade',
+            element: <PaymentPage />,
+          },
         ],
       },
       {
@@ -70,8 +75,8 @@ export const router = createBrowserRouter([
         element: <Oauth />,
       },
       {
-        path: '/upgrade',
-        element: <Payment />,
+        path: '/login',
+        element: <LoginPage />,
       },
     ],
   },
