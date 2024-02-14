@@ -98,11 +98,13 @@ function Category() {
                 key={category.id}
                 name={category.name}
                 variant={selectedCategory?.id === category.id ? 'secondary' : 'ghost'}
-                className="w-full justify-start overflow-x-scroll pr-6"
+                className="scrollbar-hide w-full justify-start overflow-x-scroll pr-6"
                 onClick={handleClickCategory}
               >
-                <FolderOpen size={16} className="mr-2 text-foreground/70" />
-                <div>{category.name}</div>
+                <div className="flex items-center">
+                  <FolderOpen size={16} className="mr-2 text-foreground/70" />
+                  <div>{category.name}</div>
+                </div>
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -135,7 +137,7 @@ function Category() {
       </div>
       <div className="mt-4 flex w-full px-4 sm:hidden">
         <div className="whitespace-nowrap rounded-lg border border-foreground/50 p-2 font-semibold">카테고리</div>
-        <div className="ml-2 flex w-full items-center space-x-2 overflow-x-scroll">
+        <div className="scrollbar-hide ml-2 flex w-full items-center space-x-2 overflow-x-scroll">
           {data.categories.map((category) => (
             <div
               key={category.id}

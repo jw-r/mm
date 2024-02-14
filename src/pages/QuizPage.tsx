@@ -5,11 +5,13 @@ import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/components/ui/use-toast';
 import useRouter from '@/hooks/useRouter';
 import { TodayQuestion } from '@/models/type';
 import { useGetQuestionSetId } from '@/remotes/question/getQuesionSetId';
 import { useTodayQuestion } from '@/remotes/question/getTodayQuestion';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
+import { useCategoryStore } from '@/stores/categoryStore';
 import { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -86,6 +88,7 @@ function QuizComponent({ questions }: { questions: TodayQuestion[] }) {
 
 function NoDocument() {
   const { push } = useRouter();
+  const { selectedCategory } = useCategoryStore();
 
   return (
     <div className="flex flex-col items-center">
@@ -103,21 +106,40 @@ function NoDocument() {
           문서를 생성하고 매일 새로운 퀴즈를 받아보세요!
         </Txt>
         <div className="mt-4 flex w-full max-w-sm flex-col space-y-3">
-          <ProtectLimitProvider
-            fakeTrigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
-          >
-            <CreateDocumentDialog
-              type="file"
-              trigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
-            />
-          </ProtectLimitProvider>
-          <ProtectLimitProvider
-            fakeTrigger={<Button className="bg-blue-400 shadow-md hover:bg-blue-500">직접 문서 작성하기</Button>}
-          >
-            <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/write')}>
-              직접 문서 작성하기
-            </Button>
-          </ProtectLimitProvider>
+          {!selectedCategory?.id ? (
+            <>
+              <Button
+                className="bg-red-300 shadow-md hover:bg-red-400"
+                onClick={() => toast({ title: '문서에서 카테고리를 먼저 생성해주세요' })}
+              >
+                md 파일 업로드하기
+              </Button>
+              <Button
+                className="bg-blue-400 shadow-md hover:bg-blue-500"
+                onClick={() => toast({ title: '문서에서 카테고리를 먼저 생성해주세요' })}
+              >
+                직접 문서 작성하기
+              </Button>
+            </>
+          ) : (
+            <>
+              <ProtectLimitProvider
+                fakeTrigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
+              >
+                <CreateDocumentDialog
+                  type="file"
+                  trigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
+                />
+              </ProtectLimitProvider>
+              <ProtectLimitProvider
+                fakeTrigger={<Button className="bg-blue-400 shadow-md hover:bg-blue-500">직접 문서 작성하기</Button>}
+              >
+                <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/write')}>
+                  직접 문서 작성하기
+                </Button>
+              </ProtectLimitProvider>
+            </>
+          )}
         </div>
       </Center>
     </div>
