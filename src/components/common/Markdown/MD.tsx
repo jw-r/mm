@@ -23,6 +23,8 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
       setIsMobile(window.innerWidth < 800);
     };
 
+    handleResize();
+
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -35,8 +37,8 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
       autoFocus
       value={value}
       onChange={(value?: string) => {
-        if (value && value.length <= MAX_CONTENT_LENGTH) {
-          setValue(value);
+        if (Number(value?.length) <= MAX_CONTENT_LENGTH) {
+          setValue(value || '');
         }
       }}
       previewOptions={{

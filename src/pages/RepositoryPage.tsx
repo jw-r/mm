@@ -21,6 +21,8 @@ export function RepositoryPage() {
     push(`/documents/${documentsId}`);
   };
 
+  const hasNoContent = data?.documents.length === 0;
+
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
       <SEO title="Repository" description="복습 창고" image="" />
@@ -56,6 +58,12 @@ export function RepositoryPage() {
           </Accordion>
         </div>
       ))}
+      {hasNoContent && (
+        <div className="mt-24 flex w-full flex-col items-center justify-center space-y-2 font-semibold text-foreground/50">
+          <Txt>생성된 문서가 없어요</Txt>
+          <Txt>문서를 업로드하시면 매일 새로운 퀴즈를 생성해서 알림을 보내드릴게요 🚀</Txt>
+        </div>
+      )}
     </main>
   );
 }

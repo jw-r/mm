@@ -21,6 +21,8 @@ export function MainPage() {
     push(`/documents/${documentsId}`);
   };
 
+  const hasNoContent = data?.documents.length === 0;
+
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
       <SEO title="Documents" description="모든 문서" image="" />
@@ -30,11 +32,11 @@ export function MainPage() {
           <CreateDocumentMenu />
         </div>
         <Txt typography="small" className="text-foreground/60">
-          오늘의 퀴즈로 매일 새로운 퀴즈가 복습 창고에 추가돼요!
+          문서가 많을수록 오늘의 퀴즈가 다채로워져요!
         </Txt>
       </div>
-      <div className="mt-8 space-y-4">
-        {data?.documents.map((document) => (
+      {data?.documents.map((document) => (
+        <div className="mt-8 space-y-4">
           <article
             key={document.id}
             id={String(document.id)}
@@ -51,8 +53,14 @@ export function MainPage() {
               <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>
             )}
           </article>
-        ))}
-      </div>
+        </div>
+      ))}
+      {hasNoContent && (
+        <div className="mt-24 flex w-full flex-col items-center justify-center space-y-2 font-semibold text-foreground/50">
+          <Txt>생성된 문서가 없어요</Txt>
+          <Txt>문서를 업로드하시면 매일 새로운 퀴즈를 생성해서 알림을 보내드릴게요 🚀</Txt>
+        </div>
+      )}
     </main>
   );
 }
