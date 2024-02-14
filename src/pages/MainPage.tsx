@@ -24,9 +24,14 @@ export function MainPage() {
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
       <SEO title="Documents" description="모든 문서" image="" />
-      <div className="flex justify-between">
-        <Txt typography="h1">문서</Txt>
-        <CreateDocumentMenu />
+      <div className="flex flex-col">
+        <div className="mb-4 flex justify-between">
+          <Txt className="border-none text-4xl font-extrabold">📄 문서</Txt>
+          <CreateDocumentMenu />
+        </div>
+        <Txt typography="small" className="text-foreground/60">
+          오늘의 퀴즈로 매일 새로운 퀴즈가 복습 창고에 추가돼요!
+        </Txt>
       </div>
       <div className="mt-8 space-y-4">
         {data?.documents.map((document) => (

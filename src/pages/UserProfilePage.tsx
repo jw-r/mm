@@ -50,7 +50,9 @@ export function UserProfilePage() {
                 </Txt>
               </div>
             ) : (
-              <Button className="mt-2">3,900원으로 PRO 버전으로 업그레이드하기</Button>
+              <Button className="mt-2" onClick={() => push('/upgrade')}>
+                3,900원으로 PRO 버전 업그레이드하기
+              </Button>
             )}
           </div>
           <div className="border-b py-4 last:border-none">

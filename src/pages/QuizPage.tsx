@@ -70,7 +70,7 @@ function QuizComponent({ questions }: { questions: TodayQuestion[] }) {
               <div>{question.answer}</div>
               <div className="mt-6 flex items-center justify-between">
                 <Txt className="small">
-                  {question.category.name}: {question.document.name}
+                  {question.category.name} {'>'} {question.document.name}
                 </Txt>
                 <button className="p-2" onClick={() => push(`/documents/${question.document.id}`)}>
                   <span className="border-b border-foreground">문서보기</span>

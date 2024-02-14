@@ -10,6 +10,7 @@ import { Input } from '../ui/input';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { MoreVertical } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { FolderOpen } from 'lucide-react';
 
 function Category() {
   const { data } = useGetCategories();
@@ -97,10 +98,11 @@ function Category() {
                 key={category.id}
                 name={category.name}
                 variant={selectedCategory?.id === category.id ? 'secondary' : 'ghost'}
-                className="w-full justify-between overflow-x-scroll pr-6"
+                className="w-full justify-start overflow-x-scroll pr-6"
                 onClick={handleClickCategory}
               >
-                {category.name}
+                <FolderOpen size={16} className="mr-2 text-foreground/70" />
+                <div>{category.name}</div>
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

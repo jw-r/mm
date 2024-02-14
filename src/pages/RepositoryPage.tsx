@@ -26,7 +26,7 @@ export function RepositoryPage() {
       <SEO title="Repository" description="복습 창고" image="" />
       <div className="flex flex-col">
         <div className="mb-4 flex justify-between">
-          <Txt typography="h1">📚 복습 창고</Txt>
+          <Txt className="border-none text-4xl font-extrabold">📚 복습 창고</Txt>
           <CreateDocumentMenu />
         </div>
         <Txt typography="small" className="text-foreground/60">
