@@ -24,8 +24,8 @@ export function MainPage() {
   const hasNoContent = !data?.documents.length;
 
   return (
-    <div className="flex w-full flex-col p-4 md:p-8 lg:p-12">
-      <main className="flex w-full max-w-[880px] flex-col">
+    <div className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
+      <main className="flex w-full flex-col">
         <SEO title="Documents" description="모든 문서" image="" />
         <div className="flex flex-col">
           <div className="mb-4 flex justify-between">
