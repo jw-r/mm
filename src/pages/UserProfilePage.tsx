@@ -35,7 +35,7 @@ export function UserProfilePage() {
                   {user.subscription.plan}
                 </div>
               ) : (
-                <div className="text-md mt-3 inline-block rounded-md bg-foreground/30 px-3 py-1 font-semibold text-white">
+                <div className="text-md inline-block rounded-md bg-foreground/30 px-3 py-1 font-semibold text-white">
                   {user.subscription.plan}
                 </div>
               )}

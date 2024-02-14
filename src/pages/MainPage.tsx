@@ -36,7 +36,7 @@ export function MainPage() {
         </Txt>
       </div>
       {data?.documents.map((document) => (
-        <div className="mt-8 space-y-4">
+        <div key={document.id} className="mt-8 space-y-4">
           <article
             key={document.id}
             id={String(document.id)}

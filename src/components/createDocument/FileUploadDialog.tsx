@@ -259,7 +259,7 @@ function Done({ documentId }: { documentId: number | undefined }) {
       <div className="space-y-2">
         <div className="text-end">
           <Txt typography="small">
-            현재 보유 문서 수: {user.documentUsage.anytimeMaxDocumentNum} / 최대 보유 문서 수:{' '}
+            현재 보유 문서 수: {user.documentUsage.currentSubscriptionCycleUploadedDocumentNum} / 최대 보유 문서 수:{' '}
             {user.documentUsage.currentSubscriptionCycleMaxDocumentNum}
           </Txt>
         </div>
