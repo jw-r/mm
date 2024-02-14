@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { HTMLProps, ReactNode } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-markdown-preview/markdown.css';
@@ -44,8 +44,8 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
   );
 }
 
-function Viewer({ content }: { content: string }) {
-  return <MDEditor.Markdown className="mt-6 max-w-4xl" source={content} rehypePlugins={[[rehypeSanitize]]} />;
+function Viewer({ content, className }: { content: string; className: HTMLProps<HTMLElement>['className'] }) {
+  return <MDEditor.Markdown className={className} source={content} rehypePlugins={[[rehypeSanitize]]} />;
 }
 
 MD.Editor = Editor;
