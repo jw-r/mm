@@ -14,6 +14,7 @@ import { useGetDocument } from '@/remotes/document/getDocument';
 import useRouter from '@/hooks/useRouter';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { queryClient } from '@/providers/TanstackProvider';
+import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 
 // 토큰 만료 401
 
@@ -228,8 +229,9 @@ function Progressing({ next }: { next: () => void }) {
 function Done({ documentId }: { documentId: number | undefined }) {
   const { push } = useRouter();
   const { data } = useGetDocument({ documentId });
+  const { data: user } = useGetUserInfo();
 
-  if (!data) return <></>;
+  if (!data || !user) return <></>;
   return (
     <div className="flex flex-col justify-between space-y-2">
       <div>
@@ -256,7 +258,10 @@ function Done({ documentId }: { documentId: number | undefined }) {
       </div>
       <div className="space-y-2">
         <div className="text-end">
-          <Txt typography="small">전체 문서 수: 2 / 업로드 가능 문서 수: 3</Txt>
+          <Txt typography="small">
+            현재 보유 문서 수: {user.documentUsage.anytimeMaxDocumentNum} / 최대 보유 문서 수:{' '}
+            {user.documentUsage.currentSubscriptionCycleMaxDocumentNum}
+          </Txt>
         </div>
         <DialogClose asChild>
           <div className="flex justify-between space-x-4">
