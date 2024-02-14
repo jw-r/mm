@@ -9,8 +9,9 @@ import { useCreateCategory } from '@/remotes/category/createCategory';
 import { Input } from '../ui/input';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { MoreVertical } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { FolderOpen } from 'lucide-react';
+import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
 
 function Category() {
   const { data } = useGetCategories();
@@ -115,7 +116,10 @@ function Category() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => handleDeleteCategory(category.id)}>삭제</DropdownMenuItem>
+                  <CategoryDeleteConfirm
+                    trigger={<div className="flex justify-center">삭제</div>}
+                    deleteCategory={() => handleDeleteCategory(category.id)}
+                  />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -135,6 +139,7 @@ function Category() {
           )}
         </div>
       </div>
+
       <div className="mt-4 flex w-full px-4 sm:hidden">
         <div className="whitespace-nowrap rounded-lg border border-foreground/50 p-2 font-semibold">카테고리</div>
         <div className="scrollbar-hide ml-2 flex w-full items-center space-x-2 overflow-x-scroll">
@@ -162,7 +167,10 @@ function Category() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => handleDeleteCategory(category.id)}>삭제</DropdownMenuItem>
+                  <CategoryDeleteConfirm
+                    trigger={<div className="flex justify-center">삭제</div>}
+                    deleteCategory={() => handleDeleteCategory(category.id)}
+                  />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
