@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import useRouter from '@/hooks/useRouter';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 
@@ -11,11 +11,11 @@ export function AuthGuard() {
   useEffect(() => {
     setInit(true);
     if (!user) {
-      push('/');
+      push('/login');
     }
   }, [user, push]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleUnauthorized = () => {
       push('/login');
     };
@@ -27,6 +27,6 @@ export function AuthGuard() {
     };
   }, [push]);
 
-  if (!init && !user) return null;
+  if (!init || !user) return null;
   return <Outlet />;
 }
