@@ -1,6 +1,7 @@
 import { HTMLProps } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
+import { DOCUMENT } from '@/constants';
 
 export function PlansTable({
   className,
@@ -10,6 +11,8 @@ export function PlansTable({
   caption?: string;
 }) {
   const { data: user } = useGetUserInfo();
+
+  const isPro = user?.subscription.plan === 'PRO';
 
   if (!user) return null;
   return (
@@ -30,9 +33,11 @@ export function PlansTable({
             <br />
             문서 개수
           </TableCell>
-          <TableCell className="text-center">{user?.documentUsage.anytimeMaxDocumentNum}</TableCell>
-          <TableCell className="bg-foreground/5 text-center">3 / 3</TableCell>
-          <TableCell className="text-center font-bold">15</TableCell>
+          <TableCell className="text-center">{DOCUMENT.MAX_DOCUMENT_COUNT_FREE}</TableCell>
+          <TableCell className="bg-foreground/5 text-center">
+            수정 예정 / {isPro ? DOCUMENT.MAX_DOCUMENT_COUNT_PRO : DOCUMENT.MAX_DOCUMENT_COUNT_FREE}
+          </TableCell>
+          <TableCell className="text-center font-bold">{DOCUMENT.MAX_DOCUMENT_COUNT_PRO}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell className="text-center font-medium">
@@ -40,11 +45,12 @@ export function PlansTable({
             <br />
             생성 개수
           </TableCell>
-          <TableCell className="text-center">15</TableCell>
+          <TableCell className="text-center">{DOCUMENT.MAX_UPLOAD_COUNT_FREE}</TableCell>
           <TableCell className="bg-foreground/5 text-center">
-            {user?.documentUsage.currentSubscriptionCycleUploadedDocumentNum} / 15
+            {user?.documentUsage.currentSubscriptionCycleUploadedDocumentNum} /{' '}
+            {isPro ? DOCUMENT.MAX_UPLOAD_COUNT_PRO : DOCUMENT.MAX_UPLOAD_COUNT_FREE}
           </TableCell>
-          <TableCell className="text-center font-bold">45</TableCell>
+          <TableCell className="text-center font-bold">{DOCUMENT.MAX_UPLOAD_COUNT_PRO}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
