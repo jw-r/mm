@@ -14,7 +14,7 @@ export function CatchEmail() {
     }
 
     push(`/quiz/${question_set_id}`);
-  }, []);
+  }, [search, push]);
 
   return null;
 }

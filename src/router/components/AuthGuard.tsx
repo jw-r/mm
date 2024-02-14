@@ -13,7 +13,7 @@ export function AuthGuard() {
     if (!user) {
       push('/');
     }
-  }, [user]);
+  }, [user, push]);
 
   useEffect(() => {
     const handleUnauthorized = () => {
@@ -25,7 +25,7 @@ export function AuthGuard() {
     return () => {
       window.removeEventListener('unauthorized', handleUnauthorized);
     };
-  }, []);
+  }, [push]);
 
   if (!init && !user) return null;
   return <Outlet />;
