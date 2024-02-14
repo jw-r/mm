@@ -24,12 +24,17 @@ export function RepositoryPage() {
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
       <SEO title="Repository" description="복습 창고" image="" />
-      <div className="flex justify-between">
-        <Txt typography="h1">📚 복습 창고</Txt>
-        <CreateDocumentMenu />
+      <div className="flex flex-col">
+        <div className="mb-4 flex justify-between">
+          <Txt typography="h1">📚 복습 창고</Txt>
+          <CreateDocumentMenu />
+        </div>
+        <Txt typography="small" className="text-foreground/60">
+          오늘의 퀴즈로 매일 새로운 퀴즈가 복습 창고에 추가돼요!
+        </Txt>
       </div>
       {data?.documents.map((document) => (
-        <div key={document.id} className="mt-8 space-y-2 rounded-lg border-2 p-4">
+        <div key={document.id} className="mt-6 space-y-2 rounded-lg border-2 p-4">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
               <Txt typography="large">{`Note: ${document.documentName}`}</Txt>

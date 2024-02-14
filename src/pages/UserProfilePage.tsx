@@ -54,7 +54,7 @@ export function UserProfilePage() {
             )}
           </div>
           <div className="border-b py-4 last:border-none">
-            <Txt typography="h4">나의 문서</Txt>
+            <Txt typography="h4">나의 문서 현황</Txt>
             <PlansTable className="mt-4 border" />
           </div>
         </div>
