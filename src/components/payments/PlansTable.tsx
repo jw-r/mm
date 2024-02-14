@@ -35,7 +35,8 @@ export function PlansTable({
           </TableCell>
           <TableCell className="text-center">{DOCUMENT.MAX_DOCUMENT_COUNT_FREE}</TableCell>
           <TableCell className="bg-foreground/5 text-center">
-            수정 예정 / {isPro ? DOCUMENT.MAX_DOCUMENT_COUNT_PRO : DOCUMENT.MAX_DOCUMENT_COUNT_FREE}
+            {user?.documentUsage.anytimeMaxDocumentNum} /{' '}
+            {isPro ? DOCUMENT.MAX_DOCUMENT_COUNT_PRO : DOCUMENT.MAX_DOCUMENT_COUNT_FREE}
           </TableCell>
           <TableCell className="text-center font-bold">{DOCUMENT.MAX_DOCUMENT_COUNT_PRO}</TableCell>
         </TableRow>
@@ -56,3 +57,16 @@ export function PlansTable({
     </Table>
   );
 }
+
+// anytimeMaxDocumentNum
+// :
+// 최대 보유횟수
+// currentSubscriptionCycleMaxDocumentNum
+// :
+// 최대 업로드 횟수
+// currentSubscriptionCycleUploadedDocumentNum
+// :
+// 현재 문서 개수
+// currentUploadedDocumentNum
+// :
+// 현재 보유횟수
