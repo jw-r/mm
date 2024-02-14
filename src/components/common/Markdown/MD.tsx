@@ -1,4 +1,4 @@
-import { HTMLProps, ReactNode } from 'react';
+import { HTMLProps, ReactNode, useEffect } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-markdown-preview/markdown.css';
@@ -14,10 +14,19 @@ export function MD({ children }: { children: ReactNode }) {
 
 function Editor({ value, setValue }: { value: string; setValue: (newValue: string) => void }) {
   const [isMobile, setIsMobile] = useState(false);
-  console.log(setIsMobile);
 
-  const textareaStyle = `pt-4 h-full bg-[#FAFDFC] ${!isMobile && 'w-[50%]'}`;
   const editorHeight = `calc(100vh - ${STYLE.HEADER_HEIGHT}px - ${STYLE.FIXED_BUTTON_HEIGHT}px)`;
+  const textareaStyle = `pt-4 bg-[#FAFDFC] ${!isMobile && 'w-[50%]'} h-full`;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <MDEditor
@@ -34,7 +43,7 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
         rehypePlugins: [[rehypeSanitize]],
       }}
       textareaProps={{
-        placeholder: '# 제목을 입력해주세요',
+        placeholder: '# 제목을 입력해주세요\n\n## 이미 작성한 글을 복사, 붙여넣기 하는 것을 추천해드려요!',
         className: textareaStyle,
       }}
       visibleDragbar={false}
