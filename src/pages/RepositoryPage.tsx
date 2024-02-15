@@ -37,16 +37,20 @@ export function RepositoryPage() {
       </div>
       {data?.documents.map((document) => (
         <div key={document.id} className="mt-6 space-y-2 rounded-lg border-2 p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col">
-              <Txt typography="large">{`Note: ${document.documentName}`}</Txt>
-              <Txt typography="small" className="mt-1 text-foreground/35">
-                {formatDate(document.createdAt)}
-              </Txt>
+          <div className="table w-full table-fixed">
+            <div className="flex items-center justify-between">
+              <div className="flex w-full flex-col">
+                <Txt typography="large" className="overflow-hidden overflow-ellipsis whitespace-nowrap pr-24">
+                  {document.documentName}
+                </Txt>
+                <Txt typography="small" className="mt-1 text-foreground/35">
+                  {formatDate(document.createdAt)}
+                </Txt>
+              </div>
+              <Button id={String(document.id)} variant="outline" onClick={moveToDetail} className="-ml-24">
+                문서보기
+              </Button>
             </div>
-            <Button id={String(document.id)} variant="outline" onClick={moveToDetail}>
-              문서보기
-            </Button>
           </div>
           <Accordion type="multiple" className="w-full pl-4">
             {document.questions.map((question, index) => (

@@ -19,8 +19,9 @@ export function MainPage() {
   const { data } = useGetDocuments({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
+    const currentTarget = e.currentTarget as HTMLElement;
     const target = e.target as HTMLElement;
-    const documentId = Number(target.id);
+    const documentId = Number(currentTarget.id);
 
     if (target instanceof HTMLButtonElement) {
       return;
@@ -52,20 +53,24 @@ export function MainPage() {
               className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
               onClick={moveToDetail}
             >
-              <div className="flex items-center justify-between">
-                <Txt typography="large">{document.documentName}</Txt>
-                <div className="flex items-center">
-                  <Txt typography="small" className="text-foreground/40">
-                    {formatDate(document.createdAt)}
+              <div className="table w-full table-fixed">
+                <div className="flex justify-between">
+                  <Txt typography="large" className="overflow-hidden overflow-ellipsis whitespace-nowrap">
+                    {document.documentName}
                   </Txt>
-                  <DocumentDeleteConfirm
-                    trigger={
-                      <Button variant="destructive" className="ml-3">
-                        삭제
-                      </Button>
-                    }
-                    deleteDocument={() => deleteDocument({ documentId: document.id })}
-                  />
+                  <div className="flex items-center">
+                    <Txt typography="small" className="whitespace-nowrap text-foreground/40">
+                      {formatDate(document.createdAt)}
+                    </Txt>
+                    <DocumentDeleteConfirm
+                      trigger={
+                        <Button variant="ghost" className="px-2 text-red-500 hover:text-red-600">
+                          삭제
+                        </Button>
+                      }
+                      deleteDocument={() => deleteDocument({ documentId: document.id })}
+                    />
+                  </div>
                 </div>
               </div>
               {document.summary && (
