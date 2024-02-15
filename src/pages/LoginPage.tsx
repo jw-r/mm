@@ -7,7 +7,7 @@ import { SEO } from '@/components/shared/SEO';
 
 export function LoginPage() {
   const onClickGoogleLogin = () => {
-    fetch(import.meta.env.DEV ? import.meta.env.VITE_API_URL_DEV : import.meta.env.VITE_API_URL_PROD + 'oauth/url')
+    fetch(`${import.meta.env.DEV ? import.meta.env.VITE_API_URL_DEV : import.meta.env.VITE_API_URL_PROD}oauth/url`)
       .then((res) => res.json())
       .then(({ oauth_url }) => (window.location.href = oauth_url));
   };
