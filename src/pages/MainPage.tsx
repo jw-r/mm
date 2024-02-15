@@ -20,14 +20,9 @@ export function MainPage() {
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
     const currentTarget = e.currentTarget as HTMLElement;
-    const target = e.target as HTMLElement;
     const documentId = Number(currentTarget.id);
 
-    if (target instanceof HTMLButtonElement) {
-      return;
-    } else {
-      push(`/documents/${documentId}`);
-    }
+    push(`/documents/${documentId}`);
   };
 
   const hasNoContent = !data?.documents.length;
@@ -47,36 +42,42 @@ export function MainPage() {
         </div>
         <div className="mt-8 space-y-4">
           {data?.documents.map((document) => (
-            <article
-              key={document.id}
-              id={String(document.id)}
-              className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
-              onClick={moveToDetail}
-            >
-              <div className="table w-full table-fixed">
-                <div className="flex justify-between">
-                  <Txt typography="large" className="overflow-hidden overflow-ellipsis whitespace-nowrap">
-                    {document.documentName}
-                  </Txt>
-                  <div className="flex items-center">
-                    <Txt typography="small" className="whitespace-nowrap text-foreground/40">
-                      {formatDate(document.createdAt)}
+            <div key={document.id} className="relative">
+              <article
+                id={String(document.id)}
+                className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
+                onClick={moveToDetail}
+              >
+                <div className="table w-full table-fixed">
+                  <div className="flex justify-between">
+                    <Txt typography="large" className="overflow-hidden overflow-ellipsis whitespace-nowrap">
+                      {document.documentName}
                     </Txt>
-                    <DocumentDeleteConfirm
-                      trigger={
-                        <Button variant="ghost" className="px-2 text-red-500 hover:text-red-600">
-                          삭제
-                        </Button>
-                      }
-                      deleteDocument={() => deleteDocument({ documentId: document.id })}
-                    />
+                    <div className="flex items-center pr-8">
+                      <Txt typography="small" className="whitespace-nowrap text-foreground/40">
+                        {formatDate(document.createdAt)}
+                      </Txt>
+                    </div>
                   </div>
                 </div>
-              </div>
-              {document.summary && (
-                <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>
-              )}
-            </article>
+                {document.summary && (
+                  <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">
+                    {document.summary}
+                  </Txt>
+                )}
+              </article>
+              <DocumentDeleteConfirm
+                trigger={
+                  <Button
+                    variant="ghost"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 px-2 text-red-500 hover:text-red-600"
+                  >
+                    삭제
+                  </Button>
+                }
+                deleteDocument={() => deleteDocument({ documentId: document.id })}
+              />
+            </div>
           ))}
         </div>
         {hasNoContent && (

@@ -25,8 +25,8 @@ export function DocumentDeleteConfirm({ trigger, deleteDocument }: { trigger: Re
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction asChild>
-            <Button onClick={deleteDocument}>확인</Button>
+          <AlertDialogAction asChild onClick={deleteDocument}>
+            <Button>확인</Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
