@@ -14,26 +14,40 @@ export function MD({ children }: { children: ReactNode }) {
 
 function Editor({ value, setValue }: { value: string; setValue: (newValue: string) => void }) {
   const [isMobile, setIsMobile] = useState(false);
+  const [editorHeight, setEditorHeight] = useState(0);
 
-  const editorHeight = `calc(100vh - ${STYLE.HEADER_HEIGHT}px - ${STYLE.FIXED_BUTTON_HEIGHT}px)`;
-  const textareaStyle = `pt-4 bg-[#FAFDFC] ${!isMobile && 'w-[50%]'} h-full`;
+  const textareaStyle = `pt-4 bg-[#FAFDFC] ${!isMobile && 'w-[50%]'}`;
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleHeightResize = () => {
+      const windowHeight = window.innerHeight;
+      setEditorHeight(windowHeight - STYLE.HEADER_HEIGHT - STYLE.FIXED_BUTTON_HEIGHT);
+    };
+
+    handleHeightResize();
+
+    window.addEventListener('resize', handleHeightResize);
+
+    return () => window.removeEventListener('resize', handleHeightResize);
+  }, []);
+
+  useEffect(() => {
+    const handleWithResize = () => {
       setIsMobile(window.innerWidth < 800);
     };
 
-    handleResize();
+    handleWithResize();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleWithResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleWithResize);
   }, []);
 
   return (
     <MDEditor
       className="px-3 shadow-none *:border-none"
       height={editorHeight}
+      minHeight={window.innerHeight - STYLE.HEADER_HEIGHT - STYLE.FIXED_BUTTON_HEIGHT}
       autoFocus
       value={value}
       onChange={(value?: string) => {
