@@ -1,4 +1,4 @@
-import { CreateDocumentMenu } from '@/components/createDocument/CreateDocumentMenu';
+import { CreateDocumentMenu } from '@/components/document/CreateDocumentMenu';
 import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';

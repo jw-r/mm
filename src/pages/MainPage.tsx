@@ -1,7 +1,10 @@
-import { CreateDocumentMenu } from '@/components/createDocument/CreateDocumentMenu';
+import { CreateDocumentMenu } from '@/components/document/CreateDocumentMenu';
+import { DocumentDeleteConfirm } from '@/components/document/DocumentDeleteConfirm';
 import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
+import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
+import { useDeleteDocument } from '@/remotes/document/deleteDocument';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
@@ -12,13 +15,18 @@ import { MouseEventHandler } from 'react';
 export function MainPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
+  const { mutate: deleteDocument } = useDeleteDocument();
   const { data } = useGetDocuments({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
-    const button = e.currentTarget as HTMLButtonElement;
-    const documentsId = Number(button.id);
+    const target = e.target as HTMLElement;
+    const documentId = Number(target.id);
 
-    push(`/documents/${documentsId}`);
+    if (target instanceof HTMLButtonElement) {
+      return;
+    } else {
+      push(`/documents/${documentId}`);
+    }
   };
 
   const hasNoContent = !data?.documents.length;
@@ -46,9 +54,19 @@ export function MainPage() {
             >
               <div className="flex items-center justify-between">
                 <Txt typography="large">{document.documentName}</Txt>
-                <Txt typography="small" className="text-foreground/40">
-                  {formatDate(document.createdAt)}
-                </Txt>
+                <div className="flex items-center">
+                  <Txt typography="small" className="text-foreground/40">
+                    {formatDate(document.createdAt)}
+                  </Txt>
+                  <DocumentDeleteConfirm
+                    trigger={
+                      <Button variant="destructive" className="ml-3">
+                        삭제
+                      </Button>
+                    }
+                    deleteDocument={() => deleteDocument({ documentId: document.id })}
+                  />
+                </div>
               </div>
               {document.summary && (
                 <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>

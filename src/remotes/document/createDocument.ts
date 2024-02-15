@@ -1,3 +1,4 @@
+import { queryClient } from '@/providers/TanstackProvider';
 import { http } from '@/utils/http';
 import { useMutation } from '@tanstack/react-query';
 
@@ -26,5 +27,9 @@ export function useCreateDocument() {
   return useMutation({
     mutationKey: ['createDocument'],
     mutationFn: (data: CreateDocumentRequest) => createDocument(data),
+
+    onSettled: () => {
+      queryClient.invalidateQueries();
+    },
   });
 }

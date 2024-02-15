@@ -64,4 +64,4 @@ type PostApiPath = '/categories' | '/documents' | '/payment' | '/feedback';
 
 type PatchApiPath = `/categories/${number}`;
 
-type DeleteApiPath = `/categories/${number}`;
+type DeleteApiPath = `/categories/${number}` | `/documents/${number}`;

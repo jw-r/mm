@@ -1,6 +1,6 @@
 import { MD } from '@/components/common/Markdown/MD';
-import { CreateDocumentDialog } from '@/components/createDocument/FileUploadDialog';
-import { ProtectLimitProvider } from '@/components/createDocument/ProtectLimitProvider';
+import { CreateDocumentDialog } from '@/components/document/FileUploadDialog';
+import { ProtectLimitProvider } from '@/components/document/ProtectLimitProvider';
 import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
 import { Button } from '@/components/ui/button';

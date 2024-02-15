@@ -1,5 +1,5 @@
-import { CreateDocumentDialog } from '@/components/createDocument/FileUploadDialog';
-import { ProtectLimitProvider } from '@/components/createDocument/ProtectLimitProvider';
+import { CreateDocumentDialog } from '@/components/document/FileUploadDialog';
+import { ProtectLimitProvider } from '@/components/document/ProtectLimitProvider';
 import { Center } from '@/components/shared/Center';
 import { SEO } from '@/components/shared/SEO';
 import { Txt } from '@/components/shared/Txt';
