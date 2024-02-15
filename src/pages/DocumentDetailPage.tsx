@@ -29,7 +29,10 @@ export function DocumentDetailPage() {
         <MD.Viewer content={data.content} className="mt-6 w-full" />
       </div>
       <div>
-        <Accordion type="multiple" className="sticky top-24 mt-24 hidden w-full max-w-xl p-8 xl:block">
+        <Accordion
+          type="multiple"
+          className="scrollbar-hide sticky top-24 mt-24 hidden max-h-[650px] w-full max-w-xl overflow-y-scroll rounded-lg border p-8 xl:block"
+        >
           {data.questions.map((question, index) => (
             <AccordionItem key={question.id} value={String(question.id)} className="last:border-none">
               <AccordionTrigger className="text-start">{`${index + 1}. ${question.question}`}</AccordionTrigger>
