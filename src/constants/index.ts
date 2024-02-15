@@ -7,7 +7,7 @@ export const LOCAL_TOKEN_NAME = 'pick-toss-token';
 
 export const MAX_CONTENT_LENGTH = 15_000;
 
-export const MIN_CONTENT_LENGTH = 300;
+export const MIN_CONTENT_LENGTH = 500;
 
 export const DOCUMENT = {
   MAX_DOCUMENT_COUNT_FREE: 3,
