@@ -12,6 +12,7 @@ import { MoreVertical } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { FolderOpen } from 'lucide-react';
 import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
+import { toast } from '../ui/use-toast';
 
 function Category() {
   const { data } = useGetCategories();
@@ -37,9 +38,20 @@ function Category() {
     handleCreateCategory(inputValue);
   };
 
+  const isExistCategory = (categoryName: string) => {
+    return data.categories.filter((category) => category.name === categoryName).length > 0;
+  };
+
   const handleCreateCategory = (categoryName: string) => {
     setIsInputOpen(false);
     setInputValue('');
+
+    if (isExistCategory(categoryName)) {
+      toast({
+        title: '이미 존재하는 카테고리입니다',
+      });
+      return;
+    }
 
     if (categoryName.replace(/\s+/g, '') === '') {
       return;
