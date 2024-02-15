@@ -231,6 +231,8 @@ function Done({ documentId }: { documentId: number | undefined }) {
   const { data } = useGetDocument({ documentId });
   const { data: user } = useGetUserInfo();
 
+  const isPro = user?.subscription.plan === 'PRO';
+
   if (!data || !user) return <></>;
   return (
     <div className="flex flex-col justify-between space-y-2">
@@ -259,8 +261,8 @@ function Done({ documentId }: { documentId: number | undefined }) {
       <div className="space-y-2">
         <div className="text-end">
           <Txt typography="small">
-            현재 보유 문서 수: {user.documentUsage.currentSubscriptionCycleUploadedDocumentNum} / 최대 보유 문서 수:{' '}
-            {user.documentUsage.currentSubscriptionCycleMaxDocumentNum}
+            현재 보유 문서 수: {user.documentUsage.currentPossessDocumentNum} / 최대 보유 문서 수:{' '}
+            {isPro ? user.documentUsage.proPlanMaxPossessDocumentNum : user.documentUsage.freePlanMaxPossessDocumentNum}
           </Txt>
         </div>
         <DialogClose asChild>

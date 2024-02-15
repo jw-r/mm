@@ -28,9 +28,11 @@ export interface User {
     expireDate: string;
   };
   documentUsage: {
-    anytimeMaxDocumentNum: number;
-    currentSubscriptionCycleMaxDocumentNum: number;
+    currentPossessDocumentNum: number;
     currentSubscriptionCycleUploadedDocumentNum: number;
-    currentUploadedDocumentNum: number;
+    freePlanMaxPossessDocumentNum: number;
+    freePlanSubscriptionMaxUploadDocumentNum: number;
+    proPlanMaxPossessDocumentNum: number;
+    proPlanSubscriptionMaxUploadDocumentNum: number;
   };
 }

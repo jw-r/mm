@@ -1,7 +1,6 @@
 import { HTMLProps } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
-import { DOCUMENT } from '@/constants';
 
 export function PlansTable({
   className,
@@ -11,6 +10,7 @@ export function PlansTable({
   caption?: string;
 }) {
   const { data: user } = useGetUserInfo();
+  console.log(user);
 
   const isPro = user?.subscription.plan === 'PRO';
 
@@ -33,12 +33,14 @@ export function PlansTable({
             <br />
             문서 개수
           </TableCell>
-          <TableCell className="text-center">{DOCUMENT.MAX_DOCUMENT_COUNT_FREE}</TableCell>
+          <TableCell className="text-center">{user?.documentUsage.freePlanMaxPossessDocumentNum}</TableCell>
           <TableCell className="bg-foreground/5 text-center">
-            {user?.documentUsage.anytimeMaxDocumentNum} /{' '}
-            {isPro ? DOCUMENT.MAX_DOCUMENT_COUNT_PRO : DOCUMENT.MAX_DOCUMENT_COUNT_FREE}
+            {user?.documentUsage.currentPossessDocumentNum} /{' '}
+            {isPro
+              ? user?.documentUsage.proPlanMaxPossessDocumentNum
+              : user?.documentUsage.freePlanMaxPossessDocumentNum}
           </TableCell>
-          <TableCell className="text-center font-bold">{DOCUMENT.MAX_DOCUMENT_COUNT_PRO}</TableCell>
+          <TableCell className="text-center font-bold">{user?.documentUsage.proPlanMaxPossessDocumentNum}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell className="text-center font-medium">
@@ -46,12 +48,16 @@ export function PlansTable({
             <br />
             생성 개수
           </TableCell>
-          <TableCell className="text-center">{DOCUMENT.MAX_UPLOAD_COUNT_FREE}</TableCell>
+          <TableCell className="text-center">{user?.documentUsage.freePlanSubscriptionMaxUploadDocumentNum}</TableCell>
           <TableCell className="bg-foreground/5 text-center">
             {user?.documentUsage.currentSubscriptionCycleUploadedDocumentNum} /{' '}
-            {isPro ? DOCUMENT.MAX_UPLOAD_COUNT_PRO : DOCUMENT.MAX_UPLOAD_COUNT_FREE}
+            {isPro
+              ? user?.documentUsage.proPlanSubscriptionMaxUploadDocumentNum
+              : user?.documentUsage.freePlanSubscriptionMaxUploadDocumentNum}
           </TableCell>
-          <TableCell className="text-center font-bold">{DOCUMENT.MAX_UPLOAD_COUNT_PRO}</TableCell>
+          <TableCell className="text-center font-bold">
+            {user?.documentUsage.proPlanSubscriptionMaxUploadDocumentNum}
+          </TableCell>
         </TableRow>
       </TableBody>
     </Table>
