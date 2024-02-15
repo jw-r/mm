@@ -22,6 +22,8 @@ export function Nav() {
   const isRepositoryPage = pathname === '/repository';
   const isQuizPage = pathname.startsWith('/quiz');
 
+  const isPro = user?.subscription.plan === 'PRO';
+
   if (!user) return null;
   return (
     <>
@@ -45,8 +47,14 @@ export function Nav() {
             </Link>
           </div>
           <div>
-            <Txt typography="line-code">{user?.subscription.plan}</Txt>
-            <Link to="/profile" className="hover:scale-105">
+            {isPro ? (
+              <div className="text-md inline-block rounded-md bg-[#82F0D2] px-3 py-1 font-semibold text-white">PRO</div>
+            ) : (
+              <div className="text-md inline-block rounded-md bg-foreground/30 px-3 py-1 font-semibold text-white">
+                {user.subscription.plan.charAt(0).toUpperCase() + user.subscription.plan.slice(1).toLowerCase()}
+              </div>
+            )}
+            <Link to="/profile" className="ml-2 hover:scale-105">
               <Button variant="outline" className="shadow-sm">
                 Profile
               </Button>
