@@ -5,6 +5,7 @@ import '@uiw/react-markdown-preview/markdown.css';
 import './styles/editor.css';
 import { useState } from 'react';
 import { MAX_CONTENT_LENGTH, STYLE } from '@/constants';
+import { toast } from '@/components/ui/use-toast';
 
 document.documentElement.setAttribute('data-color-mode', 'light');
 
@@ -51,7 +52,10 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
       autoFocus
       value={value}
       onChange={(value?: string) => {
-        if (Number(value?.length) <= MAX_CONTENT_LENGTH) {
+        if (Number(value?.length) > MAX_CONTENT_LENGTH) {
+          toast({ title: '최대 15,000자까지 입력할 수 있어요!' });
+          setValue(value?.slice(0, MAX_CONTENT_LENGTH) || '');
+        } else {
           setValue(value || '');
         }
       }}
