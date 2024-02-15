@@ -62,6 +62,7 @@ export function UserProfilePage() {
         </div>
       </div>
       <div className="fixed bottom-5 left-1/2 w-full max-w-3xl -translate-x-1/2 px-5">
+        <Txt typography="small">비즈니스 문의사항은 support@picktoss.com</Txt>
         <Button className="w-full" onClick={() => push('/feedback')}>
           피드백 및 문의
         </Button>
