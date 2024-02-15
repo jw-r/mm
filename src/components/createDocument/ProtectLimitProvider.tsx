@@ -11,18 +11,25 @@ export function ProtectLimitProvider({ children, fakeTrigger }: { children: Reac
   const { data: user } = useGetUserInfo();
   const [limitedUpload, setLimitedUpload] = useState<'curMax' | 'totalMax' | null>(null);
 
+  const isPro = user?.subscription.plan === 'PRO';
+  const curUserLimitPossessNum =
+    (isPro ? user.documentUsage.proPlanMaxPossessDocumentNum : user?.documentUsage.freePlanMaxPossessDocumentNum) ||
+    Infinity;
+
+  const curUserLimitUploadNum =
+    (isPro
+      ? user.documentUsage.proPlanSubscriptionMaxUploadDocumentNum
+      : user?.documentUsage.freePlanSubscriptionMaxUploadDocumentNum) || Infinity;
+
   useEffect(() => {
     if (!user) return;
 
-    if (user?.documentUsage.currentUploadedDocumentNum >= user?.documentUsage.anytimeMaxDocumentNum) {
+    if (user?.documentUsage.currentPossessDocumentNum >= curUserLimitPossessNum) {
       setLimitedUpload('curMax');
-    } else if (
-      user?.documentUsage.currentSubscriptionCycleUploadedDocumentNum >=
-      user?.documentUsage.currentSubscriptionCycleMaxDocumentNum
-    ) {
+    } else if (user?.documentUsage.currentSubscriptionCycleUploadedDocumentNum >= curUserLimitUploadNum) {
       setLimitedUpload('totalMax');
     }
-  }, [user]);
+  }, [user, curUserLimitPossessNum, curUserLimitUploadNum]);
 
   const title =
     limitedUpload === 'totalMax'

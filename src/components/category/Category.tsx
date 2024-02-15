@@ -25,10 +25,10 @@ function Category() {
   const [inputValue, setInputValue] = useState('');
 
   const handleClickCategory: MouseEventHandler<HTMLButtonElement> = (e) => {
-    const target = e.target as HTMLButtonElement;
+    const $button = e.currentTarget as HTMLButtonElement;
 
-    if (target.id && target.name) {
-      selectCategory({ id: Number(target.id), name: target.name });
+    if ($button.id && $button.name) {
+      selectCategory({ id: Number($button.id), name: $button.name });
     }
   };
 
