@@ -10,7 +10,6 @@ export function PlansTable({
   caption?: string;
 }) {
   const { data: user } = useGetUserInfo();
-  console.log(user);
 
   const isPro = user?.subscription.plan === 'PRO';
 
