@@ -66,9 +66,14 @@ export function PaymentPage() {
             value={username}
             onChange={handleNameChange}
           />
-          <Button onClick={sendUserName}>
-            완료 <ArrowRight size={15} className="ml-2" />
-          </Button>
+          <div className="flex flex-col space-y-2">
+            <Txt typography="small" className="text-foreground/70">
+              최대 12시간 이내로 PRO 계정으로 전환됩니다
+            </Txt>
+            <Button onClick={sendUserName}>
+              완료 <ArrowRight size={15} className="ml-2" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
