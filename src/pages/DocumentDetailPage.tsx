@@ -31,7 +31,7 @@ export function DocumentDetailPage() {
       <div>
         <Accordion
           type="multiple"
-          className="scrollbar-hide sticky top-24 mt-24 hidden max-h-[650px] w-full max-w-xl overflow-y-scroll rounded-lg border p-8 xl:block"
+          className="scrollbar-hide sticky top-24 mt-24 hidden max-h-[650px] w-full max-w-md overflow-y-scroll border-b-2 border-foreground/40 px-0 pb-0 xl:block"
         >
           {data.questions.map((question, index) => (
             <AccordionItem key={question.id} value={String(question.id)} className="last:border-none">
