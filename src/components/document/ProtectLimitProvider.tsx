@@ -4,7 +4,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, Dia
 import { X } from 'lucide-react';
 import { Button } from '../ui/button';
 import useRouter from '@/hooks/useRouter';
-import { PlansTable } from '../payments/PlansTable';
+import { Plans } from '../common/Plans';
 
 export function ProtectLimitProvider({ children, fakeTrigger }: { children: ReactNode; fakeTrigger: ReactNode }) {
   const { push } = useRouter();
@@ -50,7 +50,7 @@ export function ProtectLimitProvider({ children, fakeTrigger }: { children: Reac
             혹은 단돈 3,900원으로 PRO 모드를 즐겨보세요!
           </div>
 
-          <PlansTable caption="결제 후, 최대 12시간 이내에 PRO 계정으로 전환됩니다" />
+          <Plans />
 
           <DialogClose asChild>
             <Button onClick={() => push('/upgrade')} className="font-semibold">

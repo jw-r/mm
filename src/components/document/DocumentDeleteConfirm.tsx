@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,11 +13,6 @@ import {
 import { Button } from '../ui/button';
 
 export function DocumentDeleteConfirm({ trigger, deleteDocument }: { trigger: ReactNode; deleteDocument: () => void }) {
-  const onClickDeleteButton: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.stopPropagation();
-    console.log(e);
-  };
-
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>

@@ -35,4 +35,8 @@ export interface User {
     proPlanMaxPossessDocumentNum: number;
     proPlanSubscriptionMaxUploadDocumentNum: number;
   };
+  quiz: {
+    freePlanQuizQuestionNum: number;
+    proPlanQuizQuestionNum: number;
+  };
 }
