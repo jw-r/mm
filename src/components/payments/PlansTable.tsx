@@ -43,7 +43,7 @@ export function PlansTable({
         </TableRow>
         <TableRow>
           <TableCell className="text-center font-medium">
-            최대 문서
+            월 최대 문서
             <br />
             생성 개수
           </TableCell>

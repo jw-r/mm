@@ -36,9 +36,10 @@ export function MainPage() {
             문서가 많을수록 오늘의 퀴즈가 다채로워져요!
           </Txt>
         </div>
-        {data?.documents.map((document) => (
-          <div key={document.id} className="mt-8 space-y-4">
+        <div className="mt-8 space-y-4">
+          {data?.documents.map((document) => (
             <article
+              key={document.id}
               id={String(document.id)}
               className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
               onClick={moveToDetail}
@@ -53,8 +54,8 @@ export function MainPage() {
                 <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>
               )}
             </article>
-          </div>
-        ))}
+          ))}
+        </div>
         {hasNoContent && (
           <div className="mt-24 flex w-full flex-col items-center justify-center space-y-2 font-semibold text-foreground/50">
             <Txt>생성된 문서가 없어요</Txt>
