@@ -15,6 +15,8 @@ import useRouter from '@/hooks/useRouter';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { queryClient } from '@/providers/TanstackProvider';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
+import { toast } from '../ui/use-toast';
+import { MIN_CONTENT_LENGTH } from '@/constants';
 
 // 토큰 만료 401
 
@@ -40,6 +42,22 @@ export function CreateDocumentDialog({
 
     if (type === 'file') {
       file = formData.get('file') as File;
+
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const contentLength = String(e.target?.result).length;
+
+        if (contentLength < MIN_CONTENT_LENGTH || contentLength >= MIN_CONTENT_LENGTH) {
+          toast({
+            title: `문서를 생성하지 못했어요. 현재 파일의 글자 수 : ${contentLength}`,
+            description: `문서를 생성하기 위해서 300글자 이상 15,000글자 이하의 텍스트가 포함된 파일이여야 해요 😭`,
+          });
+
+          setUploadProcess('NOT_START');
+        }
+      };
+      reader.readAsText(file);
+
       categoryId = Number(selectedCategory?.id);
     } else {
       const blob = new Blob([content], { type: 'text/markdown' });
