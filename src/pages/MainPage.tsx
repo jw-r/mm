@@ -31,7 +31,7 @@ export function MainPage() {
     let retryCount = 0;
     let time = 2000;
     const interval = setInterval(() => {
-      if (retryCount < 6) {
+      if (retryCount < 8) {
         reretchDocuments();
         retryCount++;
         time += 1000;
