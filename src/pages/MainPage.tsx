@@ -8,7 +8,7 @@ import { useDeleteDocument } from '@/remotes/document/deleteDocument';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 
 // access_token
 
@@ -16,7 +16,7 @@ export function MainPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
   const { mutate: deleteDocument } = useDeleteDocument();
-  const { data } = useGetDocuments({ categoryId: selectedCategory?.id });
+  const { data, refetch: reretchDocuments } = useGetDocuments({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
     const currentTarget = e.currentTarget as HTMLElement;
@@ -24,6 +24,24 @@ export function MainPage() {
 
     push(`/documents/${documentId}`);
   };
+
+  useEffect(() => {
+    if (!data) return;
+
+    let retryCount = 0;
+    let time = 2000;
+    const interval = setInterval(() => {
+      if (retryCount < 6) {
+        reretchDocuments();
+        retryCount++;
+        time += 1000;
+      } else {
+        clearInterval(interval);
+      }
+    }, time);
+
+    return () => clearInterval(interval);
+  }, [reretchDocuments, data?.documents.length]);
 
   const hasNoContent = !data?.documents.length;
 

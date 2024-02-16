@@ -7,12 +7,12 @@ import useRouter from '@/hooks/useRouter';
 import { useGetQuestions } from '@/remotes/question/getQuestions';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 
 export function RepositoryPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
-  const { data } = useGetQuestions({ categoryId: selectedCategory?.id });
+  const { data, refetch: refetchQuestions } = useGetQuestions({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLButtonElement> = (e) => {
     const button = e.target as HTMLButtonElement;
@@ -20,6 +20,24 @@ export function RepositoryPage() {
 
     push(`/documents/${documentsId}`);
   };
+
+  useEffect(() => {
+    if (!data) return;
+
+    let retryCount = 0;
+    let time = 2000;
+    const interval = setInterval(() => {
+      if (retryCount < 6) {
+        refetchQuestions();
+        retryCount++;
+        time += 1000;
+      } else {
+        clearInterval(interval);
+      }
+    }, time);
+
+    return () => clearInterval(interval);
+  }, [refetchQuestions, data?.documents.length]);
 
   const hasNoContent = !data?.documents.length;
 
