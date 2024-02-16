@@ -50,7 +50,7 @@ export function RepositoryPage() {
           <CreateDocumentMenu />
         </div>
         <Txt typography="small" className="text-foreground/60">
-          오늘의 퀴즈로 매일 새로운 퀴즈가 복습 창고에 추가돼요!
+          오늘의 퀴즈가 오픈될 때마다 새로운 퀴즈가 복습 창고에 추가돼요!
         </Txt>
       </div>
       {data?.documents.map((document) => (

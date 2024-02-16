@@ -29,11 +29,11 @@ export function Plans() {
           </div>
           <div className="flex items-center">
             <Check size={18} className="mr-2" />
-            <Txt typography="small">매일 {user.quiz.freePlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
+            <Txt typography="small">문서 생성시 퀴즈 5개 즉시 오픈</Txt>
           </div>
           <div className="flex items-center">
             <Check size={18} className="mr-2" />
-            <Txt typography="small">문서 생성시 퀴즈 3개 즉시 오픈</Txt>
+            <Txt typography="small">매일 {user.quiz.freePlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
           </div>
         </div>
       </div>
@@ -54,11 +54,11 @@ export function Plans() {
           </div>
           <div className="flex items-center">
             <Check size={18} className="mr-2" />
-            <Txt typography="small">매일 {user.quiz.proPlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
+            <Txt typography="small">문서 생성시 모든 퀴즈 즉시 오픈</Txt>
           </div>
           <div className="flex items-center">
             <Check size={18} className="mr-2" />
-            <Txt typography="small">문서 생성시 모든 퀴즈 즉시 오픈</Txt>
+            <Txt typography="small">매일 {user.quiz.proPlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
           </div>
         </div>
         <Txt typography="small" className="mb-1 mt-4 flex flex-col space-y-1 text-foreground/40">
