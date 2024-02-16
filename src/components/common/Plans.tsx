@@ -27,7 +27,6 @@ export function Plans() {
               월 {user.documentUsage.freePlanSubscriptionMaxUploadDocumentNum}개의 문서 생성 가능
             </Txt>
           </div>
-          ㅇ
           <div className="flex items-center">
             <Check size={18} className="mr-2" />
             <Txt typography="small">문서 생성시 퀴즈 5개 즉시 오픈</Txt>
