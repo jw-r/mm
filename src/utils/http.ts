@@ -5,7 +5,7 @@ import Axios, { AxiosRequestConfig } from 'axios';
 const axios = Axios.create({
   baseURL: import.meta.env.DEV ? import.meta.env.VITE_API_URL_DEV : import.meta.env.VITE_API_URL_PROD,
   headers: {
-    'Cache-Control': 'no-cache',
+    'Cache-Control': 'no-store',
   },
 });
 
