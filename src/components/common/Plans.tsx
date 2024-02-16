@@ -9,6 +9,8 @@ export function Plans() {
   const { push } = useRouter();
   const { data: user } = useGetUserInfo();
 
+  const isPro = user?.subscription.plan;
+
   if (!user) return;
   return (
     <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:justify-around">
@@ -28,6 +30,10 @@ export function Plans() {
           <div className="flex items-center">
             <Check size={18} className="mr-2" />
             <Txt typography="small">매일 {user.quiz.freePlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
+          </div>
+          <div className="flex items-center">
+            <Check size={18} className="mr-2" />
+            <Txt typography="small">문서 생성시 퀴즈 3개 즉시 오픈</Txt>
           </div>
         </div>
       </div>
@@ -50,16 +56,26 @@ export function Plans() {
             <Check size={18} className="mr-2" />
             <Txt typography="small">매일 {user.quiz.proPlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
           </div>
+          <div className="flex items-center">
+            <Check size={18} className="mr-2" />
+            <Txt typography="small">문서 생성시 모든 퀴즈 즉시 오픈</Txt>
+          </div>
         </div>
         <Txt typography="small" className="mb-1 mt-4 flex flex-col space-y-1 text-foreground/40">
           <span>* 자동결제가 되지 않습니다</span>
         </Txt>
-        <Button
-          onClick={() => push('/upgrade')}
-          className="w-full bg-[#9DEDD3] font-extrabold text-foreground/60 hover:bg-[#88e7c9]"
-        >
-          3,900원 결제하기
-        </Button>
+        {isPro ? (
+          <Button className="w-full cursor-default bg-[#9DEDD3] font-extrabold text-foreground/60 hover:bg-[#9DEDD3]">
+            이미 PRO 사용자입니다
+          </Button>
+        ) : (
+          <Button
+            onClick={() => push('/upgrade')}
+            className="w-full bg-[#9DEDD3] font-extrabold text-foreground/60 hover:bg-[#88e7c9]"
+          >
+            3,900원 결제하기
+          </Button>
+        )}
       </div>
     </div>
   );
