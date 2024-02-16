@@ -74,7 +74,7 @@ export function Plans() {
             onClick={() => push('/upgrade')}
             className="w-full bg-[#9DEDD3] font-extrabold text-foreground/60 hover:bg-[#88e7c9]"
           >
-            3,900원 결제하기
+            월 3,900원 결제하기
           </Button>
         )}
       </div>
