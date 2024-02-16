@@ -68,10 +68,7 @@ export function MainPage() {
               </article>
               <DocumentDeleteConfirm
                 trigger={
-                  <Button
-                    variant="ghost"
-                    className="absolute right-3 top-1/2 -translate-y-5 px-2 text-red-500 hover:text-red-600"
-                  >
+                  <Button variant="ghost" className="absolute right-3 top-3 px-2 text-red-500 hover:text-red-600">
                     삭제
                   </Button>
                 }
