@@ -1,6 +1,6 @@
-import { CreateDocumentMenu } from '@/components/document/CreateDocumentMenu';
-import { SEO } from '@/components/shared/SEO';
-import { Txt } from '@/components/shared/Txt';
+import { CreateDocumentMenu } from '@/features/document/CreateDocumentMenu';
+import { SEO } from '@/components/SEO';
+import { Txt } from '@/components/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';

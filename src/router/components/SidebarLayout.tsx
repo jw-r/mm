@@ -1,4 +1,4 @@
-import Category from '@/components/category/Category';
+import Category from '@/features/category/Category';
 import { Outlet } from 'react-router-dom';
 
 export function SidebarLayout() {

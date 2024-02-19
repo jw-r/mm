@@ -1,7 +1,7 @@
-import { CreateDocumentMenu } from '@/components/document/CreateDocumentMenu';
-import { DocumentDeleteConfirm } from '@/components/document/DocumentDeleteConfirm';
-import { SEO } from '@/components/shared/SEO';
-import { Txt } from '@/components/shared/Txt';
+import { CreateDocumentMenu } from '@/features/document/CreateDocumentMenu';
+import { DocumentDeleteConfirm } from '@/features/document/DocumentDeleteConfirm';
+import { SEO } from '@/components/SEO';
+import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
 import { useDeleteDocument } from '@/remotes/document/deleteDocument';

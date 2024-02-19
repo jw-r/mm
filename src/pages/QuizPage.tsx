@@ -1,8 +1,8 @@
-import { CreateDocumentDialog } from '@/components/document/FileUploadDialog';
-import { ProtectLimitProvider } from '@/components/document/ProtectLimitProvider';
-import { Center } from '@/components/shared/Center';
-import { SEO } from '@/components/shared/SEO';
-import { Txt } from '@/components/shared/Txt';
+import { CreateDocumentDialog } from '@/features/document/FileUploadDialog';
+import { ProtectLimitProvider } from '@/features/document/ProtectLimitProvider';
+import { Center } from '@/components/Center';
+import { SEO } from '@/components/SEO';
+import { Txt } from '@/components/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';

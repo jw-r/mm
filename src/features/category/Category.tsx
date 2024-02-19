@@ -1,18 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ChangeEvent, FormEventHandler, MouseEventHandler, useEffect, useState } from 'react';
-import { Txt } from '../shared/Txt';
-import { Button } from '../ui/button';
+import { Txt } from '@/components/Txt';
+import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { useGetCategories } from '@/remotes/category/getCategories';
 import { useCreateCategory } from '@/remotes/category/createCategory';
-import { Input } from '../ui/input';
+import { Input } from '@/components/ui/input';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { MoreVertical } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { FolderOpen } from 'lucide-react';
 import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
-import { toast } from '../ui/use-toast';
+import { toast } from '@/components/ui/use-toast';
 
 function Category() {
   const { data } = useGetCategories();
@@ -111,7 +111,7 @@ function Category() {
                 key={category.id}
                 name={category.name}
                 variant={selectedCategory?.id === category.id ? 'secondary' : 'ghost'}
-                className="scrollbar-hide w-full justify-start overflow-x-scroll pr-6"
+                className="w-full justify-start overflow-x-scroll pr-6 scrollbar-hide"
                 onClick={handleClickCategory}
               >
                 <div className="flex items-center">
@@ -154,7 +154,7 @@ function Category() {
 
       <div className="mt-4 flex w-full px-4 sm:hidden">
         <div className="whitespace-nowrap rounded-lg border border-foreground/50 p-2 font-semibold">카테고리</div>
-        <div className="scrollbar-hide ml-2 flex w-full items-center space-x-2 overflow-x-scroll">
+        <div className="ml-2 flex w-full items-center space-x-2 overflow-x-scroll scrollbar-hide">
           {data.categories.map((category) => (
             <div
               key={category.id}

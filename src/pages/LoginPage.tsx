@@ -1,9 +1,9 @@
-import { Center } from '@/components/shared/Center';
-import { Txt } from '@/components/shared/Txt';
+import { Center } from '@/components/Center';
+import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import signupIcon from '../assets/google.svg';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { SEO } from '@/components/shared/SEO';
+import { SEO } from '@/components/SEO';
 
 export function LoginPage() {
   const onClickGoogleLogin = () => {

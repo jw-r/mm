@@ -3,7 +3,7 @@ import QS from 'qs';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export function CatchEmail() {
+export function CatchQuiz() {
   const { push } = useRouter();
   const { search } = useLocation();
 

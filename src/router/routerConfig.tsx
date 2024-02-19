@@ -1,5 +1,5 @@
 import { AuthGuard } from '@/router/components/AuthGuard';
-import { Oauth } from '@/components/common/Oauth';
+import { Oauth } from '@/features/auth/Oauth';
 import {
   DocumentDetailPage,
   FeedbackPage,
@@ -15,8 +15,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
 import { SidebarLayout } from './components/SidebarLayout';
 import { Root } from './components/Root';
-import { CatchEmail } from '@/components/common/CatchEmail';
-import { ClipSuspense } from '@/components/shared/ClipSuspense';
+import { CatchQuiz } from '@/features/quiz/CatchQuiz';
+import { ClipSuspense } from '@/components/ClipSuspense';
 
 export const router = createBrowserRouter([
   {
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'random',
-            element: <CatchEmail />,
+            element: <CatchQuiz />,
           },
           { path: 'quiz/:questionSetId', element: <QuizPage.Public /> },
         ],

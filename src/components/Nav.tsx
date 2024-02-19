@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Txt } from '../shared/Txt';
-import { Button } from '../ui/button';
+import { Txt } from './Txt';
+import { Button } from './ui/button';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { Menu } from 'lucide-react';
 import {
@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+} from './ui/dropdown-menu';
 import useRouter from '@/hooks/useRouter';
 
 export function Nav() {

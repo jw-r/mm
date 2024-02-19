@@ -1,4 +1,4 @@
-import { Center } from '@/components/shared/Center';
+import { Center } from '@/components/Center';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet } from 'react-router-dom';
