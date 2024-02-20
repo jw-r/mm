@@ -128,10 +128,7 @@ function Category() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <CategoryDeleteConfirm
-                    trigger={<div className="flex justify-center">삭제</div>}
-                    deleteCategory={() => handleDeleteCategory(category.id)}
-                  />
+                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => handleDeleteCategory(category.id)} />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
