@@ -152,37 +152,29 @@ function Category() {
         </div>
       </div>
 
-      <div className="mt-4 flex w-full px-4 sm:hidden">
-        <div className="whitespace-nowrap rounded-lg border border-foreground/50 p-2 font-semibold">카테고리</div>
-        <div className="ml-2 flex w-full items-center space-x-2 overflow-x-scroll scrollbar-hide">
+      <div className="mb-2 mt-4 flex w-full px-4 sm:hidden">
+        <div className="whitespace-nowrap rounded-lg p-2 font-semibold shadow-sm">카테고리</div>
+        <div className="ml-2 flex space-x-2 overflow-x-scroll scrollbar-hide">
           {data.categories.map((category) => (
-            <div
-              key={category.id}
-              className="relative"
-              onMouseEnter={() => setHoverCategoryId(category.id)}
-              onMouseLeave={() => setHoverCategoryId(null)}
-            >
+            <div key={category.id} className="relative">
               <Button
                 id={String(category.id)}
                 key={category.id}
                 name={category.name}
                 variant={selectedCategory?.id === category.id ? 'secondary' : 'ghost'}
-                className="w-full justify-between pr-6"
+                className="pr-6"
                 onClick={handleClickCategory}
               >
                 {category.name}
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className="absolute right-1 top-[50%] translate-y-[-50%] cursor-pointer py-2 text-foreground/60">
+                  <div className="absolute right-0 top-[50%] translate-y-[-50%] py-2 pr-1 text-foreground/60">
                     <MoreVertical size={18} />
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <CategoryDeleteConfirm
-                    trigger={<div className="flex justify-center">삭제</div>}
-                    deleteCategory={() => handleDeleteCategory(category.id)}
-                  />
+                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => handleDeleteCategory(category.id)} />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -191,7 +183,7 @@ function Category() {
             <form onSubmit={onSubmitCategoryInput}>
               <Input
                 autoFocus
-                className="min-w-32"
+                className="max-w-32"
                 onBlur={() => handleCreateCategory(inputValue)}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
               />
