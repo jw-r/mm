@@ -1,21 +1,28 @@
 import { X } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { FormEventHandler, ReactNode, useEffect, useState } from 'react';
 import { useCreateDocument } from '@/remotes/document/createDocument';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { DialogTrigger } from '@radix-ui/react-dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useGetCategories } from '@/remotes/category/getCategories';
-import { Txt } from '../shared/Txt';
+import { Txt } from '@/components/Txt';
 import { useGetDocument } from '@/remotes/document/getDocument';
 import useRouter from '@/hooks/useRouter';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { queryClient } from '@/providers/TanstackProvider';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
-import { toast } from '../ui/use-toast';
+import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
 
 // 토큰 만료 401

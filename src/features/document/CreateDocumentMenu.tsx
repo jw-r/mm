@@ -1,10 +1,10 @@
 import useRouter from '@/hooks/useRouter';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { CreateDocumentDialog } from './FileUploadDialog';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
-import { toast } from '../ui/use-toast';
+import { toast } from '@/components/ui/use-toast';
 import { ProtectLimitProvider } from './ProtectLimitProvider';
 
 export function CreateDocumentMenu() {

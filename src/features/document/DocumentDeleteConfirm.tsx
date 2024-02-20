@@ -9,8 +9,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '../ui/alert-dialog';
-import { Button } from '../ui/button';
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 
 export function DocumentDeleteConfirm({ trigger, deleteDocument }: { trigger: ReactNode; deleteDocument: () => void }) {
   return (

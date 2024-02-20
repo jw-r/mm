@@ -1,6 +1,6 @@
-import { Plans } from '@/components/common/Plans';
-import { SEO } from '@/components/shared/SEO';
-import { Txt } from '@/components/shared/Txt';
+import { Plans } from '@/components/Plans';
+import { SEO } from '@/components/SEO';
+import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';

@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Txt } from '../shared/Txt';
-import { Button } from '../ui/button';
+import { Txt } from './Txt';
+import { Button } from './ui/button';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { Menu } from 'lucide-react';
 import {
@@ -10,8 +10,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+} from './ui/dropdown-menu';
 import useRouter from '@/hooks/useRouter';
+import { PlanBadge } from './PlanBadge';
 
 export function Nav() {
   const { push } = useRouter();
@@ -28,33 +29,27 @@ export function Nav() {
   return (
     <>
       <nav className="hidden w-full sm:block">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex items-center justify-between">
           <div className="space-x-4">
-            <Link to="/" className="hover:scale-105">
+            <Link to="/">
               <Txt typography="small" className={isMainPage ? '' : 'text-foreground/30'}>
                 문서
               </Txt>
             </Link>
-            <Link to="/repository" className="hover:scale-105">
+            <Link to="/repository">
               <Txt typography="small" className={isRepositoryPage ? '' : 'text-foreground/30'}>
                 복습 창고
               </Txt>
             </Link>
-            <Link to="quiz" className="hover:scale-105">
+            <Link to="quiz">
               <Txt typography="small" className={isQuizPage ? '' : 'text-foreground/30'}>
                 오늘의 퀴즈
               </Txt>
             </Link>
           </div>
           <div>
-            {isPro ? (
-              <div className="text-md inline-block rounded-md bg-[#82F0D2] px-3 py-1 font-semibold text-white">PRO</div>
-            ) : (
-              <div className="text-md inline-block rounded-md bg-foreground/30 px-3 py-1 font-semibold text-white">
-                {user.subscription.plan.charAt(0).toUpperCase() + user.subscription.plan.slice(1).toLowerCase()}
-              </div>
-            )}
-            <Link to="/profile" className="ml-2 hover:scale-105">
+            <PlanBadge isPro={isPro} />
+            <Link to="/profile" className="ml-2">
               <Button variant="outline" className="shadow-sm">
                 Profile
               </Button>
@@ -64,17 +59,13 @@ export function Nav() {
       </nav>
       <nav className="flex w-full justify-end sm:hidden">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="py-3">
-              <Menu />
-            </button>
+          <DropdownMenuTrigger className="py-3">
+            <Menu />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            {user.subscription.plan === 'PRO' ? (
-              <DropdownMenuLabel className="bg-[#82F0D2] text-center font-bold">PRO</DropdownMenuLabel>
-            ) : (
-              <DropdownMenuLabel className="bg-foreground/5 text-center">free</DropdownMenuLabel>
-            )}
+            <DropdownMenuLabel className="bg-point">
+              <PlanBadge isPro={isPro} className="w-full py-0" />
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => push('/')}>문서</DropdownMenuItem>
             <DropdownMenuItem onClick={() => push('/repository')}>복습 창고</DropdownMenuItem>

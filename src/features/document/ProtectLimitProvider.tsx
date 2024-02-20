@@ -1,10 +1,17 @@
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { ReactNode, useEffect, useState } from 'react';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '../ui/dialog';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { X } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
-import { Plans } from '../common/Plans';
+import { Plans } from '@/components/Plans';
 
 export function ProtectLimitProvider({ children, fakeTrigger }: { children: ReactNode; fakeTrigger: ReactNode }) {
   const { push } = useRouter();

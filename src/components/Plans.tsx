@@ -1,8 +1,7 @@
 import { Check } from 'lucide-react';
-
-import { Txt } from '../shared/Txt';
+import { Txt } from './Txt';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
-import { Button } from '../ui/button';
+import { Button } from './ui/button';
 import useRouter from '@/hooks/useRouter';
 
 export function Plans() {

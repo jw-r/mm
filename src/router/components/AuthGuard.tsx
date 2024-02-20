@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useRouter from '@/hooks/useRouter';
 
 export function AuthGuard() {
@@ -7,15 +7,13 @@ export function AuthGuard() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    setInit(true);
-  }, []);
-
-  useLayoutEffect(() => {
     const handleUnauthorized = () => {
       push('/login');
     };
 
     window.addEventListener('unauthorized', handleUnauthorized);
+
+    setInit(true);
 
     return () => {
       window.removeEventListener('unauthorized', handleUnauthorized);

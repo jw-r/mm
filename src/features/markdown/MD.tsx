@@ -2,7 +2,6 @@ import { HTMLProps, ReactNode, useEffect } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-markdown-preview/markdown.css';
-import './styles/editor.css';
 import { useState } from 'react';
 import { MAX_CONTENT_LENGTH, STYLE } from '@/constants';
 import { toast } from '@/components/ui/use-toast';
@@ -61,6 +60,7 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
       }}
       previewOptions={{
         rehypePlugins: [[rehypeSanitize]],
+        className: 'shadow-none',
       }}
       textareaProps={{
         placeholder: '# 제목을 입력해주세요\n\n## 이미 작성한 글을 복사, 붙여넣기 하는 것을 추천해드려요!',

@@ -1,8 +1,8 @@
-import { MD } from '@/components/common/Markdown/MD';
-import { CreateDocumentDialog } from '@/components/document/FileUploadDialog';
-import { ProtectLimitProvider } from '@/components/document/ProtectLimitProvider';
-import { SEO } from '@/components/shared/SEO';
-import { Txt } from '@/components/shared/Txt';
+import { MD } from '@/features/markdown/MD';
+import { CreateDocumentDialog } from '@/features/document/FileUploadDialog';
+import { ProtectLimitProvider } from '@/features/document/ProtectLimitProvider';
+import { SEO } from '@/components/SEO';
+import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';

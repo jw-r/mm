@@ -1,5 +1,5 @@
-import { SEO } from '@/components/shared/SEO';
-import { Txt } from '@/components/shared/Txt';
+import { SEO } from '@/components/SEO';
+import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
