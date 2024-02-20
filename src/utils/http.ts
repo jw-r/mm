@@ -58,7 +58,8 @@ type GetApiPath =
   | `/categories/${number}/documents/questions`
   | '/question-sets/today'
   | `/question-sets/${string}`
-  | '/members/info';
+  | '/members/info'
+  | '/oauth/url';
 
 type PostApiPath = '/categories' | '/documents' | '/payment' | '/feedback';
 

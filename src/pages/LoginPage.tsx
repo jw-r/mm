@@ -4,12 +4,15 @@ import { Button } from '@/components/ui/button';
 import signupIcon from '../assets/google.svg';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { SEO } from '@/components/SEO';
+import { useGetGoogleOauthRedirectUrl } from '@/remotes/user/getGoogleOauthRedirectUrl';
 
 export function LoginPage() {
+  const { data } = useGetGoogleOauthRedirectUrl();
+
   const onClickGoogleLogin = () => {
-    fetch(`${import.meta.env.DEV ? import.meta.env.VITE_API_URL_DEV : import.meta.env.VITE_API_URL_PROD}oauth/url`)
-      .then((res) => res.json())
-      .then(({ oauth_url }) => (window.location.href = oauth_url));
+    if (!data) return;
+
+    window.location.href = data.oauth_url;
   };
 
   return (
