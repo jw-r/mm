@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
 import { useDeleteDocument } from '@/remotes/document/deleteDocument';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
-import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
 import { MouseEventHandler, useEffect } from 'react';
+import { useCategoryStore } from '@/features/category/stores/categoryStore';
 
 // access_token
 

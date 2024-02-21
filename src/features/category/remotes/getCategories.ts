@@ -14,5 +14,7 @@ export function useGetCategories() {
   return useSuspenseQuery({
     queryKey: ['getCategories'],
     queryFn: () => getCategories(),
+
+    select: (data) => data.categories,
   });
 }

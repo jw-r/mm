@@ -1,28 +1,22 @@
-/* eslint-disable react-refresh/only-export-components */
-import { ChangeEvent, FormEventHandler, MouseEventHandler, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { useCategoryStore } from '@/stores/categoryStore';
-import { useGetCategories } from '@/remotes/category/getCategories';
-import { useCreateCategory } from '@/remotes/category/createCategory';
 import { Input } from '@/components/ui/input';
-import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { MoreVertical } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { FolderOpen } from 'lucide-react';
 import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
-import { toast } from '@/components/ui/use-toast';
+import { useCategory } from './hooks/useCategory';
+import { useCategoryStore } from './stores/categoryStore';
 
 function Category() {
-  const { data } = useGetCategories();
+  const { categories, createCategory, deleteCategory } = useCategory();
   const { selectedCategory, selectCategory } = useCategoryStore();
-  const { mutate: createCategory } = useCreateCategory();
-  const { mutate: deleteCategory } = useDeleteCategory();
 
   const [hoverCategoryId, setHoverCategoryId] = useState<number | null>();
-  const [isInputOpen, setIsInputOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [newCategoryInputInputOpened, setNewCategoryInputInputOpened] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
 
   const handleClickCategory: MouseEventHandler<HTMLButtonElement> = (e) => {
     const $button = e.currentTarget as HTMLButtonElement;
@@ -32,64 +26,12 @@ function Category() {
     }
   };
 
-  const onSubmitCategoryInput: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-
-    handleCreateCategory(inputValue);
-  };
-
-  const isExistCategory = (categoryName: string) => {
-    return data.categories.filter((category) => category.name === categoryName).length > 0;
-  };
-
   const handleCreateCategory = (categoryName: string) => {
-    setIsInputOpen(false);
-    setInputValue('');
+    setNewCategoryInputInputOpened(false);
+    setNewCategoryName('');
 
-    if (isExistCategory(categoryName)) {
-      toast({
-        title: '이미 존재하는 카테고리입니다',
-      });
-      return;
-    }
-
-    if (categoryName.replace(/\s+/g, '') === '') {
-      return;
-    }
-
-    createCategory(
-      { name: categoryName.trim() },
-      {
-        onSuccess: ({ id }) => {
-          selectCategory({ id, name: categoryName });
-        },
-      },
-    );
+    createCategory(categoryName);
   };
-
-  const handleDeleteCategory = (categoryId: number) => {
-    deleteCategory(
-      { categoryId },
-      {
-        onSuccess: () => {
-          if (categoryId === selectedCategory?.id) {
-            selectCategory(data.categories[0]);
-          }
-        },
-      },
-    );
-  };
-
-  useEffect(() => {
-    selectCategory(data?.categories[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (data.categories.length === 0) {
-      selectCategory(null);
-    }
-  }, [data.categories.length, selectCategory]);
 
   return (
     <>
@@ -99,7 +41,7 @@ function Category() {
           <div className="h-[2px] w-full bg-foreground" />
         </div>
         <div className="flex w-36 flex-col space-y-2 lg:w-52">
-          {data.categories.map((category) => (
+          {categories.map((category) => (
             <div
               key={category.id}
               className="relative"
@@ -128,21 +70,21 @@ function Category() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => handleDeleteCategory(category.id)} />
+                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           ))}
-          {isInputOpen ? (
-            <form onSubmit={onSubmitCategoryInput}>
+          {newCategoryInputInputOpened ? (
+            <form onSubmit={() => handleCreateCategory(newCategoryName)}>
               <Input
                 autoFocus
-                onBlur={() => handleCreateCategory(inputValue)}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
+                onBlur={() => handleCreateCategory(newCategoryName)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewCategoryName(e.target.value)}
               />
             </form>
           ) : (
-            <Button variant="ghost" onClick={() => setIsInputOpen(true)}>
+            <Button variant="ghost" onClick={() => setNewCategoryInputInputOpened(true)}>
               <Plus size={16} />
             </Button>
           )}
@@ -152,7 +94,7 @@ function Category() {
       <div className="mb-2 mt-4 flex w-full px-4 sm:hidden">
         <div className="whitespace-nowrap rounded-lg p-2 font-semibold shadow-sm">카테고리</div>
         <div className="ml-2 flex space-x-2 overflow-x-scroll scrollbar-hide">
-          {data.categories.map((category) => (
+          {categories.map((category) => (
             <div key={category.id} className="relative">
               <Button
                 id={String(category.id)}
@@ -171,22 +113,22 @@ function Category() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => handleDeleteCategory(category.id)} />
+                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           ))}
-          {isInputOpen ? (
-            <form onSubmit={onSubmitCategoryInput}>
+          {newCategoryInputInputOpened ? (
+            <form onSubmit={() => handleCreateCategory(newCategoryName)}>
               <Input
                 autoFocus
                 className="max-w-32"
-                onBlur={() => handleCreateCategory(inputValue)}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
+                onBlur={() => handleCreateCategory(newCategoryName)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewCategoryName(e.target.value)}
               />
             </form>
           ) : (
-            <Button variant="ghost" onClick={() => setIsInputOpen(true)}>
+            <Button variant="ghost" onClick={() => setNewCategoryInputInputOpened(true)}>
               <Plus size={16} />
             </Button>
           )}

@@ -2,10 +2,10 @@ import useRouter from '@/hooks/useRouter';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { CreateDocumentDialog } from './FileUploadDialog';
-import { useCategoryStore } from '@/stores/categoryStore';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { toast } from '@/components/ui/use-toast';
 import { ProtectLimitProvider } from './ProtectLimitProvider';
+import { useCategoryStore } from '../category/stores/categoryStore';
 
 export function CreateDocumentMenu() {
   const { push } = useRouter();

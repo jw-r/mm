@@ -5,9 +5,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
 import { useGetQuestions } from '@/remotes/question/getQuestions';
-import { useCategoryStore } from '@/stores/categoryStore';
 import { formatDate } from '@/utils/formatDate';
 import { MouseEventHandler, useEffect } from 'react';
+import { useCategoryStore } from '@/features/category/stores/categoryStore';
 
 export function RepositoryPage() {
   const { push } = useRouter();

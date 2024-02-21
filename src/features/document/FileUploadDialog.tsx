@@ -12,10 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { FormEventHandler, ReactNode, useEffect, useState } from 'react';
 import { useCreateDocument } from '@/remotes/document/createDocument';
-import { useCategoryStore } from '@/stores/categoryStore';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useGetCategories } from '@/remotes/category/getCategories';
 import { Txt } from '@/components/Txt';
 import { useGetDocument } from '@/remotes/document/getDocument';
 import useRouter from '@/hooks/useRouter';
@@ -24,6 +22,8 @@ import { queryClient } from '@/providers/TanstackProvider';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
+import { useCategory } from '../category/hooks/useCategory';
+import { useCategoryStore } from '../category/stores/categoryStore';
 
 // 토큰 만료 401
 
@@ -179,8 +179,8 @@ function FileUpload({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> 
 }
 
 function Write({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> }) {
+  const { categories } = useCategory();
   const { selectedCategory } = useCategoryStore();
-  const { data } = useGetCategories();
 
   return (
     <>
@@ -203,7 +203,7 @@ function Write({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> }) {
               <SelectValue placeholder={selectedCategory?.name} />
             </SelectTrigger>
             <SelectContent>
-              {data.categories.map((category) => (
+              {categories.map((category) => (
                 <SelectItem key={category.id} value={String(category.id)}>
                   {category.name}
                 </SelectItem>

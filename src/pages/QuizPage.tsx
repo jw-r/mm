@@ -11,9 +11,9 @@ import { TodayQuestion } from '@/models/type';
 import { useGetQuestionSetId } from '@/remotes/question/getQuesionSetId';
 import { useTodayQuestion } from '@/remotes/question/getTodayQuestion';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
-import { useCategoryStore } from '@/stores/categoryStore';
 import { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
+import { useCategoryStore } from '@/features/category/stores/categoryStore';
 
 export function QuizPage({ children }: { children: ReactNode }) {
   return children;
@@ -176,9 +176,3 @@ function NotGenerated() {
 
 QuizPage.Private = Private;
 QuizPage.Public = Public;
-
-// 프로필 (결제)
-// 피드백
-// 문서 뷰어
-// 문서 업로드하면 3개 중에
-// 현재 구독 시간에 15개 45개
