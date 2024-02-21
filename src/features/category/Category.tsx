@@ -2,20 +2,19 @@ import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { Input } from '@/components/ui/input';
 import { MoreVertical } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { FolderOpen } from 'lucide-react';
-import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
+import { CategoryDeleteConfirm } from './components/CategoryDeleteConfirm';
 import { useCategory } from './hooks/useCategory';
 import { useCategoryStore } from './stores/categoryStore';
+import { CategoryDropdownMenu } from './components/CategoryDropdownMenu';
+import { NewCategoryInput } from './components/NewCategoryInput';
 
 function Category() {
   const { categories, createCategory, deleteCategory } = useCategory();
   const { selectedCategory, selectCategory } = useCategoryStore();
 
   const [hoverCategoryId, setHoverCategoryId] = useState<number | null>();
-  const [newCategoryInputInputOpened, setNewCategoryInputInputOpened] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState('');
 
   const handleClickCategory: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -27,7 +26,6 @@ function Category() {
   };
 
   const handleCreateCategory = (categoryName: string) => {
-    setNewCategoryInputInputOpened(false);
     setNewCategoryName('');
 
     createCategory(categoryName);
@@ -35,7 +33,7 @@ function Category() {
 
   return (
     <>
-      <div className="hidden space-y-6 p-4 sm:block md:p-8 lg:py-12">
+      <div id="desktop-view" className="hidden space-y-6 p-4 sm:block md:p-8 lg:py-12">
         <div className="w-36 lg:w-52">
           <Txt typography="h3">카테고리</Txt>
           <div className="h-[2px] w-full bg-foreground" />
@@ -61,37 +59,24 @@ function Category() {
                   <div>{category.name}</div>
                 </div>
               </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div
-                    className={`absolute right-1 top-[50%] translate-y-[-50%] cursor-pointer py-2 text-foreground/60 ${hoverCategoryId !== category.id && 'invisible'}`}
-                  >
-                    <MoreVertical size={18} />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />
-                </DropdownMenuContent>
-              </DropdownMenu>
+
+              <CategoryDropdownMenu
+                isTriggerVisible={hoverCategoryId === category.id}
+                trigger={<MoreVertical />}
+                content={<CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />}
+              />
             </div>
           ))}
-          {newCategoryInputInputOpened ? (
-            <form onSubmit={() => handleCreateCategory(newCategoryName)}>
-              <Input
-                autoFocus
-                onBlur={() => handleCreateCategory(newCategoryName)}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewCategoryName(e.target.value)}
-              />
-            </form>
-          ) : (
-            <Button variant="ghost" onClick={() => setNewCategoryInputInputOpened(true)}>
-              <Plus size={16} />
-            </Button>
-          )}
+
+          <NewCategoryInput
+            toggleTrigger={<Plus size={16} />}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setNewCategoryName(e.target.value)}
+            close={() => handleCreateCategory(newCategoryName)}
+          />
         </div>
       </div>
 
-      <div className="mb-2 mt-4 flex w-full px-4 sm:hidden">
+      <div id="mobile-view" className="mb-2 mt-4 flex w-full px-4 sm:hidden">
         <div className="whitespace-nowrap rounded-lg p-2 font-semibold shadow-sm">카테고리</div>
         <div className="ml-2 flex space-x-2 overflow-x-scroll scrollbar-hide">
           {categories.map((category) => (
@@ -106,32 +91,20 @@ function Category() {
               >
                 {category.name}
               </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="absolute right-0 top-[50%] translate-y-[-50%] py-2 pr-1 text-foreground/60">
-                    <MoreVertical size={18} />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />
-                </DropdownMenuContent>
-              </DropdownMenu>
+
+              <CategoryDropdownMenu
+                isTriggerVisible={true}
+                trigger={<MoreVertical size={18} />}
+                content={<CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />}
+              />
             </div>
           ))}
-          {newCategoryInputInputOpened ? (
-            <form onSubmit={() => handleCreateCategory(newCategoryName)}>
-              <Input
-                autoFocus
-                className="max-w-32"
-                onBlur={() => handleCreateCategory(newCategoryName)}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewCategoryName(e.target.value)}
-              />
-            </form>
-          ) : (
-            <Button variant="ghost" onClick={() => setNewCategoryInputInputOpened(true)}>
-              <Plus size={16} />
-            </Button>
-          )}
+
+          <NewCategoryInput
+            toggleTrigger={<Plus size={16} />}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setNewCategoryName(e.target.value)}
+            close={() => handleCreateCategory(newCategoryName)}
+          />
         </div>
       </div>
     </>
