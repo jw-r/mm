@@ -63,7 +63,7 @@ export function Nav() {
             <Menu />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel className="bg-point">
+            <DropdownMenuLabel className={isPro ? 'bg-point' : 'bg-foreground/30'}>
               <PlanBadge isPro={isPro} className="w-full py-0" />
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
