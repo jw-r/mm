@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
 import useRouter from '@/hooks/useRouter';
 import { usePostPayment } from '@/remotes/user/postPayment';
+import isEmptyString from '@/utils/isEmptyString';
 import { ArrowLeft } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 import { ChangeEvent, useState } from 'react';
@@ -19,7 +20,7 @@ export function PaymentPage() {
   };
 
   const sendUserName = () => {
-    if (username.replace(/\s+/g, '') === '') {
+    if (isEmptyString(username)) {
       return;
     }
 

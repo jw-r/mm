@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import useRouter from '@/hooks/useRouter';
 import { usePostFeedback } from '@/remotes/user/postFeedback';
+import isEmptyString from '@/utils/isEmptyString';
 import { ArrowLeft } from 'lucide-react';
 import { ChangeEvent, useState } from 'react';
 
@@ -18,7 +19,7 @@ export function FeedbackPage() {
   };
 
   const sendFeedback = () => {
-    if (content.replace(/\s+/g, '') === '') {
+    if (isEmptyString(content)) {
       return;
     }
 

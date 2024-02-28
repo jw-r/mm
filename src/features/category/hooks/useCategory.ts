@@ -4,6 +4,7 @@ import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { useGetCategories } from '@/remotes/category/getCategories';
 import { useCallback, useEffect } from 'react';
 import { useCategoryStore } from '../stores/categoryStore';
+import isEmptyString from '@/utils/isEmptyString';
 
 export function useCategory() {
   const { data: categories } = useGetCategories();
@@ -11,22 +12,14 @@ export function useCategory() {
   const { mutate: createCategoryMutate } = useCreateCategory();
   const { mutate: deleteCategoryMutate } = useDeleteCategory();
 
-  const isExistCategory = useCallback(
-    (categoryName: string) => {
-      return categories.filter((category) => category.name === categoryName).length > 0;
-    },
-    [categories],
-  );
-
   const createCategory = useCallback(
     (categoryName: string) => {
-      if (isExistCategory(categoryName)) {
-        toast({
-          title: '이미 존재하는 카테고리입니다.',
-        });
+      if (categories.map((category) => category.name).includes(categoryName)) {
+        toast({ title: '이미 존재하는 카테고리입니다.' });
+        return;
       }
 
-      if (categoryName.replace(/\s+/g, '') === '') {
+      if (isEmptyString(categoryName)) {
         return;
       }
 
@@ -39,7 +32,7 @@ export function useCategory() {
         },
       );
     },
-    [createCategoryMutate, selectCategory, isExistCategory],
+    [categories, createCategoryMutate, selectCategory],
   );
 
   const deleteCategory = (categoryId: number) => {
@@ -48,7 +41,7 @@ export function useCategory() {
       {
         onSuccess: () => {
           if (categoryId === selectedCategory?.id) {
-            selectCategory(categories[0]);
+            selectCategory(categories.find((category) => category.id !== selectedCategory?.id) || null);
           }
         },
       },
@@ -57,7 +50,7 @@ export function useCategory() {
 
   useEffect(() => {
     if (selectedCategory === null) {
-      selectCategory(categories[0]);
+      selectCategory(categories[0] || null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
