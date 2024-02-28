@@ -6,7 +6,7 @@ import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
-import { useState } from 'react';
+import { ButtonHTMLAttributes, useState } from 'react';
 
 export function WriteDocumentPage() {
   const [value, setValue] = useState('');
@@ -20,38 +20,28 @@ export function WriteDocumentPage() {
           {value.length} / {MAX_CONTENT_LENGTH.toLocaleString('ko-kr')}
         </Txt>
         {value.length < MIN_CONTENT_LENGTH ? (
-          <Button
-            variant="secondary"
-            className="px-6 py-3 font-semibold"
+          <UploadButton
             onClick={() =>
               toast({
                 title: `${MIN_CONTENT_LENGTH.toLocaleString('ko-ro')} 이상 입력해주세요`,
                 description: `사용자님께 도움이 되는 퀴즈를 생성하기 위해 최소 ${MIN_CONTENT_LENGTH.toLocaleString('ko-ro')}자의 컨텐츠가 필요해요 😭`,
               })
             }
-          >
-            업로드
-          </Button>
+          />
         ) : (
-          <ProtectLimitProvider
-            fakeTrigger={
-              <Button variant="secondary" className="px-6 py-3 font-semibold">
-                업로드
-              </Button>
-            }
-          >
-            <CreateDocumentDialog
-              type="content"
-              content={value}
-              trigger={
-                <Button variant="secondary" className="px-6 py-3 font-semibold">
-                  업로드
-                </Button>
-              }
-            />
+          <ProtectLimitProvider fakeTrigger={<UploadButton />}>
+            <CreateDocumentDialog type="content" content={value} trigger={<UploadButton />} />
           </ProtectLimitProvider>
         )}
       </div>
     </div>
+  );
+}
+
+function UploadButton({ ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <Button variant="secondary" className="px-6 py-3 font-semibold" {...props}>
+      업로드
+    </Button>
   );
 }

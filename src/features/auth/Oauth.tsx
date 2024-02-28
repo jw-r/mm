@@ -11,7 +11,9 @@ export function Oauth() {
     const queryParams = QS.parse(search, { ignoreQueryPrefix: true }) as { ['access-token']?: string };
     const token = queryParams['access-token'] || '';
 
-    localStorage.setItem(LOCAL_TOKEN_NAME, token);
+    if (token) {
+      localStorage.setItem(LOCAL_TOKEN_NAME, token);
+    }
 
     navigate('/');
   }, [search, navigate]);

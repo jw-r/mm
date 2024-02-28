@@ -25,8 +25,6 @@ import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
 import { useCategory } from '../category/hooks/useCategory';
 import { useCategoryStore } from '../category/stores/categoryStore';
 
-// 토큰 만료 401
-
 export function CreateDocumentDialog({
   type,
   content,
