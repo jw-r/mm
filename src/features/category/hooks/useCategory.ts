@@ -1,7 +1,7 @@
 import { toast } from '@/components/ui/use-toast';
-import { useCreateCategory } from '@/features/category/remotes/createCategory';
-import { useDeleteCategory } from '@/features/category/remotes/deleteCategory';
-import { useGetCategories } from '@/features/category/remotes/getCategories';
+import { useCreateCategory } from '@/remotes/category/createCategory';
+import { useDeleteCategory } from '@/remotes/category/deleteCategory';
+import { useGetCategories } from '@/remotes/category/getCategories';
 import { useCallback, useEffect } from 'react';
 import { useCategoryStore } from '../stores/categoryStore';
 
