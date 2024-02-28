@@ -1,4 +1,4 @@
-import { CreateDocumentMenu } from '@/features/document/CreateDocumentMenu';
+import { CreateDocumentMenu } from '@/pages/home/components/CreateDocumentMenu';
 import { SEO } from '@/components/SEO';
 import { Txt } from '@/components/Txt';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -7,7 +7,7 @@ import useRouter from '@/hooks/useRouter';
 import { useGetQuestions } from '@/remotes/question/getQuestions';
 import { formatDate } from '@/utils/formatDate';
 import { MouseEventHandler, useEffect } from 'react';
-import { useCategoryStore } from '@/features/category/stores/categoryStore';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 export function RepositoryPage() {
   const { push } = useRouter();

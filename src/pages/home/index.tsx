@@ -1,5 +1,5 @@
-import { CreateDocumentMenu } from '@/features/document/CreateDocumentMenu';
-import { DocumentDeleteConfirm } from '@/features/document/DocumentDeleteConfirm';
+import { CreateDocumentMenu } from '@/pages/home/components/CreateDocumentMenu';
+import { DocumentDeleteConfirm } from '@/pages/home/components/DocumentDeleteConfirm';
 import { SEO } from '@/components/SEO';
 import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,7 @@ import { useDeleteDocument } from '@/remotes/document/deleteDocument';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
 import { formatDate } from '@/utils/formatDate';
 import { MouseEventHandler, useEffect } from 'react';
-import { useCategoryStore } from '@/features/category/stores/categoryStore';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 export function MainPage() {
   const { push } = useRouter();
@@ -42,7 +42,6 @@ export function MainPage() {
   }, [reretchDocuments, documents?.length]);
 
   const hasNoContent = !documents?.length;
-  console.log(documents);
 
   return (
     <div className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">

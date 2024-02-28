@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import useRouter from '@/hooks/useRouter';
 import { Plans } from '@/components/Plans';
 
-export function ProtectLimitProvider({ children, fakeTrigger }: { children: ReactNode; fakeTrigger: ReactNode }) {
+export function DocumentLimitProtecter({ children, fakeTrigger }: { children: ReactNode; fakeTrigger: ReactNode }) {
   const { push } = useRouter();
   const { data: user } = useGetUserInfo();
   const [limitedUpload, setLimitedUpload] = useState<'curMax' | 'totalMax' | null>(null);

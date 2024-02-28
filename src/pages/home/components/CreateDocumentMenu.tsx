@@ -1,11 +1,11 @@
 import useRouter from '@/hooks/useRouter';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { CreateDocumentDialog } from './FileUploadDialog';
+import { CreateDocumentDialog } from '../../../components/FileUploadDialog';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { toast } from '@/components/ui/use-toast';
-import { ProtectLimitProvider } from './ProtectLimitProvider';
-import { useCategoryStore } from '../category/stores/categoryStore';
+import { DocumentLimitProtecter } from '../../../components/DocumentLimitProtecter';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 export function CreateDocumentMenu() {
   const { push } = useRouter();
@@ -14,7 +14,7 @@ export function CreateDocumentMenu() {
 
   if (!user) return null;
   return (
-    <ProtectLimitProvider fakeTrigger={<Button className="h-full">문서 업로드</Button>}>
+    <DocumentLimitProtecter fakeTrigger={<Button className="h-full">문서 업로드</Button>}>
       {selectedCategory?.id ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -32,6 +32,6 @@ export function CreateDocumentMenu() {
           문서 업로드
         </Button>
       )}
-    </ProtectLimitProvider>
+    </DocumentLimitProtecter>
   );
 }

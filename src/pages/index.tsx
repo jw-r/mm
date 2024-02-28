@@ -1,12 +1,12 @@
-import { DocumentDetailPage } from './DocumentDetailPage';
-import { MainPage } from './MainPage';
-import { QuizPage } from './QuizPage';
-import { RepositoryPage } from './RepositoryPage';
-import { UserProfilePage } from './UserProfilePage';
-import { WriteDocumentPage } from './WriteDocumentPage';
-import { PaymentPage } from './PaymentPage';
-import { FeedbackPage } from './FeedbackPage';
-import { LoginPage } from './LoginPage';
+import { DocumentDetailPage } from './document-detail';
+import { MainPage } from './home';
+import { QuizPage } from './quiz';
+import { RepositoryPage } from './repository';
+import { UserProfilePage } from './user-profile';
+import { WriteDocumentPage } from './write-document';
+import { PaymentPage } from './payment';
+import { FeedbackPage } from './feedback';
+import { LoginPage } from './login';
 
 export {
   MainPage,

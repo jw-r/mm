@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import { SEO } from '@/components/SEO';
 import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
@@ -6,7 +7,6 @@ import { toast } from '@/components/ui/use-toast';
 import useRouter from '@/hooks/useRouter';
 import { usePostPayment } from '@/remotes/user/postPayment';
 import isEmptyString from '@/utils/isEmptyString';
-import { ArrowLeft } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 import { ChangeEvent, useState } from 'react';
 
@@ -42,14 +42,7 @@ export function PaymentPage() {
     <div className="flex justify-center">
       <SEO title="Upgrade" description="결제 페이지" image="" />
       <div className="mt-16 flex w-full max-w-3xl flex-col items-start justify-center px-4">
-        <Button
-          variant="ghost"
-          onClick={() => back()}
-          className="flex items-center pl-0 text-foreground/40 hover:bg-transparent"
-        >
-          <ArrowLeft size={15} className="mr-2" />
-          <Txt typography="small">뒤로</Txt>
-        </Button>
+        <BackButton label="뒤로" />
         <div>
           <Txt typography="large" className="mb-3 mt-6">
             일반 결제 및 입금자 성함 입력 <span className="text-red-500">*</span>

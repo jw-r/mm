@@ -22,8 +22,8 @@ import { queryClient } from '@/providers/TanstackProvider';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
-import { useCategory } from '../category/hooks/useCategory';
-import { useCategoryStore } from '../category/stores/categoryStore';
+import { useCategory } from '../hooks/useCategory';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 export function CreateDocumentDialog({
   type,

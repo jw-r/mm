@@ -1,6 +1,6 @@
-import { MD } from '@/features/markdown/MD';
-import { CreateDocumentDialog } from '@/features/document/FileUploadDialog';
-import { ProtectLimitProvider } from '@/features/document/ProtectLimitProvider';
+import { MD } from '@/components/MD';
+import { CreateDocumentDialog } from '@/components/FileUploadDialog';
+import { DocumentLimitProtecter } from '@/components/DocumentLimitProtecter';
 import { SEO } from '@/components/SEO';
 import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
@@ -29,9 +29,9 @@ export function WriteDocumentPage() {
             }
           />
         ) : (
-          <ProtectLimitProvider fakeTrigger={<UploadButton />}>
+          <DocumentLimitProtecter fakeTrigger={<UploadButton />}>
             <CreateDocumentDialog type="content" content={value} trigger={<UploadButton />} />
-          </ProtectLimitProvider>
+          </DocumentLimitProtecter>
         )}
       </div>
     </div>

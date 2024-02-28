@@ -1,5 +1,5 @@
-import { CreateDocumentDialog } from '@/features/document/FileUploadDialog';
-import { ProtectLimitProvider } from '@/features/document/ProtectLimitProvider';
+import { CreateDocumentDialog } from '@/components/FileUploadDialog';
+import { DocumentLimitProtecter } from '@/components/DocumentLimitProtecter';
 import { Center } from '@/components/Center';
 import { SEO } from '@/components/SEO';
 import { Txt } from '@/components/Txt';
@@ -13,7 +13,7 @@ import { useTodayQuestion } from '@/remotes/question/getTodayQuestion';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCategoryStore } from '@/features/category/stores/categoryStore';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 export function QuizPage({ children }: { children: ReactNode }) {
   return children;
@@ -123,21 +123,21 @@ function NoDocument() {
             </>
           ) : (
             <>
-              <ProtectLimitProvider
+              <DocumentLimitProtecter
                 fakeTrigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
               >
                 <CreateDocumentDialog
                   type="file"
                   trigger={<Button className="bg-red-300 shadow-md hover:bg-red-400">md 파일 업로드하기</Button>}
                 />
-              </ProtectLimitProvider>
-              <ProtectLimitProvider
+              </DocumentLimitProtecter>
+              <DocumentLimitProtecter
                 fakeTrigger={<Button className="bg-blue-400 shadow-md hover:bg-blue-500">직접 문서 작성하기</Button>}
               >
                 <Button className="bg-blue-400 shadow-md hover:bg-blue-500" onClick={() => push('/write')}>
                   직접 문서 작성하기
                 </Button>
-              </ProtectLimitProvider>
+              </DocumentLimitProtecter>
             </>
           )}
         </div>

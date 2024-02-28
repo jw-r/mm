@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { MoreVertical } from 'lucide-react';
 import { FolderOpen } from 'lucide-react';
-import { CategoryDeleteConfirm } from './components/CategoryDeleteConfirm';
-import { useCategory } from './hooks/useCategory';
-import { useCategoryStore } from './stores/categoryStore';
-import { CategoryDropdownMenu } from './components/CategoryDropdownMenu';
-import { NewCategoryInput } from './components/NewCategoryInput';
+import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
+import { useCategory } from '@/hooks/useCategory';
+import { useCategoryStore } from '@/stores/categoryStore';
+import { CategoryDropdownMenu } from '@/components/Category/CategoryDropdownMenu';
+import { NewCategoryInput } from '@/components/Category/NewCategoryInput';
 
 function Category() {
   const { categories, createCategory, deleteCategory } = useCategory();

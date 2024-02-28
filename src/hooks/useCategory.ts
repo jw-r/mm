@@ -3,7 +3,7 @@ import { useCreateCategory } from '@/remotes/category/createCategory';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { useGetCategories } from '@/remotes/category/getCategories';
 import { useCallback, useEffect } from 'react';
-import { useCategoryStore } from '../stores/categoryStore';
+import { useCategoryStore } from '@/stores/categoryStore';
 import isEmptyString from '@/utils/isEmptyString';
 
 export function useCategory() {

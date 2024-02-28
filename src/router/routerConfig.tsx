@@ -1,5 +1,5 @@
 import { AuthGuard } from '@/router/components/AuthGuard';
-import { Oauth } from '@/features/auth/Oauth';
+import { Oauth } from '@/components/Oauth';
 import {
   DocumentDetailPage,
   FeedbackPage,
@@ -13,10 +13,9 @@ import {
 } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 import { HeaderLayout } from './components/HeaderLayout';
-import { SidebarLayout } from './components/SidebarLayout';
+import { CategoryLayout } from './components/CategoryLayout';
 import { Root } from './components/Root';
-import { CatchQuiz } from '@/features/quiz/CatchQuiz';
-import { ClipSuspense } from '@/components/ClipSuspense';
+import { CatchQuiz } from '@/components/CatchQuiz';
 
 export const router = createBrowserRouter([
   {
@@ -30,29 +29,24 @@ export const router = createBrowserRouter([
             element: <HeaderLayout />,
             children: [
               {
-                element: <ClipSuspense />,
+                element: <CategoryLayout />,
                 children: [
                   {
-                    element: <SidebarLayout />,
-                    children: [
-                      {
-                        index: true,
-                        element: <MainPage />,
-                      },
-                      { path: 'repository', element: <RepositoryPage /> },
-                    ],
+                    index: true,
+                    element: <MainPage />,
                   },
-                  {
-                    path: 'quiz',
-                    element: <QuizPage.Private />,
-                  },
-                  { path: 'documents/:id', element: <DocumentDetailPage /> },
-                  { path: 'write', element: <WriteDocumentPage /> },
-                  { path: 'profile', element: <UserProfilePage /> },
-                  { path: 'feedback', element: <FeedbackPage /> },
-                  { path: '/upgrade', element: <PaymentPage /> },
+                  { path: 'repository', element: <RepositoryPage /> },
                 ],
               },
+              {
+                path: 'quiz',
+                element: <QuizPage.Private />,
+              },
+              { path: 'documents/:id', element: <DocumentDetailPage /> },
+              { path: 'write', element: <WriteDocumentPage /> },
+              { path: 'profile', element: <UserProfilePage /> },
+              { path: 'feedback', element: <FeedbackPage /> },
+              { path: '/upgrade', element: <PaymentPage /> },
             ],
           },
         ],
