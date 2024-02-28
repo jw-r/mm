@@ -10,13 +10,11 @@ import { formatDate } from '@/utils/formatDate';
 import { MouseEventHandler, useEffect } from 'react';
 import { useCategoryStore } from '@/features/category/stores/categoryStore';
 
-// access_token
-
 export function MainPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
   const { mutate: deleteDocument } = useDeleteDocument();
-  const { data, refetch: reretchDocuments } = useGetDocuments({ categoryId: selectedCategory?.id });
+  const { data: documents, refetch: reretchDocuments } = useGetDocuments({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
     const currentTarget = e.currentTarget as HTMLElement;
@@ -26,7 +24,7 @@ export function MainPage() {
   };
 
   useEffect(() => {
-    if (!data) return;
+    if (!documents) return;
 
     let retryCount = 0;
     let time = 2000;
@@ -41,9 +39,10 @@ export function MainPage() {
     }, time);
 
     return () => clearInterval(interval);
-  }, [reretchDocuments, data?.documents.length]);
+  }, [reretchDocuments, documents?.length]);
 
-  const hasNoContent = !data?.documents.length;
+  const hasNoContent = !documents?.length;
+  console.log(documents);
 
   return (
     <div className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
@@ -59,7 +58,7 @@ export function MainPage() {
           </Txt>
         </div>
         <div className="mt-8 space-y-4">
-          {data?.documents.map((document) => (
+          {documents?.map((document) => (
             <div key={document.id} className="relative">
               <article
                 id={String(document.id)}

@@ -21,5 +21,7 @@ export function useGetQuestions({ categoryId }: { categoryId: number | undefined
     queryFn: () => getQuestions({ categoryId } as { categoryId: number }),
 
     enabled: !!categoryId,
+
+    select: (data) => data.documents,
   });
 }

@@ -7,6 +7,7 @@ interface GetDocumentsResponse {
     documentName: string;
     createdAt: string;
     summary: string;
+    status: 'UNPROCESSED' | 'PROCESSED' | 'COMPLETELY_FAILED' | 'PARTIAL_SUCCESS';
   }[];
 }
 
@@ -20,5 +21,7 @@ export function useGetDocuments({ categoryId }: { categoryId: number | undefined
     queryFn: () => getDocuments({ categoryId: categoryId as number }),
 
     enabled: !!categoryId,
+
+    select: (data) => data.documents,
   });
 }

@@ -12,7 +12,7 @@ import { useCategoryStore } from '@/features/category/stores/categoryStore';
 export function RepositoryPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
-  const { data, refetch: refetchQuestions } = useGetQuestions({ categoryId: selectedCategory?.id });
+  const { data: documents, refetch: refetchQuestions } = useGetQuestions({ categoryId: selectedCategory?.id });
 
   const moveToDetail: MouseEventHandler<HTMLButtonElement> = (e) => {
     const button = e.target as HTMLButtonElement;
@@ -22,7 +22,7 @@ export function RepositoryPage() {
   };
 
   useEffect(() => {
-    if (!data) return;
+    if (!documents) return;
 
     let retryCount = 0;
     let time = 2000;
@@ -37,9 +37,9 @@ export function RepositoryPage() {
     }, time);
 
     return () => clearInterval(interval);
-  }, [refetchQuestions, data?.documents.length]);
+  }, [refetchQuestions, documents?.length]);
 
-  const hasNoContent = !data?.documents.length;
+  const hasNoContent = !documents?.length;
 
   return (
     <main className="flex w-full max-w-[880px] flex-col p-4 md:p-8 lg:p-12">
@@ -53,7 +53,7 @@ export function RepositoryPage() {
           오늘의 퀴즈가 오픈될 때마다 새로운 퀴즈가 복습 창고에 추가돼요!
         </Txt>
       </div>
-      {data?.documents.map((document) => (
+      {documents?.map((document) => (
         <div key={document.id} className="mt-6 space-y-2 rounded-lg border-2 p-4">
           <div className="table w-full table-fixed">
             <div className="flex items-center justify-between">
