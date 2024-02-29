@@ -60,7 +60,7 @@ function QuizComponent({ questions }: { questions: TodayQuestion[] }) {
   const { push } = useRouter();
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <main className="flex w-full flex-col items-center justify-center">
       <Txt typography="h4" className="mt-8 w-full max-w-4xl p-3 text-center ring-1 ring-offset-2 ring-offset-cyan-300">
         오늘의 퀴즈가 도착했어요 🎉
       </Txt>
@@ -82,7 +82,7 @@ function QuizComponent({ questions }: { questions: TodayQuestion[] }) {
           </AccordionItem>
         ))}
       </Accordion>
-    </div>
+    </main>
   );
 }
 
