@@ -58,7 +58,7 @@ function PlanCardContainer({ type, children }: { type: 'Free' | 'PRO'; children:
     <div
       className={cn([
         'flex w-full items-center justify-start rounded-md p-0.5',
-        type ? '_pro-gradient bg-gradient-to-tr' : 'bg-foreground/15',
+        type === 'PRO' ? '_pro-gradient bg-gradient-to-tr' : 'bg-foreground/15',
       ])}
     >
       <div className="flex h-full w-full flex-col items-center space-y-2 rounded-sm bg-background p-4">{children}</div>
