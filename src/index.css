@@ -50,10 +50,6 @@
 }
 
 @layer base {
-  :root {
-    --point: #82f0d2;
-  }
-
   * {
     @apply border-border;
   }

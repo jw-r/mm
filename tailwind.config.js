@@ -19,7 +19,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        point: 'var(--point)',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -52,6 +51,12 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+        },
+        gradient: {
+          start: 'rgb(34, 211, 238)',
+          end: 'rgb(192 132 252)',
+          hoverStart: 'rgb(6 182 212)',
+          hoverEnd: 'rgb(168 85 247)',
         },
       },
       borderRadius: {

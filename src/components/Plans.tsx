@@ -3,9 +3,10 @@ import { Txt } from './Txt';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { Button } from './ui/button';
 import useRouter from '@/hooks/useRouter';
+import { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 export function Plans() {
-  const { push } = useRouter();
   const { data: user } = useGetUserInfo();
 
   const isPro = user?.subscription.plan === 'PRO';
@@ -13,7 +14,7 @@ export function Plans() {
   if (!user) return;
   return (
     <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:justify-around">
-      <div className="flex w-full flex-col items-center space-y-2 rounded-md border-2 p-4">
+      <PlanCardContainer isPro={false}>
         <Txt typography="h3">Free</Txt>
         <div className="flex flex-col space-y-3 text-foreground/70">
           <div className="flex items-center">
@@ -35,9 +36,12 @@ export function Plans() {
             <Txt typography="small">매일 {user.quiz.freePlanQuizQuestionNum}개의 퀴즈를 전송</Txt>
           </div>
         </div>
-      </div>
-      <div className="flex w-full flex-col items-center rounded-md border-2 border-[#9DEDD3] p-4">
-        <Txt typography="h3" className="mb-2 font-bold text-[#9DEDD3]">
+      </PlanCardContainer>
+      <PlanCardContainer isPro={true}>
+        <Txt
+          typography="h3"
+          className="from-gradient-start to-gradient-end mb-2 bg-gradient-to-tr bg-clip-text font-bold text-transparent"
+        >
           PRO
         </Txt>
         <div className="flex flex-col space-y-3 text-foreground/70">
@@ -63,19 +67,40 @@ export function Plans() {
         <Txt typography="small" className="mb-1 mt-4 flex flex-col space-y-1 text-foreground/40">
           <span>* 자동결제가 되지 않습니다</span>
         </Txt>
-        {isPro ? (
-          <Button className="w-full cursor-default bg-[#9DEDD3] font-extrabold text-foreground/60 hover:bg-[#9DEDD3]">
-            이미 PRO 사용자입니다
-          </Button>
-        ) : (
-          <Button
-            onClick={() => push('/upgrade')}
-            className="w-full bg-[#9DEDD3] font-extrabold text-foreground/60 hover:bg-[#88e7c9]"
-          >
-            월 3,900원 결제하기
-          </Button>
-        )}
-      </div>
+
+        <PaymentButton isPro={isPro} label={isPro ? '이미 PRO 사용자입니다' : '월 3,900원 결제하기'} />
+      </PlanCardContainer>
     </div>
+  );
+}
+
+function PlanCardContainer({ isPro, children }: { isPro: boolean; children: ReactNode }) {
+  return (
+    <div
+      className={cn([
+        'flex w-full items-center justify-start rounded-md p-0.5',
+        isPro ? 'from-gradient-start to-gradient-end bg-gradient-to-tr' : 'bg-foreground/15',
+      ])}
+    >
+      <div className="flex h-full w-full flex-col items-center space-y-2 rounded-sm bg-background p-4">{children}</div>
+    </div>
+  );
+}
+
+function PaymentButton({ isPro, label }: { isPro: boolean; label: string }) {
+  const { push } = useRouter();
+
+  return (
+    <Button
+      className={cn([
+        'from-gradient-start to-gradient-end w-full cursor-default bg-gradient-to-tr font-extrabold text-white hover:bg-gradient-to-tr',
+        isPro
+          ? 'hover:from-gradient-start hover:to-gradient-end'
+          : 'hover:from-gradient-hoverStart hover:to-gradient-hoverEnd cursor-pointer',
+      ])}
+      onClick={isPro ? undefined : () => push('/upgrade')}
+    >
+      {label}
+    </Button>
   );
 }

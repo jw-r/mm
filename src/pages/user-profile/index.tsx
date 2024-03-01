@@ -1,3 +1,4 @@
+import { PlanBadge } from '@/components/PlanBadge';
 import { Plans } from '@/components/Plans';
 import { SEO } from '@/components/SEO';
 import { Txt } from '@/components/Txt';
@@ -45,15 +46,7 @@ export function UserProfilePage() {
             <div className="border-b py-4 last:border-none">
               <div className="flex space-x-4">
                 <Txt typography="h4">My Plan</Txt>
-                {isPro ? (
-                  <div className="text-md inline-block rounded-md bg-[#82F0D2] px-3 py-1 font-semibold text-white">
-                    {user.subscription.plan}
-                  </div>
-                ) : (
-                  <div className="text-md inline-block rounded-md bg-foreground/30 px-3 py-1 font-semibold text-white">
-                    {user.subscription.plan}
-                  </div>
-                )}
+                <PlanBadge isPro={isPro} />
               </div>
               {isPro ? (
                 <div className="mt-3 flex flex-col space-y-3 text-foreground/40">

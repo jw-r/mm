@@ -63,8 +63,8 @@ export function Nav() {
             <Menu />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel className={isPro ? 'bg-point' : ''}>
-              <PlanBadge isPro={isPro} className="w-full py-0" />
+            <DropdownMenuLabel className="h-6 p-0">
+              <PlanBadge isPro={isPro} className="w-full py-1" />
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => push('/')}>문서</DropdownMenuItem>
