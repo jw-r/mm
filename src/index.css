@@ -60,4 +60,10 @@
   ol {
     list-style: revert;
   }
+  ._pro-gradient {
+    @apply from-cyan-400 to-purple-400;
+  }
+  ._pro-gradient-hover {
+    @apply from-cyan-500 to-purple-500;
+  }
 }

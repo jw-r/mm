@@ -6,7 +6,7 @@ export function PlanBadge({ isPro, className }: { isPro: boolean; className?: Cl
     <div
       className={cn([
         'text-md inline-block rounded-md px-3 py-1 text-center font-semibold text-white',
-        isPro ? 'from-gradient-start to-gradient-end bg-gradient-to-tr' : 'bg-foreground/30',
+        isPro ? '_pro-gradient bg-gradient-to-tr' : 'bg-foreground/30',
         className,
       ])}
     >
