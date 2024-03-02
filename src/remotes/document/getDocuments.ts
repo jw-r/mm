@@ -7,7 +7,7 @@ interface GetDocumentsResponse {
     documentName: string;
     createdAt: string;
     summary: string;
-    status: 'UNPROCESSED' | 'PROCESSED' | 'COMPLETELY_FAILED' | 'PARTIAL_SUCCESS';
+    status: 'UNPROCESSED' | 'PROCESSED';
   }[];
 }
 

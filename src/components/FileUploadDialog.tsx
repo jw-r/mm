@@ -24,6 +24,7 @@ import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
 import { useCategory } from '../hooks/useCategory';
 import { useCategoryStore } from '@/stores/categoryStore';
+import delay from '@/utils/delay';
 
 export function CreateDocumentDialog({
   type,
@@ -217,35 +218,22 @@ function Write({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> }) {
 
 function Progressing({ next }: { next: () => void }) {
   useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    const delay = () =>
-      new Promise((resolve) => {
-        timeoutId = setTimeout(resolve, 3000);
-      });
-
-    const startDelay = async () => {
-      await delay();
+    const progress = async () => {
+      await delay(2000);
       next();
     };
 
-    startDelay();
-
-    return () => clearTimeout(timeoutId);
+    progress();
   }, [next]);
 
   return (
-    <>
-      <DialogHeader>
-        <DialogTitle className="text-center">문서를 생성중이에요!</DialogTitle>
-        <DialogDescription className="text-center">
-          퀴즈가 생성될 때까지는 최대 1분이 소요될 수 있어요
-        </DialogDescription>
-        <div className="flex justify-center pt-12">
-          <FadeLoader color="#36d7b7" />
-        </div>
-      </DialogHeader>
-    </>
+    <DialogHeader>
+      <DialogTitle className="text-center">문서를 생성중이에요!</DialogTitle>
+      <DialogDescription className="text-center">퀴즈가 생성될 때까지는 최대 1분이 소요될 수 있어요</DialogDescription>
+      <div className="flex justify-center pt-12">
+        <FadeLoader color="#36d7b7" />
+      </div>
+    </DialogHeader>
   );
 }
 

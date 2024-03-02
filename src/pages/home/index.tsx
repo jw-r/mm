@@ -7,14 +7,22 @@ import useRouter from '@/hooks/useRouter';
 import { useDeleteDocument } from '@/remotes/document/deleteDocument';
 import { useGetDocuments } from '@/remotes/document/getDocuments';
 import { formatDate } from '@/utils/formatDate';
-import { MouseEventHandler, useEffect } from 'react';
+import { MouseEventHandler } from 'react';
 import { useCategoryStore } from '@/stores/categoryStore';
+import { PuffLoader } from 'react-spinners';
+import usePolling from '@/hooks/usePolling';
 
 export function MainPage() {
   const { push } = useRouter();
   const { selectedCategory } = useCategoryStore();
   const { mutate: deleteDocument } = useDeleteDocument();
-  const { data: documents, refetch: reretchDocuments } = useGetDocuments({ categoryId: selectedCategory?.id });
+  const { data: documents, refetch: refetchDocuments } = useGetDocuments({ categoryId: selectedCategory?.id });
+
+  usePolling({
+    callback: refetchDocuments,
+    condition: !!documents && (documents?.filter((document) => document.status === 'UNPROCESSED').length || 0) > 0,
+    interval: 3000,
+  });
 
   const moveToDetail: MouseEventHandler<HTMLElement> = (e) => {
     const currentTarget = e.currentTarget as HTMLElement;
@@ -22,24 +30,6 @@ export function MainPage() {
 
     push(`/documents/${documentId}`);
   };
-
-  useEffect(() => {
-    if (!documents) return;
-
-    let retryCount = 0;
-    let time = 2000;
-    const interval = setInterval(() => {
-      if (retryCount < 8) {
-        reretchDocuments();
-        retryCount++;
-        time += 1000;
-      } else {
-        clearInterval(interval);
-      }
-    }, time);
-
-    return () => clearInterval(interval);
-  }, [reretchDocuments, documents?.length]);
 
   const hasNoContent = !documents?.length;
 
@@ -60,8 +50,9 @@ export function MainPage() {
           {documents?.map((document) => (
             <div key={document.id} className="relative">
               <article
+                key={document.id}
                 id={String(document.id)}
-                className="cursor-pointer rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
+                className="relative flex cursor-pointer flex-col rounded-lg border-2 p-4 transition-all hover:bg-foreground/5"
                 onClick={moveToDetail}
               >
                 <div className="table w-full table-fixed">
@@ -76,11 +67,16 @@ export function MainPage() {
                     </div>
                   </div>
                 </div>
-                {document.summary && (
-                  <Txt className="mt-[-20px] line-clamp-2 text-sm font-medium text-foreground/80">
-                    {document.summary}
-                  </Txt>
-                )}
+                <div className="mt-4">
+                  {document.status === 'PROCESSED' ? (
+                    <Txt className="line-clamp-2 text-sm font-medium text-foreground/80">{document.summary}</Txt>
+                  ) : (
+                    <div className="flex w-full items-center">
+                      <PuffLoader size={20} />
+                      <Txt className="ml-1 text-sm font-medium text-foreground/80">문서를 요약중이예요</Txt>
+                    </div>
+                  )}
+                </div>
               </article>
               <DocumentDeleteConfirm
                 trigger={

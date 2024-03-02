@@ -8,6 +8,7 @@ interface GetQuestionsResponse {
     documentName: string;
     createdAt: string;
     questions: Question[];
+    status: 'UNPROCESSED' | 'PROCESSED';
   }[];
 }
 
