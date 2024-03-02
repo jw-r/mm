@@ -63,7 +63,7 @@ function Editor({ value, setValue }: { value: string; setValue: (newValue: strin
       }}
       textareaProps={{
         placeholder: '# 제목을 입력해주세요\n\n## 이미 작성한 글을 복사, 붙여넣기 하는 것을 추천해드려요!',
-        className: `pt-4 bg-[#FAFDFC] ${!isMobile && 'w-[50%]'}`,
+        className: `pt-4 bg-[#FAFDFC] ${isMobile ? 'w-full' : 'w-[50%]'}`,
       }}
       visibleDragbar={false}
       extraCommands={[]}
