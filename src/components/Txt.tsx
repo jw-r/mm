@@ -20,7 +20,7 @@ const typographyMap = {
   },
   p: {
     tagName: 'p',
-    className: 'leading-7 [&:not(:first-child)]:mt-6',
+    className: 'leading-7',
   },
   blockquote: {
     tagName: 'blockquote',
