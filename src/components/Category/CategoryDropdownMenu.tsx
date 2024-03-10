@@ -3,12 +3,12 @@ import { FormEventHandler, ReactNode, useState } from 'react';
 import { CategoryUpdateFormDialog } from './CategoryUpdateFormDialog';
 import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
 import { Category } from '@/models/type';
-import { useCategory } from '@/hooks/useCategory';
 import { useUpdateCategoryName } from '@/remotes/category/updateCategoryName';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { toast } from '../ui/use-toast';
 import { useCategoryStore } from '@/stores/categoryStore';
 import isEmptyString from '@/utils/isEmptyString';
+import { useGetCategories } from '@/remotes/category/getCategories';
 
 interface CategoryDropdownMenuProps {
   category: Category;
@@ -17,8 +17,8 @@ interface CategoryDropdownMenuProps {
 }
 
 export function CategoryDropdownMenu({ category, trigger, isTriggerVisible: isVisible }: CategoryDropdownMenuProps) {
+  const { data: categories } = useGetCategories();
   const { selectedCategory, selectCategory } = useCategoryStore();
-  const { categories } = useCategory();
   const { mutate: deleteCategory } = useDeleteCategory();
   const { mutate: updateCategory } = useUpdateCategoryName();
   const [open, setIsOpen] = useState(false);

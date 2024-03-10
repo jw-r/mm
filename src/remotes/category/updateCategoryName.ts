@@ -1,6 +1,5 @@
-import { queryClient } from '@/providers/TanstackProvider';
 import { http } from '@/utils/http';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface UpdateCategoryNameRequest {
   newName: string;
@@ -16,6 +15,8 @@ const updateCategoryName = ({ id, newName }: Data) => {
 };
 
 export function useUpdateCategoryName() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['createCategory'],
     mutationFn: (data: Data) => updateCategoryName({ ...data, newName: data.newName.trim() }),

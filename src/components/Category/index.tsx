@@ -1,17 +1,22 @@
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { MoreVertical } from 'lucide-react';
 import { FolderOpen } from 'lucide-react';
-import { useCategory } from '@/hooks/useCategory';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { CategoryDropdownMenu } from '@/components/Category/CategoryDropdownMenu';
 import { NewCategoryInput } from '@/components/Category/NewCategoryInput';
+import useManagedCategorySelection from '@/hooks/useManagedCategorySelection';
+import { useCreateCategory } from '@/remotes/category/createCategory';
+import { toast } from '../ui/use-toast';
+import isEmptyString from '@/utils/isEmptyString';
+import { useGetCategories } from '@/remotes/category/getCategories';
 
 function Category() {
-  const { categories, createCategory } = useCategory();
+  const { data: categories } = useGetCategories();
   const { selectedCategory, selectCategory } = useCategoryStore();
+  const { mutate: createCategory } = useCreateCategory();
 
   const [hoverCategoryId, setHoverCategoryId] = useState<number | null>();
   const [newCategoryName, setNewCategoryName] = useState('');
@@ -27,21 +32,26 @@ function Category() {
   const handleCreateCategory = (categoryName: string) => {
     setNewCategoryName('');
 
-    createCategory(categoryName);
+    if (categories.map((category) => category.name).includes(categoryName)) {
+      toast({ title: '이미 존재하는 카테고리입니다.' });
+      return;
+    }
+
+    if (isEmptyString(categoryName)) {
+      return;
+    }
+
+    createCategory(
+      { name: categoryName },
+      {
+        onSuccess: ({ id }) => {
+          selectCategory({ id, name: categoryName });
+        },
+      },
+    );
   };
 
-  useEffect(() => {
-    if (selectedCategory === null) {
-      selectCategory(categories[0] || null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (categories.length === 0) {
-      selectCategory(null);
-    }
-  }, [categories.length, selectCategory]);
+  useManagedCategorySelection();
 
   return (
     <>

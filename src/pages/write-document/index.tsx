@@ -6,10 +6,12 @@ import { Txt } from '@/components/Txt';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
-import { ButtonHTMLAttributes, useState } from 'react';
+import { ButtonHTMLAttributes, forwardRef, useState } from 'react';
+import { useGetCategories } from '@/remotes/category/getCategories';
 
 export function WriteDocumentPage() {
   const [value, setValue] = useState('');
+  useGetCategories();
 
   return (
     <>
@@ -40,10 +42,10 @@ export function WriteDocumentPage() {
   );
 }
 
-function UploadButton({ ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+const UploadButton = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>((props, ref) => {
   return (
-    <Button variant="secondary" className="px-6 py-3 font-semibold" {...props}>
+    <Button variant="secondary" className="px-6 py-3 font-semibold" ref={ref} {...props}>
       업로드
     </Button>
   );
-}
+});
