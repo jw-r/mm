@@ -13,7 +13,7 @@ const createCategory = (requestBody: CreateCategoryRequest) => {
 export function useCreateCategory() {
   return useMutation({
     mutationKey: ['createCategory'],
-    mutationFn: (data: CreateCategoryRequest) => createCategory(data),
+    mutationFn: (data: CreateCategoryRequest) => createCategory({ ...data, name: data.name.trim() }),
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['getCategories'] });

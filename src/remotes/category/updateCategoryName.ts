@@ -8,17 +8,17 @@ interface UpdateCategoryNameRequest {
 
 interface Data {
   id: number;
-  newName: UpdateCategoryNameRequest;
+  newName: string;
 }
 
 const updateCategoryName = ({ id, newName }: Data) => {
-  return http.patch<UpdateCategoryNameRequest>(`/categories/${id}`, newName);
+  return http.patch<UpdateCategoryNameRequest>(`/categories/${id}`, { newName });
 };
 
 export function useUpdateCategoryName() {
   return useMutation({
     mutationKey: ['createCategory'],
-    mutationFn: (data: Data) => updateCategoryName(data),
+    mutationFn: (data: Data) => updateCategoryName({ ...data, newName: data.newName.trim() }),
 
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['getCategories'] }),
   });

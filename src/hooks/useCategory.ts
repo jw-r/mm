@@ -2,15 +2,17 @@ import { toast } from '@/components/ui/use-toast';
 import { useCreateCategory } from '@/remotes/category/createCategory';
 import { useDeleteCategory } from '@/remotes/category/deleteCategory';
 import { useGetCategories } from '@/remotes/category/getCategories';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useCategoryStore } from '@/stores/categoryStore';
 import isEmptyString from '@/utils/isEmptyString';
+import { useUpdateCategoryName } from '@/remotes/category/updateCategoryName';
 
 export function useCategory() {
   const { data: categories } = useGetCategories();
   const { selectedCategory, selectCategory } = useCategoryStore();
   const { mutate: createCategoryMutate } = useCreateCategory();
   const { mutate: deleteCategoryMutate } = useDeleteCategory();
+  const { mutate: updateCategoryMutate } = useUpdateCategoryName();
 
   const createCategory = useCallback(
     (categoryName: string) => {
@@ -24,7 +26,7 @@ export function useCategory() {
       }
 
       createCategoryMutate(
-        { name: categoryName.trim() },
+        { name: categoryName },
         {
           onSuccess: ({ id }) => {
             selectCategory({ id, name: categoryName });
@@ -36,7 +38,7 @@ export function useCategory() {
   );
 
   const deleteCategory = (categoryId: number) => {
-    deleteCategoryMutate(
+    return deleteCategoryMutate(
       { categoryId },
       {
         onSuccess: () => {
@@ -48,18 +50,9 @@ export function useCategory() {
     );
   };
 
-  useEffect(() => {
-    if (selectedCategory === null) {
-      selectCategory(categories[0] || null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const updateCategory = (categoryId: number, newName: string) => {
+    return updateCategoryMutate({ id: categoryId, newName });
+  };
 
-  useEffect(() => {
-    if (categories.length === 0) {
-      selectCategory(null);
-    }
-  }, [categories.length, selectCategory]);
-
-  return { categories, createCategory, deleteCategory };
+  return { categories, createCategory, deleteCategory, updateCategory };
 }

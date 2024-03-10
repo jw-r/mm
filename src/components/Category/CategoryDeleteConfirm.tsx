@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,12 +11,18 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 
-export function CategoryDeleteConfirm({ trigger, deleteCategory }: { trigger: ReactNode; deleteCategory: () => void }) {
+export function CategoryDeleteConfirm({
+  triggerLabel,
+  handleConfirm,
+}: {
+  triggerLabel: string;
+  handleConfirm: () => void;
+}) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="ghost" className="h-8 w-full">
-          {trigger}
+        <Button variant="destructive" className="h-8 w-full">
+          {triggerLabel}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -30,7 +35,7 @@ export function CategoryDeleteConfirm({ trigger, deleteCategory }: { trigger: Re
         <AlertDialogFooter>
           <AlertDialogCancel>취소</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Button onClick={deleteCategory}>확인</Button>
+            <Button onClick={handleConfirm}>확인</Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
