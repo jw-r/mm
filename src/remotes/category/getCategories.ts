@@ -2,7 +2,7 @@ import { Category } from '@/models/type';
 import { http } from '@/utils/http';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-interface GetCategoriesResponse {
+export interface GetCategoriesResponse {
   categories: Category[];
 }
 
@@ -16,5 +16,8 @@ export function useGetCategories() {
     queryFn: () => getCategories(),
 
     select: (data) => data.categories,
+
+    gcTime: 3600 * 1000,
+    staleTime: 3600 * 1000,
   });
 }

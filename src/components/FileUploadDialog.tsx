@@ -18,19 +18,21 @@ import { Txt } from '@/components/Txt';
 import { useGetDocument } from '@/remotes/document/getDocument';
 import useRouter from '@/hooks/useRouter';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { queryClient } from '@/providers/TanstackProvider';
 import { useGetUserInfo } from '@/remotes/user/getUserInfo';
 import { toast } from '@/components/ui/use-toast';
 import { MAX_CONTENT_LENGTH, MIN_CONTENT_LENGTH } from '@/constants';
-import { useCategory } from '../hooks/useCategory';
 import { useCategoryStore } from '@/stores/categoryStore';
 import delay from '@/utils/delay';
+import { useQueryClient } from '@tanstack/react-query';
+import { useGetCategories } from '@/remotes/category/getCategories';
+import useManagedCategorySelection from '@/hooks/useManagedCategorySelection';
 
 export function CreateDocumentDialog({
   type,
   content,
   trigger,
 }: { type: 'file'; content?: never; trigger?: ReactNode } | { type: 'content'; content: string; trigger?: ReactNode }) {
+  const queryClient = useQueryClient();
   const { selectedCategory } = useCategoryStore();
   const { mutate: createDocument } = useCreateDocument();
 
@@ -113,6 +115,8 @@ export function CreateDocumentDialog({
     }
   };
 
+  useManagedCategorySelection();
+
   return (
     <Dialog
       open={uploadProcess === 'PROGRESSING' ? true : undefined}
@@ -178,7 +182,7 @@ function FileUpload({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> 
 }
 
 function Write({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> }) {
-  const { categories } = useCategory();
+  const { data: categories } = useGetCategories();
   const { selectedCategory } = useCategoryStore();
 
   return (
@@ -202,7 +206,7 @@ function Write({ onSubmit }: { onSubmit: FormEventHandler<HTMLFormElement> }) {
               <SelectValue placeholder={selectedCategory?.name} />
             </SelectTrigger>
             <SelectContent>
-              {categories.map((category) => (
+              {categories?.map((category) => (
                 <SelectItem key={category.id} value={String(category.id)}>
                   {category.name}
                 </SelectItem>

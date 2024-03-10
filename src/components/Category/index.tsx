@@ -4,15 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { MoreVertical } from 'lucide-react';
 import { FolderOpen } from 'lucide-react';
-import { CategoryDeleteConfirm } from './CategoryDeleteConfirm';
-import { useCategory } from '@/hooks/useCategory';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { CategoryDropdownMenu } from '@/components/Category/CategoryDropdownMenu';
 import { NewCategoryInput } from '@/components/Category/NewCategoryInput';
+import useManagedCategorySelection from '@/hooks/useManagedCategorySelection';
+import { useCreateCategory } from '@/remotes/category/createCategory';
+import { toast } from '../ui/use-toast';
+import isEmptyString from '@/utils/isEmptyString';
+import { useGetCategories } from '@/remotes/category/getCategories';
 
 function Category() {
-  const { categories, createCategory, deleteCategory } = useCategory();
+  const { data: categories } = useGetCategories();
   const { selectedCategory, selectCategory } = useCategoryStore();
+  const { mutate: createCategory } = useCreateCategory();
 
   const [hoverCategoryId, setHoverCategoryId] = useState<number | null>();
   const [newCategoryName, setNewCategoryName] = useState('');
@@ -28,8 +32,26 @@ function Category() {
   const handleCreateCategory = (categoryName: string) => {
     setNewCategoryName('');
 
-    createCategory(categoryName);
+    if (categories.map((category) => category.name).includes(categoryName)) {
+      toast({ title: '이미 존재하는 카테고리입니다.' });
+      return;
+    }
+
+    if (isEmptyString(categoryName)) {
+      return;
+    }
+
+    createCategory(
+      { name: categoryName },
+      {
+        onSuccess: ({ id }) => {
+          selectCategory({ id, name: categoryName });
+        },
+      },
+    );
   };
+
+  useManagedCategorySelection();
 
   return (
     <>
@@ -61,9 +83,9 @@ function Category() {
               </Button>
 
               <CategoryDropdownMenu
+                category={category}
+                trigger={<MoreVertical size={18} />}
                 isTriggerVisible={hoverCategoryId === category.id}
-                trigger={<MoreVertical />}
-                content={<CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />}
               />
             </div>
           ))}
@@ -92,11 +114,7 @@ function Category() {
                 {category.name}
               </Button>
 
-              <CategoryDropdownMenu
-                isTriggerVisible={true}
-                trigger={<MoreVertical size={18} />}
-                content={<CategoryDeleteConfirm trigger="삭제" deleteCategory={() => deleteCategory(category.id)} />}
-              />
+              <CategoryDropdownMenu category={category} isTriggerVisible={true} trigger={<MoreVertical size={18} />} />
             </div>
           ))}
 

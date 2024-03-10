@@ -12,5 +12,8 @@ export function useGetUserInfo() {
   return useQuery({
     queryKey: ['getUserInfo'],
     queryFn: () => getUserInfo(),
+
+    gcTime: 3600 * 1000,
+    staleTime: 3600 * 1000,
   });
 }

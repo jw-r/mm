@@ -1,6 +1,5 @@
-import { queryClient } from '@/providers/TanstackProvider';
 import { http } from '@/utils/http';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface PostPaymentRequest {
   name: string;
@@ -11,6 +10,8 @@ const postPayment = (requestBody: PostPaymentRequest) => {
 };
 
 export function usePostPayment() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['postPayment'],
     mutationFn: (data: PostPaymentRequest) => postPayment(data),
