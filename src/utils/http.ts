@@ -31,6 +31,7 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       window.dispatchEvent(new CustomEvent('unauthorized'));
+      return;
     }
     return Promise.reject(error);
   },
