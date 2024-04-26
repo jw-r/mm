@@ -14,14 +14,13 @@ axios.interceptors.request.use(
     if (!config.headers) return config;
 
     const token = localStorage.getItem(LOCAL_TOKEN_NAME);
-    if (token) {
+    if (token && config.url !== '/oauth/url') {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;
   },
   (error) => {
-    console.log(error);
     return Promise.reject(error);
   },
 );
